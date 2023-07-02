@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDonviTable extends Migration
+class AfterDoituongTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateDonviTable extends Migration
      */
     public function up()
     {
-        Schema::create('donvi', function (Blueprint $table) {
-            $table->id();
-            $table->string('tendonvi');
-            $table->string('kyhieu');
-            $table->timestamps();
+        Schema::table('doituong', function (Blueprint $table) {
+            $table->unsignedBigInteger('loaidoituong_id');
+            
+
+
+            $table->foreign('loaidoituong_id')->references('id')->on('loaidoituong');
+            
+
         });
     }
 
@@ -28,6 +31,6 @@ class CreateDonviTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donvi');
+        //
     }
 }

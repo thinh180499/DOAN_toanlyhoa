@@ -15,7 +15,6 @@ class CreateDoituongTable extends Migration
     {
         Schema::create('doituong', function (Blueprint $table) {
             $table->id();
-            $table->string('loaidoituong');
             $table->timestamps();
         });
     }

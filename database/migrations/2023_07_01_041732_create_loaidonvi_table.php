@@ -15,7 +15,7 @@ class CreateLoaidonviTable extends Migration
     {
         Schema::create('loaidonvi', function (Blueprint $table) {
             $table->id();
-            $table->string('tenloai');
+            $table->string('tenloaidonvi');
             $table->timestamps();
         });
     }

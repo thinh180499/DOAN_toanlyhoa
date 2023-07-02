@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDonviTable extends Migration
+class CreateLoaidoituongTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateDonviTable extends Migration
      */
     public function up()
     {
-        Schema::create('donvi', function (Blueprint $table) {
+        Schema::create('loaidoituong', function (Blueprint $table) {
             $table->id();
-            $table->string('tendonvi');
-            $table->string('kyhieu');
+            $table->string('loaidoituong');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateDonviTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donvi');
+        Schema::dropIfExists('loaidoituong');
     }
 }
