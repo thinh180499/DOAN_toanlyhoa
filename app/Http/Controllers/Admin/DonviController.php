@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Donvi;
 
 class DonviController extends Controller
 {
+    private $donvi;
+    public function __construct(){
+        $this->donvi=new Donvi();
+       // $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class DonviController extends Controller
      */
     public function index()
     {
-        //
+        $list_donvi=$this->donvi->danhsachdonvi();
+        $title="danh sách đơn vị";
+        return view('admin.donvi.index',compact('list_donvi','title'));
     }
 
     /**

@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Khainiem;
 
 class KhainiemController extends Controller
 {
+    private $khainiem;
+    public function __construct(){
+        $this->khainiem=new Khainiem();
+       // $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,10 @@ class KhainiemController extends Controller
      */
     public function index()
     {
-        //
+        $list_khainiem=$this->khainiem->danhsachkhainiem();
+    
+        $title="danh sách môn";
+        return view('admin.khainiem.index',compact('list_khainiem','title'));
     }
 
     /**

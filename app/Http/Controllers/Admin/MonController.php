@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Mon;
 
 class MonController extends Controller
 {
+    private $mon;
+    public function __construct(){
+        $this->mon=new Mon();
+       // $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,10 @@ class MonController extends Controller
      */
     public function index()
     {
-        //
+        $list_mon=$this->mon->danhsachmon();
+    
+        $title="danh sách môn";
+        return view('admin.mon.index',compact('list_mon','title'));
     }
 
     /**

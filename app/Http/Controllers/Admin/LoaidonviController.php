@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Loaidonvi;
 
 class LoaidonviController extends Controller
 {
+    private $loaidonvi;
+    public function __construct(){
+        $this->loaidonvi=new Loaidonvi();
+       // $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,10 @@ class LoaidonviController extends Controller
      */
     public function index()
     {
-        //
+        $list_loaidonvi=$this->loaidonvi->danhsachloaidonvi();
+    
+        $title="danh sách môn";
+        return view('admin.loaidonvi.index',compact('list_loaidonvi','title'));
     }
 
     /**
