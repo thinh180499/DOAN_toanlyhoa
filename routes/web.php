@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\CongthucController;
 use App\Http\Controllers\Admin\DonviController;
 use App\Http\Controllers\Admin\KhainiemController;
@@ -27,11 +28,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::get('/admin', [KhainiemController::class, 'index'])->name('admin');
 
 Route::prefix('/admin')->name('admin.')->group(function () {
 
-
+    
     Route::resource('congthuc', CongthucController::class);
     Route::resource('donvi', DonviController::class);
     Route::resource('khainiem', KhainiemController::class);

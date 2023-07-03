@@ -15,5 +15,13 @@ class Congthuc extends Model
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
     }
+    public function chitietcongthuc($id){
+        $table=$this->table;
+        return DB::table($table)
+        ->select('khainiem.id','dinhnghia','kyhieu','bieuthuc_id')
+        ->join('khainiem','khainiem.id','=','congthuc.khainiem_id')
+        ->where('congthuc.id','=',$id)
+        ->get();
+    }
     
 }

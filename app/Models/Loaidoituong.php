@@ -11,4 +11,9 @@ class Loaidoituong extends Model
     use HasFactory;
     protected $table='loaidoituong';
     protected $fillable=['loaidoituong'];
+    public function loaidoituong(){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table);
+    }
+    
 }

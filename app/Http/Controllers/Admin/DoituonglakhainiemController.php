@@ -4,16 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Khainiem;
 
-class KhainiemController extends Controller
+class DoituonglakhainiemController extends Controller
 {
-    private $khainiem;
-    public function __construct(){
-        $this->middleware('auth');
-        $this->khainiem=new Khainiem();
-       
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,10 +14,7 @@ class KhainiemController extends Controller
      */
     public function index()
     {
-        $list_khainiem=$this->khainiem->danhsachkhainiem();
-        //dd($list_khainiem);
-        $title="danh sách khái niệm";
-        return view('admin.khainiem.index',compact('list_khainiem','title'));
+        //
     }
 
     /**
@@ -34,9 +24,7 @@ class KhainiemController extends Controller
      */
     public function create()
     {
-        
-        $title="thêm khái niệm";
-        return view('admin.khainiem.create',compact('title'));
+        //
     }
 
     /**
@@ -47,25 +35,7 @@ class KhainiemController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-
-            'tenkhainiem'=>'required',
-            'dinhnghia'=>'required',
-            'kytu'=>'required',
-        ],[
-            'tenkhainiem.required'=>'đơn vi bắt buộc phải nhập',
-            'dinhnghia.min'=>'định nghĩa phải hơn 5 ký tự',
-            'kytu.required'=>'ký tự bắt buộc phải nhập',
-            
-        ]);
-        $data=[
-            $request->tenkhainiem,
-            $request->dinhnghia,
-            $request->kytu,
-        ];
-        
-        $this->khainiem->themkhainiem($data);
-        return redirect()->route('admin.doituong.index');
+        //
     }
 
     /**
@@ -76,7 +46,7 @@ class KhainiemController extends Controller
      */
     public function show($id)
     {
-        $this->khainiem->chitietkhainiem($id);
+        //
     }
 
     /**
@@ -112,5 +82,4 @@ class KhainiemController extends Controller
     {
         //
     }
-    
 }

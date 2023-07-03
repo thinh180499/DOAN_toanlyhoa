@@ -9,12 +9,12 @@
     <meta content="Coderthemes" name="author">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('admin\assets\images\favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('admin1\assets\images\favicon.ico') }}">
     <!-- App css -->
-    <link href="{{ asset('admin\assets\css\bootstrap.min.css') }}" rel="stylesheet" type="text/css"
+    <link href="{{ asset('admin1\assets\css\bootstrap.min.css') }}" rel="stylesheet" type="text/css"
         id="bootstrap-stylesheet">
-    <link href="{{ asset('admin\assets\css\icons.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('admin\assets\css\app.min.css') }}" rel="stylesheet" type="text/css"
+    <link href="{{ asset('admin1\assets\css\icons.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin1\assets\css\app.min.css') }}" rel="stylesheet" type="text/css"
         id="app-stylesheet">
 </head>
 
@@ -30,7 +30,7 @@
             <!-- LOGO -->
             <div class="logo-box">
                 <a href="<?php echo route('home'); ?>" class="logo text-center logo-dark">
-                    <h3 class="my-3">Admin tool</h3>
+                    <h3 class="my-3">Admin</h3>
                 </a>
             </div>
 
@@ -55,6 +55,37 @@
                         </div>
                     </form>
                 </li>
+                @guest
+                @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                @endif
+
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
             </ul>
         </div>
         <!-- end Topbar -->
@@ -173,10 +204,10 @@
 
 
     <!-- Vendor js -->
-    <script src="{{ asset('admin\assets\js\vendor.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\js\vendor.min.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('admin\assets\js\app.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\js\app.min.js') }}"></script>
 
 </body>
 

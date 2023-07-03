@@ -11,4 +11,11 @@ class Doituonglabieuthuc extends Model
     use HasFactory;
     protected $table='doituonglabieuthuc';
     protected $fillable=['doituong_id','bieuthuc_id'];
+    public function doituonglabieuthuc(){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table);
+    }
+    public function themdoituonglabieuthuc($data){
+        DB::insert('INSERT INTO '.$this->table.'('.$this->fillable.')value(?,?)',$data);
+     }
 }
