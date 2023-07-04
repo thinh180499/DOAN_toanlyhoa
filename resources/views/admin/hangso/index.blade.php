@@ -10,7 +10,7 @@
             </h4>
 
             <div class="table-responsive">
-                <a href="{{ route('admin.hangso.create') }}" class="btn btn-success mb-4">Thêm khái niệm</a>
+                <a href="{{ route('admin.hangso.create') }}" class="btn btn-success mb-4">Thêm hằng số</a>
                 <table class="table m-0">
                     <thead>
                         <tr>

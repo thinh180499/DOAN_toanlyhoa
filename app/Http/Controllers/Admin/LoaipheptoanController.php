@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Loaipheptoan;
 
-class PheptoanController extends Controller
+class LoaipheptoanController extends Controller
 {
     private $loaipheptoan;
     public function __construct(){

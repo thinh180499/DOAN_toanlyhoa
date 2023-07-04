@@ -14,8 +14,7 @@
     <link href="{{ asset('admin1\assets\css\bootstrap.min.css') }}" rel="stylesheet" type="text/css"
         id="bootstrap-stylesheet">
     <link href="{{ asset('admin1\assets\css\icons.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('admin1\assets\css\app.min.css') }}" rel="stylesheet" type="text/css"
-        id="app-stylesheet">
+    <link href="{{ asset('admin1\assets\css\app.min.css') }}" rel="stylesheet" type="text/css" id="app-stylesheet">
     @yield('css')
 </head>
 
@@ -29,20 +28,21 @@
         <div class="navbar-custom">
 
             <ul class="list-unstyled topnav-menu float-right mb-0">
-                
+
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        
+                    <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
+
                         <span class="pro-user-name ml-1">
-                            {{ Auth::user()->name }}  <i class="mdi mdi-chevron-down"></i> 
+                            {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown" style="">
 
-                        
+
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
+                            onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>{{ __('Logout') }}</span>
@@ -107,19 +107,26 @@
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                              <a href="<?php echo route('admin.congthuc.index'); ?>">Công thức</a>
+                                <a href="<?php echo route('admin.khainiem.index'); ?>">Khái niệm</a>
                             </li>
                             <li>
-                              <a href="<?php echo route('admin.donvi.index'); ?>">Đơn vị</a>
+                                <a href="<?php echo route('admin.hangso.index'); ?>">Hằng số</a>
+                            </li>
+                            {{-- <li>
+                                <a href="<?php echo route('admin.bieuthuc.index'); ?>">Biểu thức</a>
+                            </li> --}}
+                            <li>
+                                <a href="<?php echo route('admin.congthuc.index'); ?>">Công thức</a>
                             </li>
                             <li>
-                              <a href="<?php echo route('admin.khainiem.index'); ?>">Khái niệm</a>
+                                <a href="<?php echo route('admin.donvi.index'); ?>">Đơn vị</a>
+                            </li>
+
+                            <li>
+                                <a href="<?php echo route('admin.loaidonvi.index'); ?>">Loại đơn vị</a>
                             </li>
                             <li>
-                              <a href="<?php echo route('admin.loaidonvi.index'); ?>">Loại dơn vị</a>
-                            </li>
-                            <li>
-                              <a href="<?php echo route('admin.mon.index'); ?>">Môn</a>
+                                <a href="<?php echo route('admin.mon.index'); ?>">Môn</a>
                             </li>
                         </ul>
                     </li>
@@ -168,9 +175,9 @@
 
                 <!-- main start   -->
                 {{-- <div class="row"> --}}
-                    {{-- <div class="col-12"> --}}
-                        @yield('content')
-                    {{-- </div> --}}
+                {{-- <div class="col-12"> --}}
+                @yield('content')
+                {{-- </div> --}}
                 {{-- </div> --}}
                 <!-- main end -->
 

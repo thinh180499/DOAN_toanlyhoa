@@ -32,7 +32,7 @@ class HangsoController extends Controller
      */
     public function create()
     {
-        $title="thêm hằng số";
+        $title="Thêm hằng số";
         return view('admin.hangso.create',compact('title'));
     }
 
@@ -45,12 +45,11 @@ class HangsoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'hangso'=>'required',
         ],[
-            'hangso.required'=>'tên khái niệm bắt buộc phải nhập',
+            'hangso.required'=>'* hằng số bắt buộc phải nhập',
         ]);
-        
+
         $data=[
             $this->hangso->layidcuoidanhsach(),
             $request->hangso,
