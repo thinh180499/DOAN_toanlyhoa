@@ -23,10 +23,7 @@ class CongthucController extends Controller
      */
     public function index()
     {
-       
-
         $list_congthuc=$this->congthuc->danhsachcongthuc();
-        
         $title="danh sách công thức";
         return view('admin.congthuc.index',compact('list_congthuc','title'));
     }

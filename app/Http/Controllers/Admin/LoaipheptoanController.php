@@ -48,7 +48,7 @@ class LoaipheptoanController extends Controller
 
             'loaipheptoan'=>'required',
         ],[
-            'loaipheptoan.required'=>'tên khái niệm bắt buộc phải nhập',
+            'loaipheptoan.required'=>'tên loại phép toán bắt buộc phải nhập',
         ]);
         
         $data=[
@@ -100,14 +100,13 @@ class LoaipheptoanController extends Controller
             
             
         ],[
-            'tenloaipheptoan.required'=>'tên khái niệm bắt buộc phải nhập',
+            'loaipheptoan.required'=>'tên loại phép toán bắt buộc phải nhập',
             
         ]);
         $data=[
-            $request->tenloaipheptoan,
-            $request->dinhnghia,
-            $request->kyhieu,
+            $request->loaipheptoan,
         ];
+        //dd($data);
         $this->loaipheptoan->sualoaipheptoan($data,$id);
 
         return back()->with('msr','sửa thành công');

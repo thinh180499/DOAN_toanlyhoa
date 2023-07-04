@@ -112,16 +112,18 @@
                             <li>
                                 <a href="<?php echo route('admin.hangso.index'); ?>">Hằng số</a>
                             </li>
-                            {{-- <li>
+                            <li>
                                 <a href="<?php echo route('admin.bieuthuc.index'); ?>">Biểu thức</a>
-                            </li> --}}
+                            </li>
                             <li>
                                 <a href="<?php echo route('admin.congthuc.index'); ?>">Công thức</a>
                             </li>
                             <li>
                                 <a href="<?php echo route('admin.donvi.index'); ?>">Đơn vị</a>
                             </li>
-
+                            <li>
+                                <a href="<?php echo route('admin.loaipheptoan.index'); ?>">Loại phép toán</a>
+                            </li>
                             <li>
                                 <a href="<?php echo route('admin.loaidonvi.index'); ?>">Loại đơn vị</a>
                             </li>

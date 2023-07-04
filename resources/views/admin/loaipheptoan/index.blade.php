@@ -10,15 +10,14 @@
             </h4>
 
             <div class="table-responsive">
-                <a href="{{ route('admin.loaipheptoan.create') }}" class="btn btn-success mb-4">Thêm khái niệm</a>
+                <a href="{{ route('admin.loaipheptoan.create') }}" class="btn btn-success mb-4">Thêm phép toán</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>ID Khái niệm</th>
-                            <th>Tên khái niệm</th>
-                            <th>Ký hiệu</th>
-                            <th>Định nghĩa</th>
+                            <th>ID loại phép toán</th>
+                            <th>loại phép toán</th>
+                            
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -34,14 +33,10 @@
                                         {{ $loaipheptoan->loaipheptoan_id }}
                                     </th>
                                     <td>
-                                        {{ $loaipheptoan->tenloaipheptoan }}
+                                        {{ $loaipheptoan->loaipheptoan }}
                                     </td>
-                                    <td>
-                                        {{ $loaipheptoan->kyhieu }}
-                                    </td>
-                                    <td>
-                                        {{ $loaipheptoan->dinhnghia }}
-                                    </td>
+                                   
+                                   
                                     <td>
                                         <a href="{{ route('admin.loaipheptoan.edit',['loaipheptoan' => $loaipheptoan->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
                                         <form class="d-inline-block" action="{{ route('admin.loaipheptoan.destroy', ['loaipheptoan' => $loaipheptoan->id]) }}" method="post">
