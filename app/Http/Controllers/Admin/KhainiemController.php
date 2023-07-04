@@ -53,13 +53,13 @@ class KhainiemController extends Controller
             'kyhieu'=>'required',
         ],[
             'tenkhainiem.required'=>'tên khái niệm bắt buộc phải nhập',
-            'dinhnghia.min'=>'định nghĩa phải hơn 5 ký tự',
+            'dinhnghia.min'=>'định nghĩa bắt buộc phải nhập',
             'kyhieu.required'=>'ký tự bắt buộc phải nhập',
             
         ]);
-
+        
         $data=[
-            $this->khainiem->demkhainiem(),
+            $this->khainiem->layidcuoidanhsach(),
             $request->tenkhainiem,
             $request->dinhnghia,
             $request->kyhieu,

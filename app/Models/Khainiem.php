@@ -5,9 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Models\Congthuc;
-use App\Models\Bieuthuc;
-use App\Models\Loaipheptoan;
 
 class Khainiem extends Model
 {
@@ -19,13 +16,20 @@ class Khainiem extends Model
         return DB::select('SELECT * FROM '.$table);
         
     }
-    public function danhsachcongthuckhainiem(){
+    public function layidcuoidanhsach(){
+       
         $table=$this->table;
-        return DB::table($table)
-        ->select('khainiem.id','dinhnghia','kyhieu','bieuthuc_id')
-        ->join('congthuc','khainiem.id','=','congthuc.khainiem_id')
+        
+        $danhsachid=DB::table($table)
+        ->orderBy('id', 'desc')
         ->get();
+        $idkhainiem=$danhsachid[0]->id;
+        (int)$idkhainiem++;
+        $idkhainiem="KH".$idkhainiem;
+
+        return $idkhainiem;
     }
+    
     public function themkhainiem($data){
         $table=$this->table;
         // $count=DB::table($table)->count();

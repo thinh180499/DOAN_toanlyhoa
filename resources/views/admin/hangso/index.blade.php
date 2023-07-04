@@ -10,41 +10,33 @@
             </h4>
 
             <div class="table-responsive">
-                <a href="{{ route('admin.khainiem.create') }}" class="btn btn-success mb-4">Thêm khái niệm</a>
+                <a href="{{ route('admin.hangso.create') }}" class="btn btn-success mb-4">Thêm khái niệm</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>ID Khái niệm</th>
-                            <th>Tên khái niệm</th>
-                            <th>Ký hiệu</th>
-                            <th>Định nghĩa</th>
+                            <th>ID hằng số</th>
+                            <th>Hằng số</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @if (!empty($list_khainiem))
-                            @foreach ($list_khainiem as $khainiem)
+                        @if (!empty($list_hangso))
+                            @foreach ($list_hangso as $hangso)
                                 <tr>
                                     <th scope="row">
-                                        {{ $khainiem->id }}
-                                    </th>
-                                    <th scope="row">
-                                        {{ $khainiem->khainiem_id }}
+                                        {{ $hangso->id }}
                                     </th>
                                     <td>
-                                        {{ $khainiem->tenkhainiem }}
+                                        {{ $hangso->hangso_id }}
                                     </td>
                                     <td>
-                                        {{ $khainiem->kyhieu }}
+                                        {{ $hangso->hangso }}
                                     </td>
                                     <td>
-                                        {{ $khainiem->dinhnghia }}
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.khainiem.edit',['khainiem' => $khainiem->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
-                                        <form class="d-inline-block" action="{{ route('admin.khainiem.destroy', ['khainiem' => $khainiem->id]) }}" method="post">
+                                        <a href="{{ route('admin.hangso.edit',['hangso' => $hangso->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
+                                        <form class="d-inline-block" action="{{ route('admin.hangso.destroy', ['hangso' => $hangso->id]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger px-3" >Xóa</button>
