@@ -43,6 +43,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('loaidonvi', LoaidonviController::class);
     Route::resource('mon', MonController::class);
     Route::resource('hangso', HangsoController::class);
-    Route::resource('pheptoan', LoaipheptoanController::class);
+    Route::resource('loaipheptoan', LoaipheptoanController::class);
 
 });

@@ -11,7 +11,7 @@ class Loaipheptoan extends Model
     use HasFactory;
     protected $table='loaipheptoans';
     protected $fillable=['loaipheptoan_id','loaipheptoan'];
-    public function loaipheptoan(){
+    public function danhsachloaipheptoan(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
     }
