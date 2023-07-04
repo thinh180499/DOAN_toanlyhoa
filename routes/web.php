@@ -29,6 +29,8 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/admin', [KhainiemController::class, 'index'])->name('admin');
+Route::get('dodai', [HomeController::class, 'dodai'])->name('dodai');
+    Route::post('dodai', [HomeController::class, 'doidodai']);
 
 Route::prefix('/admin')->name('admin.')->group(function () {
 

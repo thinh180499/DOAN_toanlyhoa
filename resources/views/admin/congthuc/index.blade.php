@@ -15,6 +15,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Khái niệm</th>
+                            <th>Ký hiệu</th>
                             <th>Biểu thức</th>
                             <th>Chức năng</th>
                         </tr>
@@ -28,7 +29,10 @@
                                         {{ $congthuc->id }}
                                     </th>
                                     <td>
-                                        {{ $congthuc->khainiem_id }}
+                                        {{ $congthuc->tenkhainiem }}
+                                    </td>
+                                    <td>
+                                        {{ $congthuc->kyhieu }}
                                     </td>
                                     <td>
                                         {{ $congthuc->bieuthuc_id }}

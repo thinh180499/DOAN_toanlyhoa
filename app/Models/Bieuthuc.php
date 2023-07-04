@@ -11,9 +11,13 @@ class Bieuthuc extends Model
     use HasFactory;
     protected $table='bieuthuc';
     protected $fillable=['vetrai','vephai','loaipheptoan_id'];
-    public function chitietbieuthuc(){
+    public function danhsachbieuthuc(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
+    }
+    public function chitietbieuthuccuadoituong($id){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
     }
     public function thembieuthuc($data){
         DB::insert('INSERT INTO bieuthuc('.$this->table.')value(?,?,?)',$data);

@@ -24,11 +24,11 @@ class CongthucController extends Controller
     public function __construct(){
         $this->congthuc=new Congthuc();
        // $this->middleware('auth');
-        $bieuthuc=new Bieuthuc();
-        $doituong=new Doituong();
-        $doituonglabieuthuc=new Doituonglabieuthuc();
-        $doituonglahangso=new Doituonglahangso();
-        $doituonglakhainiem=new Doituonglakhainiem();
+        $this->bieuthuc=new Bieuthuc();
+        $this->doituong=new Doituong();
+        $this->doituonglabieuthuc=new Doituonglabieuthuc();
+        $this->doituonglahangso=new Doituonglahangso();
+        $this->doituonglakhainiem=new Doituonglakhainiem();
     }
     /**
      * Display a listing of the resource.
@@ -39,7 +39,8 @@ class CongthucController extends Controller
     {
        
 
-        $list_congthuc=$this->congthuc->danhsachcongthuc();
+        $list_congthuc=$this->congthuc->danhsachcongthuccuakhainiem();
+        
         $title="danh sách công thức";
         return view('admin.congthuc.index',compact('list_congthuc','title'));
     }
@@ -73,11 +74,17 @@ class CongthucController extends Controller
      */
     public function show($id)
     {
+        $data=[1,2];
+        $list_bieuthuc="";
+        $list_doituong="";
+        $ketqua="";
+        $x=0;
+        $y=0;
         //chi tiết công thức
         $list_chitietcongthuc=$this->congthuc->chitietcongthuc($id);
+        //dd($list_chitietcongthuc[0]->bieuthuc_id);
 
-        
-        $chi=$this->chitietbieuthuc($list_chitietcongthuc[0]->id);
+        $chi=$this->chitietbieuthuc($list_chitietcongthuc[0]->bieuthuc_id,$list_bieuthuc,$list_doituong,$data,$ketqua,$x,$y);
         // //chi tiết biểu thức
         // $list_chitietbieuthuc=$bieuthuc->chitietbieuthuc($list_chitietcongthuc->bieuthuc_id);
 
@@ -140,14 +147,14 @@ class CongthucController extends Controller
     {
         //
     }
-    public function chitietbieuthuc($id)
+    public function chitietbieuthuc($id,$list_bieuthuc,$list_doituong,$data,$ketqua,$x,$y)
     {
         
         //chi tiết biểu thức
-        $list_chitietbieuthuc=$this->bieuthuc->chitietbieuthuc($id);
-        dd($list_chitietbieuthuc);
+        $list_bieuthuc=array_merge($this->bieuthuc->chitietbieuthuccuadoituong($id));
+        //dd($list_bieuthuc);
         //xác định đối tượng vế trái
-        $vetrai=$this->doituong->chitietdoituong($list_chitietbieuthuc[0]->vetrai);
+        $vetrai=$this->doituong->chitietdoituong($list_bieuthuc[$x]->vetrai);
         if($vetrai->loaidoituong_id==1){
             $chitietvetrai=$this->doituonglakhainiem->chitiet($vetrai->id);
         }
@@ -160,7 +167,7 @@ class CongthucController extends Controller
 
 
         //xác định đối tượng vế phải
-        $vephai=$this->doituong->chitietdoituong($list_chitietbieuthuc[0]->vephai);
+        $vephai=$this->doituong->chitietdoituong($list_bieuthuc[0]->vephai);
         if($vephai->loaidoituong_id==1){
             $chitietvephai=$this->doituonglakhainiem->chitiet($vephai->id);
         }
