@@ -23,10 +23,13 @@ class Khainiem extends Model
         $danhsachid=DB::table($table)
         ->orderBy('id', 'desc')
         ->get();
+        if(!empty($danhsachid)){
         $idkhainiem=$danhsachid[0]->id;
         (int)$idkhainiem++;
         $idkhainiem="KN-".$idkhainiem;
-
+        }else{
+            $idkhainiem="KN-1";
+        }
         return $idkhainiem;
     }
     

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\LoaidonviController;
 use App\Http\Controllers\Admin\MonController;
 use App\Http\Controllers\Admin\HangsoController;
 use App\Http\Controllers\Admin\LoaipheptoanController;
+use App\Http\Controllers\Admin\BieuthucController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +45,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('mon', MonController::class);
     Route::resource('hangso', HangsoController::class);
     Route::resource('loaipheptoan', LoaipheptoanController::class);
+    Route::resource('bieuthuc', BieuthucController::class);
 
 });

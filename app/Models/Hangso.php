@@ -23,10 +23,15 @@ class Hangso extends Model
         $danhsachid=DB::table($table)
         ->orderBy('id', 'desc')
         ->get();
-        $idhangso=$danhsachid[0]->id;
-        (int)$idhangso++;
-        $idhangso="HS-".$idhangso;
-
+        if(!empty($danhsachid[0]->id)){
+            $idhangso=$danhsachid[0]->id;
+            (int)$idhangso++;
+            $idhangso="HS-".$idhangso;
+        }else{
+            $idhangso="HS-1";
+        }
+       
+        //dd($idhangso);
         return $idhangso;
     }
     public function themhangso($data){

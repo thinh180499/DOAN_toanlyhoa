@@ -49,12 +49,12 @@ class HangsoController extends Controller
         ],[
             'hangso.required'=>'* hằng số bắt buộc phải nhập',
         ]);
-
+        //dd( $request->hangso);
         $data=[
             $this->hangso->layidcuoidanhsach(),
             $request->hangso,
         ];
-        //dd($data);
+       //dd($data);
         $this->hangso->themhangso($data);
         return redirect()->route('admin.hangso.index');
     }
@@ -96,16 +96,12 @@ class HangsoController extends Controller
     {
         $request->validate([
             'hangso'=>'required',
-            
-            
         ],[
-            'tenhangso.required'=>'tên khái niệm bắt buộc phải nhập',
+            'hangso.required'=>'tên khái niệm bắt buộc phải nhập',
             
         ]);
         $data=[
-            $request->tenhangso,
-            $request->dinhnghia,
-            $request->kyhieu,
+            $request->hangso,
         ];
         $this->hangso->suahangso($data,$id);
 

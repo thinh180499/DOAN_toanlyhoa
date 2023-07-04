@@ -22,10 +22,14 @@ class Loaipheptoan extends Model
         $danhsachid=DB::table($table)
         ->orderBy('id', 'desc')
         ->get();
-        $idloaipheptoan=$danhsachid[0]->id;
-        (int)$idloaipheptoan++;
-        $idloaipheptoan="LPT-".$idloaipheptoan;
-
+        if(!empty($danhsachid)){
+            $idloaipheptoan=$danhsachid[0]->id;
+            (int)$idloaipheptoan++;
+            $idloaipheptoan="LPT-".$idloaipheptoan;
+        }else{
+            $idloaipheptoan="LPT-1";
+        }
+        dd($danhsachid);
         return $idloaipheptoan;
     }
     public function themloaipheptoan($data){
