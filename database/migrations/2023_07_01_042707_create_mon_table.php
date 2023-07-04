@@ -13,7 +13,7 @@ class CreateMonTable extends Migration
      */
     public function up()
     {
-        Schema::create('mon', function (Blueprint $table) {
+        Schema::create('mons', function (Blueprint $table) {
             $table->id();
             $table->string('tenmon');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateMonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mon');
+        Schema::dropIfExists('mons');
     }
 }

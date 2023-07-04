@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{ route('admin.khainiem.store') }}" method="post">
-        
+    <form action="" method="post">
+        @method('PUT')
         @csrf
 
         <!-- ========== tables-wrapper start ========== -->
@@ -19,24 +19,24 @@
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="tenkhainiem">Tên khái niệm</label>
                     <div class="col-md-10">
-                        <input name="tenkhainiem" type="text" class="form-control" id="tenkhainiem" placeholder="Nhập tên khái niệm" value="{{ old('tenkhainiem') }}">
+                        <input type="text" class="form-control" id="tenkhainiem" value="Nhập tên khái niệm">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="kyhieu">Ký hiệu</label>
                     <div class="col-md-10">
-                        <input name="kyhieu" type="text" class="form-control" id="kyhieu" placeholder="Nhập ký hiệu" value="{{ old('kyhieu') }}">
+                        <input type="text" class="form-control" id="kyhieu" placeholder="Nhập ký hiệu">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="dinhnghia-textarea">Định nghĩa</label>
                     <div class="col-md-10">
-                        <textarea name="dinhnghia" class="form-control" rows="5" id="dinhnghia-textarea" placeholder="Nhập khái niệm" style="height: 166px;" value="{{ old('dinhnghia') }}"></textarea>
+                        <textarea class="form-control" rows="5" id="dinhnghia-textarea" placeholder="Nhập khái niệm" style="height: 166px;"></textarea>
                     </div>
                 </div>
                 <div class="form-group now d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success px-5">Thêm</button>
+                    <button type="button" class="btn btn-success px-5">Thêm</button>
                     <a href="{{ route('admin.khainiem.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>

@@ -13,7 +13,7 @@ class CreateChuyendonviTable extends Migration
      */
     public function up()
     {
-        Schema::create('chuyendonvi', function (Blueprint $table) {
+        Schema::create('chuyendonvis', function (Blueprint $table) {
             $table->id();
             $table->float('hesonhan');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateChuyendonviTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chuyendonvi');
+        Schema::dropIfExists('chuyendonvis');
     }
 }

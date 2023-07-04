@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Mon extends Model
 {
     use HasFactory;
-    protected $table='mon';
+    protected $table='mons';
     protected $fillable=['tenmon'];
     public function danhsachmon(){
         $table=$this->table;

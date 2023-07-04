@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AfterCongthuccuamonTable extends Migration
+class AfterChuyendonviTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class AfterCongthuccuamonTable extends Migration
      */
     public function up()
     {
-        Schema::table('congthuccuamon', function (Blueprint $table) {
-            $table->unsignedBigInteger('congthuc_id');
-            $table->unsignedBigInteger('mon_id');
-
-            $table->foreign('congthuc_id')->references('id')->on('congthuc');
-            $table->foreign('mon_id')->references('id')->on('mon');
+        Schema::table('chuyendonvis', function (Blueprint $table) {
+            $table->foreignId('tudonvi')->constrained('donvis');
+            $table->foreignId('dendonvi')->constrained('donvis');
         });
     }
 

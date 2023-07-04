@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Hangso;
 
-class DoituonglakhainiemController extends Controller
+class HangsoController extends Controller
 {
+    private $hangso;
+    public function __construct(){
+        $this->middleware('auth');
+        $this->hangso=new Hangso();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class DoituonglakhainiemController extends Controller
      */
     public function index()
     {
-        //
+        $list_hangso=$this->hangso->danhsachhangso();
+        $title="danh sách các hằng số";
+        return view('admin.hangso.index',compact('list_hangso','title'));
     }
 
     /**

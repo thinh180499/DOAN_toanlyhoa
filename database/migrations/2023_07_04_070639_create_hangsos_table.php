@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVephaiTable extends Migration
+class CreateHangsosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateVephaiTable extends Migration
      */
     public function up()
     {
-        Schema::create('vephai', function (Blueprint $table) {
+        Schema::create('hangsos', function (Blueprint $table) {
             $table->id();
+            $table->string('hangso_id')->unique();
+            $table->float('hangso');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateVephaiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vephai');
+        Schema::dropIfExists('hangsos');
     }
 }

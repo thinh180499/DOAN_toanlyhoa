@@ -13,7 +13,7 @@ class CreateLoaidonviTable extends Migration
      */
     public function up()
     {
-        Schema::create('loaidonvi', function (Blueprint $table) {
+        Schema::create('loaidonvis', function (Blueprint $table) {
             $table->id();
             $table->string('tenloaidonvi');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateLoaidonviTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loaidonvi');
+        Schema::dropIfExists('loaidonvis');
     }
 }

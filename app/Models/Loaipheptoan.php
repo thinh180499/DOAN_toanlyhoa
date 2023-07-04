@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 class Loaipheptoan extends Model
 {
     use HasFactory;
-    protected $table='loaipheptoan';
-    protected $fillable=['loaipheptoan'];
+    protected $table='loaipheptoans';
+    protected $fillable=['loaipheptoan_id','loaipheptoan'];
     public function loaipheptoan(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);

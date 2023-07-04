@@ -34,7 +34,6 @@ class KhainiemController extends Controller
      */
     public function create()
     {
-        
         $title="thêm khái niệm";
         return view('admin.khainiem.create',compact('title'));
     }
@@ -51,21 +50,23 @@ class KhainiemController extends Controller
 
             'tenkhainiem'=>'required',
             'dinhnghia'=>'required',
-            'kytu'=>'required',
+            'kyhieu'=>'required',
         ],[
-            'tenkhainiem.required'=>'đơn vi bắt buộc phải nhập',
+            'tenkhainiem.required'=>'tên khái niệm bắt buộc phải nhập',
             'dinhnghia.min'=>'định nghĩa phải hơn 5 ký tự',
-            'kytu.required'=>'ký tự bắt buộc phải nhập',
+            'kyhieu.required'=>'ký tự bắt buộc phải nhập',
             
         ]);
+
         $data=[
+            $this->khainiem->demkhainiem(),
             $request->tenkhainiem,
             $request->dinhnghia,
-            $request->kytu,
+            $request->kyhieu,
         ];
-        
+        //dd($data);
         $this->khainiem->themkhainiem($data);
-        return redirect()->route('admin.doituong.index');
+        return redirect()->route('admin.khainiem.index');
     }
 
     /**

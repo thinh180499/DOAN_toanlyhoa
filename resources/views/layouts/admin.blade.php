@@ -16,6 +16,7 @@
     <link href="{{ asset('admin1\assets\css\icons.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin1\assets\css\app.min.css') }}" rel="stylesheet" type="text/css"
         id="app-stylesheet">
+    @yield('css')
 </head>
 
 <body>
@@ -95,7 +96,7 @@
 
                 <ul class="metismenu" id="side-menu">
 
-                    <li class="menu-title">Môn học</li>
+                    <li class="menu-title">Chức năng</li>
 
                     {{-- Chức năng --}}
                     <li>
@@ -106,19 +107,19 @@
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                              {{-- <a href="<?php echo route('admin.congthuc'); ?>">Công thức</a> --}}
+                              <a href="<?php echo route('admin.congthuc.index'); ?>">Công thức</a>
                             </li>
                             <li>
-                              {{-- <a href="<?php echo route('admin.donvi'); ?>">Đơn vị</a> --}}
+                              <a href="<?php echo route('admin.donvi.index'); ?>">Đơn vị</a>
                             </li>
                             <li>
-                              {{-- <a href="<?php echo route('admin.khainiem'); ?>">Khái niệm</a> --}}
+                              <a href="<?php echo route('admin.khainiem.index'); ?>">Khái niệm</a>
                             </li>
                             <li>
-                              {{-- <a href="<?php echo route('admin.loaidonvi'); ?>">Loại dơn vị</a> --}}
+                              <a href="<?php echo route('admin.loaidonvi.index'); ?>">Loại dơn vị</a>
                             </li>
                             <li>
-                              {{-- <a href="<?php echo route('admin.mon'); ?>">Môn</a> --}}
+                              <a href="<?php echo route('admin.mon.index'); ?>">Môn</a>
                             </li>
                         </ul>
                     </li>
@@ -205,6 +206,7 @@
 
     <!-- App js -->
     <script src="{{ asset('admin1\assets\js\app.min.js') }}"></script>
+    @yield('script')
 
 </body>
 

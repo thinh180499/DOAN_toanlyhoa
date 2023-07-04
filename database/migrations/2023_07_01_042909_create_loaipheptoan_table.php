@@ -13,9 +13,10 @@ class CreateLoaipheptoanTable extends Migration
      */
     public function up()
     {
-        Schema::create('loaipheptoan', function (Blueprint $table) {
+        Schema::create('loaipheptoans', function (Blueprint $table) {
             $table->id();
-            $table->string('loaipheptoan');
+            $table->string('loaipheptoan_id')->unique();
+            $table->string('loaipheptoans');
             $table->timestamps();
         });
     }

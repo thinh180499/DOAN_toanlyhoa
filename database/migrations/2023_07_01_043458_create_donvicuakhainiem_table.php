@@ -13,7 +13,7 @@ class CreateDonvicuakhainiemTable extends Migration
      */
     public function up()
     {
-        Schema::create('donvicuakhainiem', function (Blueprint $table) {
+        Schema::create('donvicuakhainiems', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateDonvicuakhainiemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donvicuakhainiem');
+        Schema::dropIfExists('donvicuakhainiems');
     }
 }

@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 class Chuyendonvi extends Model
 {
     use HasFactory;
-    protected $table='chuyendonvi';
-    protected $fillable=['hesonhan','tudonvi_id','dendonvi_id'];
+    protected $table='chuyendonvis';
+    protected $fillable=['hesonhan','tudonvi','dendonvi'];
     public function chuyendonvithanh($a,$i,$j){
         $table=$this->table;
-        $data=DB::select('SELECT hesonhan FROM '.$table.' WHERE tudonvi_id='.$i.' AND dendonvi_id='.$j);
+        $data=DB::select('SELECT hesonhan FROM '.$table.' WHERE tudonvi='.$i.' AND dendonvi='.$j);
         $hesonhan=$data[0]->hesonhan;
         $ketqua=$a*$hesonhan;
        return $ketqua;

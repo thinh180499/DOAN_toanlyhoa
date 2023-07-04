@@ -25,10 +25,7 @@ class CongthucController extends Controller
         $this->congthuc=new Congthuc();
        // $this->middleware('auth');
         $this->bieuthuc=new Bieuthuc();
-        $this->doituong=new Doituong();
-        $this->doituonglabieuthuc=new Doituonglabieuthuc();
-        $this->doituonglahangso=new Doituonglahangso();
-        $this->doituonglakhainiem=new Doituonglakhainiem();
+       
     }
     /**
      * Display a listing of the resource.

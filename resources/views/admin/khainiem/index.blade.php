@@ -10,13 +10,14 @@
             </h4>
 
             <div class="table-responsive">
+                <a href="{{ route('admin.khainiem.create') }}" class="btn btn-success mb-4">Thêm khái niệm</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tên khái niệm</th>
-                            <th>Định nghĩa</th>
                             <th>Ký hiệu</th>
+                            <th>Định nghĩa</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -32,17 +33,17 @@
                                         {{ $khainiem->tenkhainiem }}
                                     </td>
                                     <td>
-                                        {{ $khainiem->dinhnghia }}
-                                    </td>
-                                    <td>
                                         {{ $khainiem->kyhieu }}
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-info">Sửa</a>
+                                        {{ $khainiem->dinhnghia }}
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-info px-3 mr-2">Sửa</a>
                                         <form class="d-inline-block" action="" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="button" class="btn btn-danger">Xóa</button>
+                                            <button type="button" class="btn btn-danger px-3">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -59,4 +60,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('css')
+    <style>
+        td:nth-child(4) {
+          width: 55%;
+        }
+    </style>
 @endsection

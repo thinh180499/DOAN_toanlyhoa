@@ -9,6 +9,6 @@ use Illuminate\Support\Facades\DB;
 class Donvicuakhainiem extends Model
 {
     use HasFactory;
-    protected $table='donvicuakhainiem';
+    protected $table='donvicuakhainiems';
     protected $fillable=['khainiem_id','donvi_id'];
 }

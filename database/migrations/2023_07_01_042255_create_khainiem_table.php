@@ -13,8 +13,9 @@ class CreateKhainiemTable extends Migration
      */
     public function up()
     {
-        Schema::create('khainiem', function (Blueprint $table) {
+        Schema::create('khainiems', function (Blueprint $table) {
             $table->id();
+            $table->string('khainiem_id')->unique();
             $table->string('tenkhainiem');
             $table->text('dinhnghia');
             $table->string('kyhieu');
@@ -29,6 +30,6 @@ class CreateKhainiemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('khainiem');
+        Schema::dropIfExists('khainiems');
     }
 }

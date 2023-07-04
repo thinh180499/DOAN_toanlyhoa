@@ -13,7 +13,7 @@ class CreateCongthucTable extends Migration
      */
     public function up()
     {
-        Schema::create('congthuc', function (Blueprint $table) {
+        Schema::create('congthucs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateCongthucTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('congthuc');
+        Schema::dropIfExists('congthucs');
     }
 }

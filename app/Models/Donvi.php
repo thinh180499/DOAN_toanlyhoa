@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Donvi extends Model
 {
     use HasFactory;
-    protected $table='donvi';
+    protected $table='donvis';
     protected $fillable=['tendonvi','kyhieu','loaidonvi_id'];
     public function danhsachdonvi(){
         $table=$this->table;

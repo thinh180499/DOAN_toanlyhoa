@@ -13,8 +13,9 @@ class CreateBieuthucTable extends Migration
      */
     public function up()
     {
-        Schema::create('bieuthuc', function (Blueprint $table) {
+        Schema::create('bieuthucs', function (Blueprint $table) {
             $table->id();
+            $table->string('bieuthuc_id')->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateBieuthucTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bieuthuc');
+        Schema::dropIfExists('bieuthucs');
     }
 }

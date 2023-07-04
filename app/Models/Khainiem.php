@@ -8,15 +8,11 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Congthuc;
 use App\Models\Bieuthuc;
 use App\Models\Loaipheptoan;
-use App\Models\Doituong;
-use App\Models\Doituonglabieuthuc;
-use App\Models\Doituonglahangso;
-use App\Models\Doituonglakhainiem;
 
 class Khainiem extends Model
 {
     use HasFactory;
-    protected $table='khainiem';
+    protected $table='khainiems';
     protected $fillable=['tenkhainiem','dinhnghia','kyhieu'];
     public function danhsachkhainiem(){
         $table=$this->table;
@@ -30,8 +26,19 @@ class Khainiem extends Model
         ->join('congthuc','khainiem.id','=','congthuc.khainiem_id')
         ->get();
     }
+    public function demkhainiem(){
+        $table=$this->table;
+        $count=DB::table('khainiems')->count();
+        $count++;
+        $setid="KN".$count;
+        return $setid;
+    }
     public function themkhainiem($data){
-        DB::insert('INSERT INTO khainiem(tenkhainiem,dinhnghia,kyhieu)value(?,?,?)',$data);
+        $table=$this->table;
+        // $count=DB::table($table)->count();
+        // $count++;
+        // $setid="KN".$count;
+        DB::insert('INSERT INTO khainiems(khainiem_id,tenkhainiem,dinhnghia,kyhieu)value(?,?,?,?)',$data);
      }
      public function suakhainiem($data,$id){
         $data[]=$id;

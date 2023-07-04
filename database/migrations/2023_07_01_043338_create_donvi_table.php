@@ -13,7 +13,7 @@ class CreateDonviTable extends Migration
      */
     public function up()
     {
-        Schema::create('donvi', function (Blueprint $table) {
+        Schema::create('donvis', function (Blueprint $table) {
             $table->id();
             $table->string('tendonvi');
             $table->string('kyhieu');
@@ -28,6 +28,6 @@ class CreateDonviTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donvi');
+        Schema::dropIfExists('donvis');
     }
 }

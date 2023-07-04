@@ -36,7 +36,7 @@ class HomeController extends Controller
          $i=2;
          $j=3;
          $ketqua=$chuyendonvi->chuyendonvithanh($a,$i,$j);
-        dd($ketqua);
+        //dd($ketqua);
         return view('dodai',compact('list_donvi'));
     }
     public function doidodai(Request $request){

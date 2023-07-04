@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 class Bieuthuc extends Model
 {
     use HasFactory;
-    protected $table='bieuthuc';
-    protected $fillable=['vetrai','vephai','loaipheptoan_id'];
+    protected $table='bieuthucs';
+    protected $fillable=['bieuthuc_id','vetrai','vephai','loaipheptoan_id'];
     public function danhsachbieuthuc(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
@@ -20,7 +20,10 @@ class Bieuthuc extends Model
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
     }
     public function thembieuthuc($data){
-        DB::insert('INSERT INTO bieuthuc('.$this->table.')value(?,?,?)',$data);
+        $table=$this->table;
+        $count=DB::table($table)->count();
+        $setid="BT".$count;
+        DB::insert('INSERT INTO bieuthucs('.$this->table.')value('.$setid.'?,?,?)',$data);
      }
      public function suabieuthuc($data,$id){
         $data[]=$id;
