@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bieuthuc;
 
+use App\Models\Khainiem;
+
+use App\Models\Loaipheptoan;
+
+use App\Models\Hangso;
+
 class BieuthucController extends Controller
 {
     private $bieuthuc;
@@ -23,7 +29,7 @@ class BieuthucController extends Controller
     {
         $list_bieuthuc=$this->bieuthuc->danhsachbieuthuc();
         //dd($list_bieuthuc);
-        $title="danh sách khái niệm";
+        $title="danh sách biểu thức";
         return view('admin.bieuthuc.index',compact('list_bieuthuc','title'));
     }
 
@@ -34,8 +40,14 @@ class BieuthucController extends Controller
      */
     public function create()
     {
-        $title="thêm khái niệm";
-        return view('admin.bieuthuc.create',compact('title'));
+        $khainiem=new Khainiem();
+        $hangso=new Hangso();
+        $loaipheptoan=new Loaipheptoan();
+        $list_khainiem=$khainiem->danhsachkhainiem();
+        $list_hangso=$hangso->danhsachhangso();
+        $list_loaipheptoan=$loaipheptoan->danhsachloaipheptoan();
+        $title="thêm biểu thức";
+        return view('admin.bieuthuc.create',compact('list_khainiem','list_hangso','list_loaipheptoan','title'));
     }
 
     /**
