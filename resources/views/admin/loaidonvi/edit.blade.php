@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{ route('admin.hangso.update', ['hangso' => $hangso->id]) }}" method="post">
+    <form action="{{ route('admin.loaidonvi.update', ['loaidonvi' => $loaidonvi->id]) }}" method="post">
         @method('PUT')
         @csrf
 
@@ -17,11 +17,11 @@
                 </h4>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="tenhangso">Hằng số</label>
+                    <label class="col-md-2 col-form-label" for="tenloaidonvi">Loại đơn vi</label>
                     <div class="col-md-10">
-                        <input name="hangso" type="text" class="form-control" id="tenhangso" placeholder="Nhập hằng số" 
-                            value="{{ old('hangso') ?? $hangso->hangso }}">
-                            @error('hangso')
+                        <input name="tenloaidonvi" type="text" class="form-control" id="tenloaidonvi" placeholder="Nhập loại đơn vi" 
+                            value="{{ old('tenloaidonvi') ?? $loaidonvi->tenloaidonvi }}">
+                            @error('tenloaidonvi')
                                 <span style="color: red;">{{ $message }}</span>
                              @enderror
                     </div>
@@ -31,7 +31,7 @@
                 
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">sửa</button>
-                    <a href="{{ route('admin.hangso.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
+                    <a href="{{ route('admin.loaidonvi.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>
         </div>

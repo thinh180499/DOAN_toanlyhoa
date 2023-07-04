@@ -21,7 +21,7 @@ class LoaipheptoanController extends Controller
     public function index()
     {
         $list_loaipheptoan=$this->loaipheptoan->danhsachloaipheptoan();
-        $title="danh sách các hằng số";
+        $title="danh sách các phép toán";
         return view('admin.loaipheptoan.index',compact('list_loaipheptoan','title'));
     }
 
@@ -32,7 +32,7 @@ class LoaipheptoanController extends Controller
      */
     public function create()
     {
-        $title="thêm phép tính";
+        $title="thêm phép toán";
         return view('admin.loaipheptoan.create',compact('title'));
     }
 

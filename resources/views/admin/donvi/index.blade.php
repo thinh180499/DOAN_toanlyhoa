@@ -10,13 +10,14 @@
             </h4>
 
             <div class="table-responsive">
+                <a href="{{ route('admin.donvi.create') }}" class="btn btn-success mb-4">Thêm loại đơn vị</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tên đơn vị</th>
                             <th>Ký hiệu</th>
-                            <th>Loại đơn vị id</th>
+                            <th>Loại đơn vị</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -35,14 +36,14 @@
                                         {{ $donvi->kyhieu }}
                                     </td>
                                     <td>
-                                        {{ $donvi->loaidonvi_id }}
+                                        {{ $donvi->tenloaidonvi }}
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-info">Sửa</a>
-                                        <form class="d-inline-block" action="" method="post">
+                                        <a href="{{ route('admin.donvi.edit',['donvi' => $donvi->id]) }}" class="btn btn-info">Sửa</a>
+                                        <form class="d-inline-block" action="{{ route('admin.donvi.destroy', ['donvi' => $donvi->id]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="button" class="btn btn-danger">Xóa</button>
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>

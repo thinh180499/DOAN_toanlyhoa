@@ -130,6 +130,9 @@
                             <li>
                                 <a href="<?php echo route('admin.mon.index'); ?>">Môn</a>
                             </li>
+                            <li>
+                                <a href="<?php echo route('admin.chuyendonvi.index'); ?>">chuyển đổi đơn vị</a>
+                            </li>
                         </ul>
                     </li>
 

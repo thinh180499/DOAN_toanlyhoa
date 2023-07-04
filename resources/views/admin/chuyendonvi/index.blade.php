@@ -10,32 +10,40 @@
             </h4>
 
             <div class="table-responsive">
-                <a href="{{ route('admin.loaidonvi.create') }}" class="btn btn-success mb-4">Thêm loại đơn vị</a>
+                <a href="{{ route('admin.chuyendonvi.create') }}" class="btn btn-success mb-4">Thêm chuyển đơn vị</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tên loại đơn vị</th>
+                            <th>Hệ số nhân</th>
+                            <th>Từ đơn vị</th>
+                            <th>Đến đơn vị</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @if (!empty($list_loaidonvi))
-                            @foreach ($list_loaidonvi as $loaidonvi)
+                        @if (!empty($list_chuyendonvi))
+                            @foreach ($list_chuyendonvi as $chuyendonvi)
                                 <tr>
                                     <th scope="row">
-                                        {{ $loaidonvi->id }}
+                                        {{ $chuyendonvi->id }}
                                     </th>
                                     <td>
-                                        {{ $loaidonvi->tenloaidonvi }}
+                                        {{ $chuyendonvi->hesonhan }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.loaidonvi.edit',['loaidonvi' => $loaidonvi->id]) }}" class="btn btn-info">Sửa</a>
-                                        <form class="d-inline-block" action="{{ route('admin.loaidonvi.destroy', ['loaidonvi' => $loaidonvi->id]) }}" method="post">
+                                        {{ $chuyendonvi->tudonvi}}
+                                    </td>
+                                    <td>
+                                        {{ $chuyendonvi->dendonvi }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.chuyendonvi.edit',['chuyendonvi' => $chuyendonvi->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
+                                        <form class="d-inline-block" action="{{ route('admin.chuyendonvi.destroy', ['chuyendonvi' => $chuyendonvi->id]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                            <button type="submit" class="btn btn-danger px-3" >Xóa</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -52,4 +60,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('css')
+    <style>
+        td:nth-child(4) {
+          width: 55%;
+        }
+    </style>
 @endsection

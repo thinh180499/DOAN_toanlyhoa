@@ -22,7 +22,7 @@ class LoaidonviController extends Controller
     {
         $list_loaidonvi=$this->loaidonvi->danhsachloaidonvi();
     
-        $title="danh sách môn";
+        $title="danh sách loại đơn vị";
         return view('admin.loaidonvi.index',compact('list_loaidonvi','title'));
     }
 
@@ -33,7 +33,8 @@ class LoaidonviController extends Controller
      */
     public function create()
     {
-        //
+        $title="Thêm loại đơn vị";
+        return view('admin.loaidonvi.create',compact('title'));
     }
 
     /**
@@ -44,7 +45,18 @@ class LoaidonviController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tenloaidonvi'=>'required',
+        ],[
+            'tenloaidonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+        ]);
+        //dd( $request->loaidonvi);
+        $data=[
+            $request->tenloaidonvi,
+        ];
+       //dd($data);
+        $this->loaidonvi->themloaidonvi($data);
+        return redirect()->route('admin.loaidonvi.index');
     }
 
     /**
@@ -55,7 +67,7 @@ class LoaidonviController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->loaidonvi->chitietloaidonvi($id);
     }
 
     /**
@@ -66,7 +78,11 @@ class LoaidonviController extends Controller
      */
     public function edit($id)
     {
-        //
+        $loaidonvi=$this->loaidonvi->chitietloaidonvi($id);
+        $title="sửa hằng số";
+        $loaidonvi=$loaidonvi[0];  
+        
+        return view('admin.loaidonvi.edit',compact('loaidonvi','title'));
     }
 
     /**
@@ -78,7 +94,18 @@ class LoaidonviController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tenloaidonvi'=>'required',
+        ],[
+            'tenloaidonvi.required'=>'tên khái niệm bắt buộc phải nhập',
+            
+        ]);
+        $data=[
+            $request->tenloaidonvi,
+        ];
+        $this->loaidonvi->sualoaidonvi($data,$id);
+
+        return back()->with('msr','sửa thành công');
     }
 
     /**
@@ -89,6 +116,8 @@ class LoaidonviController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->loaidonvi->xoaloaidonvi($id);
+        $title="danh sách khái niệm";  
+        return redirect()->route('admin.loaidonvi.index',compact('title'));
     }
 }

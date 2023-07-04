@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\HangsoController;
 use App\Http\Controllers\Admin\LoaipheptoanController;
 use App\Http\Controllers\Admin\BieuthucController;
 
+use App\Http\Controllers\Admin\ChuyendonviController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,5 +48,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('hangso', HangsoController::class);
     Route::resource('loaipheptoan', LoaipheptoanController::class);
     Route::resource('bieuthuc', BieuthucController::class);
+    Route::resource('chuyendonvi', ChuyendonviController::class);
 
 });

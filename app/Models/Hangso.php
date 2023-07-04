@@ -11,11 +11,13 @@ class Hangso extends Model
     use HasFactory;
     protected $table='hangsos';
     protected $fillable=['hangso_id','hangso'];
+
     public function danhsachhangso(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
         
     }
+
     public function layidcuoidanhsach(){
        
         $table=$this->table;
@@ -34,19 +36,23 @@ class Hangso extends Model
         //dd($idhangso);
         return $idhangso;
     }
+
     public function themhangso($data){
         $table=$this->table;
         
         DB::insert('INSERT INTO hangsos(hangso_id,hangso)value(?,?)',$data);
      }
+
      public function chitiethangso($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
+     
      public function suahangso($data,$id){
         $data[]=$id;
         return DB::update('UPDATE '.$this->table.' SET hangso=? WHERE id=?',$data);
     }
+    
     public function xoahangso($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
     

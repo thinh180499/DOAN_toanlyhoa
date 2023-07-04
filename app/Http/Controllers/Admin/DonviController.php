@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Donvi;
 
+use App\Models\Loaidonvi;
+
 class DonviController extends Controller
 {
     private $donvi;
@@ -20,7 +22,7 @@ class DonviController extends Controller
      */
     public function index()
     {
-        $list_donvi=$this->donvi->danhsachdonvi();
+        $list_donvi=$this->donvi->danhsachdonvitheoloai();
         $title="danh sách đơn vị";
         return view('admin.donvi.index',compact('list_donvi','title'));
     }
@@ -32,7 +34,10 @@ class DonviController extends Controller
      */
     public function create()
     {
-        //
+        $loaidonvi=new Loaidonvi();
+        $list_loaidonvi=$loaidonvi->danhsachloaidonvi();
+        $title="Thêm đơn vị";
+        return view('admin.donvi.create',compact('list_loaidonvi','title'));
     }
 
     /**
@@ -43,7 +48,25 @@ class DonviController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'tendonvi'=>'required',
+            'kyhieu'=>'required',
+            'loaidonvi'=>'required',
+        ],[
+            'tendonvi.required'=>'* tên khái niệm bắt buộc phải nhập',
+            'kyhieu.required'=>'* ký tự bắt buộc phải nhập',
+            'loaidonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+
+        ]);
+        $data=[
+            $request->tendonvi,
+            $request->kyhieu,
+            $request->loaidonvi,
+        ];
+        //dd($data);
+        $this->donvi->themdonvi($data);
+        return redirect()->route('admin.donvi.index');
     }
 
     /**
@@ -54,7 +77,7 @@ class DonviController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->donvi->chitietdonvi($id);
     }
 
     /**
@@ -65,7 +88,12 @@ class DonviController extends Controller
      */
     public function edit($id)
     {
-        //
+        $donvi=$this->donvi->chitietdonvi($id);
+        $title="sửa khái niệm";
+        $donvi=$donvi[0];
+        $loaidonvi=new Loaidonvi();
+        $list_loaidonvi=$loaidonvi->danhsachloaidonvi();
+        return view('admin.donvi.edit',compact('list_loaidonvi','donvi','title'));
     }
 
     /**
@@ -77,7 +105,26 @@ class DonviController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+
+            'tendonvi'=>'required',
+            'kyhieu'=>'required',
+            'dinhnghia'=>'required',
+        ],[
+            'tendonvi.required'=>'* tên khái niệm bắt buộc phải nhập',
+            'kyhieu.required'=>'* ký tự bắt buộc phải nhập',
+            'loaidonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+
+        ]);
+        $data=[
+            $request->tendonvi,
+            $request->kyhieu,
+            $request->loaidonvi,
+        ];
+        dd($data);
+        $this->donvi->suadonvi($data,$id);
+
+        return back()->with('msr','sửa thành công');
     }
 
     /**
@@ -88,6 +135,8 @@ class DonviController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->donvi->xoadonvi($id);
+        $title="danh sách đơn vị";
+        return redirect()->route('admin.donvi.index',compact('title'));
     }
 }
