@@ -25,7 +25,7 @@ class Khainiem extends Model
         ->get();
         $idkhainiem=$danhsachid[0]->id;
         (int)$idkhainiem++;
-        $idkhainiem="KH".$idkhainiem;
+        $idkhainiem="KN-".$idkhainiem;
 
         return $idkhainiem;
     }

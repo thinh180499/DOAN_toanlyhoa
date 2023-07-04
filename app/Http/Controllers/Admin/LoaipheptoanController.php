@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Hangso;
+use App\Models\Loaipheptoan;
 
-class HangsoController extends Controller
+class PheptoanController extends Controller
 {
-    private $hangso;
+    private $loaipheptoan;
     public function __construct(){
         $this->middleware('auth');
-        $this->hangso=new Hangso();
+        $this->loaipheptoan=new Loaipheptoan();
     }
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class HangsoController extends Controller
      */
     public function index()
     {
-        $list_hangso=$this->hangso->danhsachhangso();
+        $list_loaipheptoan=$this->loaipheptoan->danhsachloaipheptoan();
         $title="danh sách các hằng số";
-        return view('admin.hangso.index',compact('list_hangso','title'));
+        return view('admin.loaipheptoan.index',compact('list_loaipheptoan','title'));
     }
 
     /**
@@ -32,8 +32,8 @@ class HangsoController extends Controller
      */
     public function create()
     {
-        $title="thêm hằng số";
-        return view('admin.hangso.create',compact('title'));
+        $title="thêm phép tính";
+        return view('admin.loaipheptoan.create',compact('title'));
     }
 
     /**
@@ -46,18 +46,18 @@ class HangsoController extends Controller
     {
         $request->validate([
 
-            'hangso'=>'required',
+            'loaipheptoan'=>'required',
         ],[
-            'hangso.required'=>'tên khái niệm bắt buộc phải nhập',
+            'loaipheptoan.required'=>'tên khái niệm bắt buộc phải nhập',
         ]);
         
         $data=[
-            $this->hangso->layidcuoidanhsach(),
-            $request->hangso,
+            $this->loaipheptoan->layidcuoidanhsach(),
+            $request->loaipheptoan,
         ];
         //dd($data);
-        $this->hangso->themhangso($data);
-        return redirect()->route('admin.hangso.index');
+        $this->loaipheptoan->themloaipheptoan($data);
+        return redirect()->route('admin.loaipheptoan.index');
     }
 
     /**
@@ -68,7 +68,7 @@ class HangsoController extends Controller
      */
     public function show($id)
     {
-        $this->hangso->chitiethangso($id);
+        $this->loaipheptoan->chitietloaipheptoan($id);
     }
 
     /**
@@ -79,11 +79,11 @@ class HangsoController extends Controller
      */
     public function edit($id)
     {
-        $hangso=$this->hangso->chitiethangso($id);
-        $title="sửa hằng số";
-        $hangso=$hangso[0];  
+        $loaipheptoan=$this->loaipheptoan->chitietloaipheptoan($id);
+        $title="sửa phép tính";
+        $loaipheptoan=$loaipheptoan[0];  
         
-        return view('admin.hangso.edit',compact('hangso','title'));
+        return view('admin.loaipheptoan.edit',compact('loaipheptoan','title'));
     }
 
     /**
@@ -96,19 +96,19 @@ class HangsoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'hangso'=>'required',
+            'loaipheptoan'=>'required',
             
             
         ],[
-            'tenhangso.required'=>'tên khái niệm bắt buộc phải nhập',
+            'tenloaipheptoan.required'=>'tên khái niệm bắt buộc phải nhập',
             
         ]);
         $data=[
-            $request->tenhangso,
+            $request->tenloaipheptoan,
             $request->dinhnghia,
             $request->kyhieu,
         ];
-        $this->hangso->suahangso($data,$id);
+        $this->loaipheptoan->sualoaipheptoan($data,$id);
 
         return back()->with('msr','sửa thành công');
     }
@@ -121,8 +121,8 @@ class HangsoController extends Controller
      */
     public function destroy($id)
     {
-        $this->hangso->xoahangso($id);
+        $this->loaipheptoan->xoaloaipheptoan($id);
         $title="danh sách khái niệm";  
-        return redirect()->route('admin.hangso.index',compact('title'));
+        return redirect()->route('admin.loaipheptoan.index',compact('title'));
     }
 }

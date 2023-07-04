@@ -22,7 +22,7 @@ class Bieuthuc extends Model
     public function thembieuthuc($data){
         $table=$this->table;
         $count=DB::table($table)->count();
-        $setid="BT".$count;
+        $setid="BT-".$count;
         DB::insert('INSERT INTO bieuthucs('.$this->table.')value('.$setid.'?,?,?)',$data);
      }
      public function suabieuthuc($data,$id){

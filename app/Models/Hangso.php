@@ -25,7 +25,7 @@ class Hangso extends Model
         ->get();
         $idhangso=$danhsachid[0]->id;
         (int)$idhangso++;
-        $idhangso="KH".$idhangso;
+        $idhangso="HS-".$idhangso;
 
         return $idhangso;
     }
@@ -34,4 +34,16 @@ class Hangso extends Model
         
         DB::insert('INSERT INTO hangsos(hangso_id,hangso)value(?,?)',$data);
      }
+     public function chitiethangso($id){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
+     }
+     public function suahangso($data,$id){
+        $data[]=$id;
+        return DB::update('UPDATE '.$this->table.' SET hangso=? WHERE id=?',$data);
+    }
+    public function xoahangso($id){
+        return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
+    
+    }
 }
