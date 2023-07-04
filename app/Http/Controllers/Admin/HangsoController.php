@@ -32,7 +32,8 @@ class HangsoController extends Controller
      */
     public function create()
     {
-        //
+        $title="Thêm hằng số";
+        return view('admin.hangso.create',compact('title'));
     }
 
     /**
@@ -43,7 +44,19 @@ class HangsoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'hangso'=>'required',
+        ],[
+            'hangso.required'=>'* hằng số bắt buộc phải nhập',
+        ]);
+
+        $data=[
+            $this->hangso->layidcuoidanhsach(),
+            $request->hangso,
+        ];
+        //dd($data);
+        $this->hangso->themhangso($data);
+        return redirect()->route('admin.hangso.index');
     }
 
     /**

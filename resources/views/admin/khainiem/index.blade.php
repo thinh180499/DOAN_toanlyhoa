@@ -68,8 +68,8 @@
 
 @section('css')
     <style>
-        td:nth-child(4) {
-          width: 55%;
+        td:nth-child(5) {
+          width: 60%;
         }
     </style>
 @endsection
