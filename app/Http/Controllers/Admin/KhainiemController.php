@@ -88,7 +88,11 @@ class KhainiemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $khainiem=$this->khainiem->chitietkhainiem($id);
+        $title="sửa khái niệm";
+        $khainiem=$khainiem[0];  
+        
+        return view('admin.khainiem.edit',compact('khainiem','title'));
     }
 
     /**
@@ -100,7 +104,25 @@ class KhainiemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tenkhainiem'=>'required|min:5',
+            'dinhnghia'=>'required',
+            'kyhieu'=>'required',
+            
+        ],[
+            'tenkhainiem.required'=>'tên khái niệm bắt buộc phải nhập',
+            'tenkhainiem.min'=>'tên khái niệm phải hơn 5 ký tự',
+            'dinhnghia.required'=>'định nghĩa bắt buộc phải nhập',
+            'kyhieu.required'=>'ký hiệu bắt buộc phải nhập',
+        ]);
+        $data=[
+            $request->tenkhainiem,
+            $request->dinhnghia,
+            $request->kyhieu,
+        ];
+        $this->khainiem->suakhainiem($data,$id);
+
+        return back()->with('msr','sửa thành công');
     }
 
     /**
@@ -111,7 +133,9 @@ class KhainiemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->khainiem->xoakhainiem($id);
+        $title="danh sách khái niệm";  
+        return redirect()->route('admin.khainiem.index',compact('title'));
     }
     
 }

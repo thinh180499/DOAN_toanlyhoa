@@ -39,11 +39,11 @@
                                         {{ $khainiem->dinhnghia }}
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-info px-3 mr-2">Sửa</a>
-                                        <form class="d-inline-block" action="" method="post">
+                                        <a href="{{ route('admin.khainiem.edit',['khainiem' => $khainiem->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
+                                        <form class="d-inline-block" action="{{ route('admin.khainiem.destroy', ['khainiem' => $khainiem->id]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="button" class="btn btn-danger px-3">Xóa</button>
+                                            <button type="submit" class="btn btn-danger px-3" >Xóa</button>
                                         </form>
                                     </td>
                                 </tr>

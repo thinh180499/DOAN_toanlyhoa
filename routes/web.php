@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\DonviController;
 use App\Http\Controllers\Admin\KhainiemController;
 use App\Http\Controllers\Admin\LoaidonviController;
 use App\Http\Controllers\Admin\MonController;
+use App\Http\Controllers\Admin\HangsoController;
+use App\Http\Controllers\Admin\PheptoanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,5 +42,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('khainiem', KhainiemController::class);
     Route::resource('loaidonvi', LoaidonviController::class);
     Route::resource('mon', MonController::class);
+    Route::resource('hangso', HangsoController::class);
+    Route::resource('pheptoan', PheptoanController::class);
 
 });

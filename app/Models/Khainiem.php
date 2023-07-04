@@ -26,19 +26,16 @@ class Khainiem extends Model
         ->join('congthuc','khainiem.id','=','congthuc.khainiem_id')
         ->get();
     }
-    public function demkhainiem(){
-        $table=$this->table;
-        $count=DB::table('khainiems')->count();
-        $count++;
-        $setid="KN".$count;
-        return $setid;
-    }
     public function themkhainiem($data){
         $table=$this->table;
         // $count=DB::table($table)->count();
         // $count++;
         // $setid="KN".$count;
         DB::insert('INSERT INTO khainiems(khainiem_id,tenkhainiem,dinhnghia,kyhieu)value(?,?,?,?)',$data);
+     }
+     public function chitietkhainiem($id){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
      public function suakhainiem($data,$id){
         $data[]=$id;
