@@ -21,7 +21,7 @@ class MonController extends Controller
     public function index()
     {
         $list_mon=$this->mon->danhsachmon();
-    
+
         $title="danh sách môn";
         return view('admin.mon.index',compact('list_mon','title'));
     }
@@ -33,7 +33,8 @@ class MonController extends Controller
      */
     public function create()
     {
-        //
+        $title="Thêm môn";
+        return view('admin.mon.create',compact('title'));
     }
 
     /**
@@ -44,7 +45,18 @@ class MonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tenmon'=>'required',
+        ],[
+            'tenmon.required'=>'* tên môn bắt buộc phải nhập',
+        ]);
+        //dd( $request->mon);
+        $data=[
+            $request->tenmon,
+        ];
+       //dd($data);
+        $this->mon->themmon($data);
+        return redirect()->route('admin.mon.index');
     }
 
     /**
@@ -55,7 +67,7 @@ class MonController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->mon->chitietmon($id);
     }
 
     /**
@@ -66,7 +78,11 @@ class MonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mon=$this->mon->chitietmon($id);
+        $title="Sửa môn";
+        $mon=$mon[0];
+
+        return view('admin.mon.edit',compact('mon','title'));
     }
 
     /**
@@ -78,7 +94,18 @@ class MonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tenmon'=>'required',
+        ],[
+            'tenmon.required'=>'tên môn bắt buộc phải nhập',
+
+        ]);
+        $data=[
+            $request->tenmon,
+        ];
+        $this->mon->suamon($data,$id);
+
+        return back()->with('msr','sửa thành công');
     }
 
     /**
@@ -89,6 +116,8 @@ class MonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->mon->xoamon($id);
+        $title="danh sách khái niệm";
+        return redirect()->route('admin.mon.index',compact('title'));
     }
 }

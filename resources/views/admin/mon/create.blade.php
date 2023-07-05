@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{ route('admin.loaidonvi.update', ['loaidonvi' => $loaidonvi->id]) }}" method="post">
-        @method('PUT')
+    <form action="{{ route('admin.mon.store') }}" method="post">
+
         @csrf
 
         <!-- ========== tables-wrapper start ========== -->
@@ -17,21 +17,18 @@
                 </h4>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="tenloaidonvi">Loại đơn vị</label>
+                    <label class="col-md-2 col-form-label" for="mon">Môn</label>
                     <div class="col-md-10">
-                        <input name="tenloaidonvi" type="text" class="form-control" id="tenloaidonvi" placeholder="Nhập loại đơn vị"
-                            value="{{ old('tenloaidonvi') ?? $loaidonvi->tenloaidonvi }}">
-                            @error('tenloaidonvi')
-                                <span style="color: red;">{{ $message }}</span>
-                             @enderror
+                        <input name="tenmon" type="text" class="form-control" id="tenmon" placeholder="Nhập tên môn" value="{{ old('tenmon') }}">
+                        @error('tenmon')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
-
-
                 <div class="form-group now d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success px-5">sửa</button>
-                    <a href="{{ route('admin.loaidonvi.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
+                    <button type="submit" class="btn btn-success px-5">Thêm</button>
+                    <a href="{{ route('admin.mon.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>
         </div>

@@ -19,6 +19,7 @@
                         {{ session('msgthanhcong') }}
                     </div>
                 @endif
+                @if (session('msgloi'))
                     <div class="alert alert-icon alert-danger text-danger alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
@@ -126,9 +127,9 @@
                                         <form class="d-inline-block"
                                             action="{{ route('admin.bieuthuc.destroy', ['bieuthuc' => $bieuthuc->id]) }}"
                                             method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger px-3">Xóa</button>
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger px-3">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>
