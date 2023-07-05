@@ -17,32 +17,44 @@
                 </h4>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="hesonhan">hệ số nhân</label>
+                    <label class="col-md-2 col-form-label" for="hesonhan">Hệ số nhân</label>
                     <div class="col-md-10">
-                        <input name="hesonhan" type="text" class="form-control" id="hesonhan" placeholder="Nhập hệ số nhân" value="{{ old('hesonhan') }}">
+                        <input name="hesonhan" type="text" class="form-control" id="hesonhan"
+                            placeholder="Nhập hệ số nhân" value="{{ old('hesonhan') }}">
                         @error('hesonhan')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
 
-                
-                <select name="tudonvi">
-                    @if (!empty($list_donvi))
-                        @foreach ($list_donvi as $donvi)
-                            <option value="{{ old('tudonvi')??$donvi->id }}">{{ $donvi->tendonvi}}
-                            </option>
-                        @endforeach
-                    @endif
-                </select>
-                <select name="dendonvi">
-                    @if (!empty($list_donvi))
-                        @foreach ($list_donvi as $donvi)
-                            <option value="{{ old('dendonvi')??$donvi->id }}">{{ $donvi->tendonvi}}
-                            </option>
-                        @endforeach
-                    @endif
-                </select>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="tudonvi">Từ đơn vị</label>
+                    <div class="col-md-10">
+                        <select name="tudonvi" class="form-control">
+                            @if (!empty($list_donvi))
+                                @foreach ($list_donvi as $donvi)
+                                    <option value="{{ old('tudonvi') ?? $donvi->id }}">{{ $donvi->tendonvi }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="dendonvi">Đên đơn vị</label>
+                    <div class="col-md-10">
+                        <select name="dendonvi" class="form-control">
+                            @if (!empty($list_donvi))
+                                @foreach ($list_donvi as $donvi)
+                                    <option value="{{ old('dendonvi') ?? $donvi->id }}">{{ $donvi->tendonvi }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">Thêm</button>
                     <a href="{{ route('admin.chuyendonvi.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>

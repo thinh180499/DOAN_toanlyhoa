@@ -10,33 +10,30 @@
             </h4>
 
             <div class="table-responsive">
-                <a href="{{ route('admin.chuyendonvi.create') }}" class="btn btn-success mb-4">Thêm chuyển đơn vị</a>
+                <a href="{{ route('admin.congthuccuamon.create') }}" class="btn btn-success mb-4">Thêm công thức của môn</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Hệ số nhân</th>
-                            <th>Từ đơn vị</th>
-                            <th>Đến đơn vị</th>
+                            <th>Môn</th>
+                            <th>Công thức</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @if (!empty($list_chuyendonvi))
-                            @foreach ($list_chuyendonvi as $chuyendonvi)
+                        @if (!empty($list_congthuccuamon))
+                            @foreach ($list_congthuccuamon as $congthuccuamon)
                                 <tr>
                                     <th scope="row">
-                                        {{ $chuyendonvi->id }}
+                                        {{ $congthuccuamon->id }}
                                     </th>
+
                                     <td>
-                                        {{ $chuyendonvi->hesonhan }}
-                                    </td>
-                                    <td>
-                                        @if (!empty($list_donvi))
-                                            @foreach ($list_donvi as $donvi)
-                                                @if($chuyendonvi->tudonvi == $donvi->id)
-                                                    {{$donvi->tendonvi}}
+                                        @if (!empty($list_mon))
+                                            @foreach ($list_mon as $mon)
+                                                @if($congthuccuamon->mon_id == $mon->id)
+                                                    {{$mon->tenmon}}
                                                 @endif
 
                                             @endforeach
@@ -44,10 +41,10 @@
 
                                     </td>
                                     <td>
-                                        @if (!empty($list_donvi))
-                                        @foreach ($list_donvi as $donvi)
-                                            @if($chuyendonvi->dendonvi == $donvi->id)
-                                                {{$donvi->tendonvi}}
+                                        @if (!empty($list_congthuc))
+                                        @foreach ($list_congthuc as $congthuc)
+                                            @if($congthuccuamon->congthuc_id == $congthuc->id)
+                                                {{$congthuc->tencongthuc}}
                                             @endif
 
                                         @endforeach
@@ -55,8 +52,8 @@
 
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.chuyendonvi.edit',['chuyendonvi' => $chuyendonvi->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
-                                        <form class="d-inline-block" action="{{ route('admin.chuyendonvi.destroy', ['chuyendonvi' => $chuyendonvi->id]) }}" method="post">
+                                        <a href="{{ route('admin.congthuccuamon.edit',['congthuccuamon' => $congthuccuamon->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
+                                        <form class="d-inline-block" action="{{ route('admin.congthuccuamon.destroy', ['congthuccuamon' => $congthuccuamon->id]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger px-3" >Xóa</button>
@@ -78,3 +75,10 @@
     </div>
 @endsection
 
+@section('css')
+    <style>
+        td:nth-child(4) {
+          width: 55%;
+        }
+    </style>
+@endsection

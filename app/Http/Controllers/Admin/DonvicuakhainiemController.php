@@ -12,7 +12,7 @@ use App\Models\Donvicuakhainiem;
 class DonvicuakhainiemController extends Controller
 {
     private $donvi;
-    
+
     private $donvicuakhainiem;
     public function __construct(){
         $this->donvi=new Donvi();
@@ -30,7 +30,7 @@ class DonvicuakhainiemController extends Controller
         $list_khainiem=$khainiem->danhsachkhainiem();
         $list_donvi=$this->donvi->danhsachdonvitheoloai();
         $list_donvicuakhainiem=$this->donvicuakhainiem->danhsachdonvicuakhainiem();
-        $title="danh sách đơn vị của khái niệm";
+        $title="Danh sách đơn vị của khái niệm";
         return view('admin.donvicuakhainiem.index',compact('list_donvicuakhainiem','list_donvi','list_khainiem','title'));
     }
 
@@ -41,11 +41,11 @@ class DonvicuakhainiemController extends Controller
      */
     public function create()
     {
-        
+
         $khainiem=new Khainiem();
         $list_khainiem=$khainiem->danhsachkhainiem();
         $list_donvi=$this->donvi->danhsachdonvitheoloai();
-        $title="Thêm chuyển đơn vị";
+        $title="Thêm đơn vị của khái niệm";
         return view('admin.donvicuakhainiem.create',compact('list_khainiem','list_donvi','title'));
     }
 
@@ -58,14 +58,9 @@ class DonvicuakhainiemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
-            
             'khainiem'=>'required',
             'donvi'=>'required',
         ],[
-          
-            'khainiem.required'=>'* ký tự bắt buộc phải nhập',
-            'donvi.required'=>'* loại đơn vi bắt buộc phải nhập',
 
         ]);
         $data=[
@@ -99,7 +94,7 @@ class DonvicuakhainiemController extends Controller
         //dd($donvicuakhainiem);
         $khainiem=new Khainiem();
         $list_khainiem=$khainiem->danhsachkhainiem();
-        $title="sửa đơn vị của khái niệm";
+        $title="Sửa đơn vị của khái niệm";
         $donvicuakhainiem=$donvicuakhainiem[0];
         $list_donvi=$this->donvi->danhsachdonvi();
         return view('admin.donvicuakhainiem.edit',compact('list_khainiem','list_donvi','donvicuakhainiem','title'));
@@ -115,14 +110,11 @@ class DonvicuakhainiemController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-
-            
             'khainiem'=>'required',
             'donvi'=>'required',
         ],[
-          
-            'khainiem.required'=>'* ký tự bắt buộc phải nhập',
-            'donvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+            'khainiem.required'=>'* ký tự bắt buộc phải chọn',
+            'donvi.required'=>'* loại đơn vi bắt buộc phải chọn',
 
         ]);
         $data=[
@@ -143,7 +135,7 @@ class DonvicuakhainiemController extends Controller
     public function destroy($id)
     {
         $this->donvicuakhainiem->xoadonvicuakhainiem($id);
-        $title="danh sách chuyển đơn vị";
+        $title="Danh sách đơn vị của khái niệm";
         return redirect()->route('admin.donvicuakhainiem.index',compact('title'));
     }
 }

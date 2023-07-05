@@ -16,22 +16,34 @@
                     @endif
                 </h4>
 
-                <select name="khainiem">
-                    @if (!empty($list_khainiem))
-                        @foreach ($list_khainiem as $khainiem)
-                            <option value="{{ old('khainiem') ?? $khainiem->id }}">{{ $khainiem->tenkhainiem." - ".$khainiem->kyhieu}}
-                            </option>
-                        @endforeach
-                    @endif
-                </select>
-                <select name="donvi">
-                    @if (!empty($list_donvi))
-                        @foreach ($list_donvi as $donvi)
-                            <option value="{{ old('donvi')??$donvi->id }}">{{ $donvi->tendonvi}}
-                            </option>
-                        @endforeach
-                    @endif
-                </select>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="khainiem">Tên khái niệm</label>
+                    <div class="col-md-10">
+                        <select name="khainiem" class="form-control">
+                            @if (!empty($list_khainiem))
+                                @foreach ($list_khainiem as $khainiem)
+                                    <option value="{{ old('khainiem') ?? $khainiem->id }}">
+                                        {{ $khainiem->tenkhainiem . ' - ' . $khainiem->kyhieu }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="donvi">Đơn vị</label>
+                    <div class="col-md-10">
+                        <select name="donvi" class="form-control">
+                            @if (!empty($list_donvi))
+                                @foreach ($list_donvi as $donvi)
+                                    <option value="{{ old('donvi') ?? $donvi->id }}">{{ $donvi->tendonvi }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">Thêm</button>
                     <a href="{{ route('admin.donvicuakhainiem.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>

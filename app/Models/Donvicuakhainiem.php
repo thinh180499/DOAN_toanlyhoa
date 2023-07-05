@@ -17,7 +17,7 @@ class Donvicuakhainiem extends Model
     }
     public function themdonvicuakhainiem($data){
         $table=$this->table;
-        
+
         DB::insert('INSERT INTO donvicuakhainiems(khainiem_id,donvi_id)value(?,?)',$data);
      }
      public function chitietdonvicuakhainiem($id){
@@ -30,6 +30,6 @@ class Donvicuakhainiem extends Model
     }
     public function xoadonvicuakhainiem($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
-    
+
     }
 }

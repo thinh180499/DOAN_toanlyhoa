@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{ route('admin.donvicuakhainiem.update', ['donvicuakhainiem' => $donvicuakhainiem->id]) }}" method="post">
-        @method('PUT')
+    <form action="{{ route('admin.congthuccuamon.store') }}" method="post">
+
         @csrf
 
         <!-- ========== tables-wrapper start ========== -->
@@ -17,15 +17,12 @@
                 </h4>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="khainiem">Tên khái niệm</label>
+                    <label class="col-md-2 col-form-label" for="mon">Tên môn</label>
                     <div class="col-md-10">
-                        <select name="khainiem" class="form-control">
-                            @if (!empty($list_khainiem))
-                                @foreach ($list_khainiem as $khainiem)
-                                    <option <?php if ($donvicuakhainiem->khainiem_id == $khainiem->id) {
-                                        echo 'selected ';
-                                    } ?>value="{{ old('khainiem') ?? $khainiem->id }}">
-                                        {{ $khainiem->tenkhainiem . ' - ' . $khainiem->kyhieu }}
+                        <select name="mon" class="form-control">
+                            @if (!empty($list_mon))
+                                @foreach ($list_mon as $mon)
+                                    <option value="{{ old('mon') ?? $mon->id }}">{{ $mon->tenmon }}
                                     </option>
                                 @endforeach
                             @endif
@@ -34,14 +31,12 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="donvi">Đơn vị</label>
+                    <label class="col-md-2 col-form-label" for="congthuc">Công thức</label>
                     <div class="col-md-10">
-                        <select name="donvi" class="form-control">
-                            @if (!empty($list_donvi))
-                                @foreach ($list_donvi as $donvi)
-                                    <option <?php if ($donvicuakhainiem->donvi_id == $donvi->id) {
-                                        echo 'selected ';
-                                    } ?>value="{{ old('donvi') ?? $donvi->id }}">{{ $donvi->tendonvi }}
+                        <select name="congthuc" class="form-control">
+                            @if (!empty($list_congthuc))
+                                @foreach ($list_congthuc as $congthuc)
+                                    <option value="{{ old('congthuc') ?? $congthuc->id }}">{{ $congthuc->tencongthuc }}
                                     </option>
                                 @endforeach
                             @endif
@@ -50,8 +45,8 @@
                 </div>
 
                 <div class="form-group now d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success px-5">sửa</button>
-                    <a href="{{ route('admin.donvicuakhainiem.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
+                    <button type="submit" class="btn btn-success px-5">Thêm</button>
+                    <a href="{{ route('admin.congthuccuamon.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>
         </div>
