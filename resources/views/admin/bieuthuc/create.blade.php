@@ -75,13 +75,13 @@
                 <button class="btn btn-danger px-4" id="resetgiatri">Reset giá trị</button>
 
                 <form action="">
-                    <input type="hidden" id="inputvetraisubmit">
                     {{-- <select name="loaipheptoan" id="loaipheptoansubmit" class="form-control">
                         <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}
                         </option>
                     </select> --}}
-                    <input type="hidden" id="loaipheptoansubmit">
-                    <input type="hidden" id="inputvephaisubmit">
+                    <input type="hidden" name="id_vetrai" id="inputvetraisubmit">
+                    <input type="hidden" name="id_loaipheptoan" id="loaipheptoansubmit">
+                    <input type="hidden" name="id_vephai" id="inputvephaisubmit">
                     <button type="submit" class="btn btn-success px-5 ml-4">Thêm</button>
                 </form>
 
