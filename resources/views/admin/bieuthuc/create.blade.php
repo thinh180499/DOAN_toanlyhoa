@@ -79,9 +79,9 @@
                         <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}
                         </option>
                     </select> --}}
-                    <input type="hidden" name="id_vetrai" id="inputvetraisubmit">
-                    <input type="hidden" name="id_loaipheptoan" id="loaipheptoansubmit">
-                    <input type="hidden" name="id_vephai" id="inputvephaisubmit">
+                    <input type="hidden" name="vetruoc" id="inputvetraisubmit">
+                    <input type="hidden" name="loaipheptoan_id" id="loaipheptoansubmit">
+                    <input type="hidden" name="vesau" id="inputvephaisubmit">
                     <button type="submit" class="btn btn-success px-5 ml-4">Thêm</button>
                 </form>
 
