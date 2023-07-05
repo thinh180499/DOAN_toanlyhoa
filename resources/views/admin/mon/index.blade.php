@@ -10,6 +10,7 @@
             </h4>
 
             <div class="table-responsive">
+                <a href="{{ route('admin.mon.create') }}" class="btn btn-success mb-4">Thêm môn</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
@@ -30,11 +31,11 @@
                                         {{ $mon->tenmon }}
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-info">Sửa</a>
-                                        <form class="d-inline-block" action="" method="post">
+                                        <a href="{{ route('admin.mon.edit',['mon' => $mon->id]) }}" class="btn btn-info">Sửa</a>
+                                        <form class="d-inline-block" action="{{ route('admin.mon.destroy', ['mon' => $mon->id]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="button" class="btn btn-danger">Xóa</button>
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>

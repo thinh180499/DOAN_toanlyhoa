@@ -21,7 +21,7 @@ class LoaidonviController extends Controller
     public function index()
     {
         $list_loaidonvi=$this->loaidonvi->danhsachloaidonvi();
-    
+
         $title="danh sách loại đơn vị";
         return view('admin.loaidonvi.index',compact('list_loaidonvi','title'));
     }
@@ -48,7 +48,7 @@ class LoaidonviController extends Controller
         $request->validate([
             'tenloaidonvi'=>'required',
         ],[
-            'tenloaidonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+            'tenloaidonvi.required'=>'* loại đơn vị bắt buộc phải nhập',
         ]);
         //dd( $request->loaidonvi);
         $data=[
@@ -79,9 +79,9 @@ class LoaidonviController extends Controller
     public function edit($id)
     {
         $loaidonvi=$this->loaidonvi->chitietloaidonvi($id);
-        $title="sửa hằng số";
-        $loaidonvi=$loaidonvi[0];  
-        
+        $title="Sửa loại đơn vị";
+        $loaidonvi=$loaidonvi[0];
+
         return view('admin.loaidonvi.edit',compact('loaidonvi','title'));
     }
 
@@ -97,8 +97,8 @@ class LoaidonviController extends Controller
         $request->validate([
             'tenloaidonvi'=>'required',
         ],[
-            'tenloaidonvi.required'=>'tên khái niệm bắt buộc phải nhập',
-            
+            'tenloaidonvi.required'=>'tên loại đơn vị bắt buộc phải nhập',
+
         ]);
         $data=[
             $request->tenloaidonvi,
@@ -117,7 +117,7 @@ class LoaidonviController extends Controller
     public function destroy($id)
     {
         $this->loaidonvi->xoaloaidonvi($id);
-        $title="danh sách khái niệm";  
+        $title="danh sách khái niệm";
         return redirect()->route('admin.loaidonvi.index',compact('title'));
     }
 }

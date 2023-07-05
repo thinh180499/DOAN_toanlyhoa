@@ -14,12 +14,12 @@ class Loaidonvi extends Model
     public function danhsachloaidonvi(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
-        
+
     }
 
     public function themloaidonvi($data){
         $table=$this->table;
-        
+
         DB::insert('INSERT INTO loaidonvis(tenloaidonvi)value(?)',$data);
      }
 
@@ -27,14 +27,14 @@ class Loaidonvi extends Model
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
-     
+
      public function sualoaidonvi($data,$id){
         $data[]=$id;
         return DB::update('UPDATE '.$this->table.' SET tenloaidonvi=? WHERE id=?',$data);
     }
-    
+
     public function xoaloaidonvi($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
-    
+
     }
 }
