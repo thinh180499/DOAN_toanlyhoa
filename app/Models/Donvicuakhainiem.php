@@ -24,4 +24,12 @@ class Donvicuakhainiem extends Model
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
+     public function suadonvicuakhainiem($data,$id){
+        $data[]=$id;
+        return DB::update('UPDATE '.$this->table.' SET khainiem_id=?,donvi_id=? WHERE id=?',$data);
+    }
+    public function xoadonvicuakhainiem($id){
+        return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
+    
+    }
 }

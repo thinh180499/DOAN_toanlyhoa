@@ -116,19 +116,18 @@ class DonvicuakhainiemController extends Controller
     {
         $request->validate([
 
-            'hesonhan'=>'required',
-            'tudonvi'=>'required',
-            'dendonvi'=>'required',
+            
+            'khainiem'=>'required',
+            'donvi'=>'required',
         ],[
-            'hesonhan.required'=>'* hệ số nhân bắt buộc phải nhập',
-            'tudonvi.required'=>'* ký tự bắt buộc phải nhập',
-            'dendonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+          
+            'khainiem.required'=>'* ký tự bắt buộc phải nhập',
+            'donvi.required'=>'* loại đơn vi bắt buộc phải nhập',
 
         ]);
         $data=[
-            $request->hesonhan,
-            $request->tudonvi,
-            $request->dendonvi,
+            $request->khainiem,
+            $request->donvi,
         ];
         $this->donvicuakhainiem->suadonvicuakhainiem($data,$id);
 
