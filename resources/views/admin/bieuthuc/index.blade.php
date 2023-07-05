@@ -15,8 +15,10 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>ID hằng số</th>
-                            <th>Hằng số</th>
+                            <th>ID biểu thức</th>
+                            <th>loại phép toán</th>
+                            <th>Vế trước</th>
+                            <th>Vế sau</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -32,7 +34,70 @@
                                         {{ $bieuthuc->bieuthuc_id }}
                                     </td>
                                     <td>
-                                        {{ $bieuthuc->bieuthuc }}
+                                        @if (!empty($list_loaipheptoan))
+                                        @foreach ($list_loaipheptoan as $loaipheptoan)
+                                            @if($bieuthuc->loaipheptoan_id == $loaipheptoan->loaipheptoan_id) 
+                                                {{$loaipheptoan->loaipheptoan}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                       
+                                       
+                                    </td>
+                                    <td>
+                                        @if (!empty($list_khainiem))
+                                        @foreach ($list_khainiem as $khainiem)
+                                            @if($bieuthuc->vetruoc== $khainiem->khainiem_id) 
+                                                {{$khainiem->kyhieu}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                    @if (!empty($list_hangso))
+                                        @foreach ($list_hangso as $hangso)
+                                            @if($bieuthuc->vetruoc == $hangso->hangso_id) 
+                                                {{$hangso->hangso}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                    @if (!empty($list_bieuthuc))
+                                        @foreach ($list_bieuthuc as $bieuthuc)
+                                            @if($bieuthuc->vetruoc == $bieuthuc->bieuthuc_id) 
+                                                {{$bieuthuc->bieuthuc_id}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                        
+                                    </td>
+                                    <td>
+                                        @if (!empty($list_khainiem))
+                                        @foreach ($list_khainiem as $khainiem)
+                                            @if($bieuthuc->vesau== $khainiem->khainiem_id) 
+                                                {{$khainiem->kyhieu}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                    @if (!empty($list_hangso))
+                                        @foreach ($list_hangso as $hangso)
+                                            @if($bieuthuc->vesau == $hangso->hangso_id) 
+                                                {{$hangso->hangso}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                    @if (!empty($list_bieuthuc))
+                                        @foreach ($list_bieuthuc as $bieuthuc)
+                                            @if($bieuthuc->vesau == $bieuthuc->bieuthuc_id) 
+                                                {{$bieuthuc->bieuthuc_id}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                        
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.bieuthuc.edit',['bieuthuc' => $bieuthuc->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
@@ -58,10 +123,3 @@
     </div>
 @endsection
 
-@section('css')
-    <style>
-        td:nth-child(4) {
-          width: 55%;
-        }
-    </style>
-@endsection

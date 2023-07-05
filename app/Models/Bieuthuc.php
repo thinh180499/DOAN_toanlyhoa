@@ -25,7 +25,7 @@ class Bieuthuc extends Model
         //dd($danhsachid);
         if(!empty($danhsachid[0]->id)){
         $idbieuthuc=$danhsachid[0]->id;
-        dd($idbieuthuc);
+        //dd($idbieuthuc);
         (int)$idbieuthuc++;
         $idbieuthuc="BT-".$idbieuthuc;
         }else{
