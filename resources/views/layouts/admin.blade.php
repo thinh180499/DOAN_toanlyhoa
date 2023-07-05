@@ -133,6 +133,12 @@
                             <li>
                                 <a href="<?php echo route('admin.chuyendonvi.index'); ?>">chuyển đổi đơn vị</a>
                             </li>
+                            <li>
+                                <a href="<?php echo route('admin.donvicuakhainiem.index'); ?>">đơn vị của khái niệm</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo route('admin.congthuccuamon.index'); ?>">công thức của môn</a>
+                            </li>
                         </ul>
                     </li>
 

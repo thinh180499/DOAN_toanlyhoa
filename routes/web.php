@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\LoaipheptoanController;
 use App\Http\Controllers\Admin\BieuthucController;
 
 use App\Http\Controllers\Admin\ChuyendonviController;
+use App\Http\Controllers\Admin\DonvicuakhainiemController;
+use App\Http\Controllers\Admin\CongthuccuamonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +51,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('loaipheptoan', LoaipheptoanController::class);
     Route::resource('bieuthuc', BieuthucController::class);
     Route::resource('chuyendonvi', ChuyendonviController::class);
+    Route::resource('donvicuakhainiem', DonvicuakhainiemController::class);
+    Route::resource('congthuccuamon', CongthuccuamonController::class);
 
 });
