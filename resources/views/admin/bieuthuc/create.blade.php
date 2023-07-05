@@ -59,12 +59,12 @@
             {{-- Chỗ này thay bằng biểu thức --}}
             <label class="control-label mt-3 mt-lg-0">Biểu thức</label>
             <select name="" class="form-control">
-                {{-- @if (!empty($list_hangso))
-                        @foreach ($list_hangso as $hangso)
-                            <option value="{{ $hangso->hangso_id }}">{{ $hangso->hangso }}
+                @if (!empty($list_bieuthuc))
+                        @foreach ($list_bieuthuc as $bieuthuc)
+                            <option value="{{ $bieuthuc->bieuthuc_id }}">{{ $bieuthuc->bieuthuc_id }}
                             </option>
                         @endforeach
-                    @endif --}}
+                    @endif
             </select>
         </div>
     </div>
@@ -74,7 +74,9 @@
             <div class="form-group now d-flex justify-content-end">
                 <button class="btn btn-danger px-4" id="resetgiatri">Reset giá trị</button>
 
-                <form action="">
+                <form action="{{ route('admin.bieuthuc.store') }}" method="post">
+                    
+                    @csrf
                     {{-- <select name="loaipheptoan" id="loaipheptoansubmit" class="form-control">
                         <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}
                         </option>

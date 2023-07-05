@@ -27,10 +27,16 @@ class BieuthucController extends Controller
      */
     public function index()
     {
+        $khainiem=new Khainiem();
+        $hangso=new Hangso();
+        $loaipheptoan=new Loaipheptoan();
+        $list_khainiem=$khainiem->danhsachkhainiem();
+        $list_hangso=$hangso->danhsachhangso();
+        $list_loaipheptoan=$loaipheptoan->danhsachloaipheptoan();
         $list_bieuthuc=$this->bieuthuc->danhsachbieuthuc();
         //dd($list_bieuthuc);
         $title="danh sách biểu thức";
-        return view('admin.bieuthuc.index',compact('list_bieuthuc','title'));
+        return view('admin.bieuthuc.index',compact('list_khainiem','list_hangso','list_loaipheptoan','list_bieuthuc','title'));
     }
 
     /**
@@ -46,8 +52,9 @@ class BieuthucController extends Controller
         $list_khainiem=$khainiem->danhsachkhainiem();
         $list_hangso=$hangso->danhsachhangso();
         $list_loaipheptoan=$loaipheptoan->danhsachloaipheptoan();
+        $list_bieuthuc=$this->bieuthuc->danhsachbieuthuc();
         $title="thêm biểu thức";
-        return view('admin.bieuthuc.create',compact('list_khainiem','list_hangso','list_loaipheptoan','title'));
+        return view('admin.bieuthuc.create',compact('list_khainiem','list_hangso','list_loaipheptoan','list_bieuthuc','title'));
     }
 
     /**
@@ -60,21 +67,21 @@ class BieuthucController extends Controller
     {
         $request->validate([
 
-            'tenbieuthuc'=>'required',
-            'dinhnghia'=>'required',
-            'kyhieu'=>'required',
+            'loaipheptoan_id'=>'required',
+            'vetruoc'=>'required',
+            'vesau'=>'required',
         ],[
-            'tenbieuthuc.required'=>'tên khái niệm bắt buộc phải nhập',
-            'dinhnghia.min'=>'định nghĩa bắt buộc phải nhập',
-            'kyhieu.required'=>'ký tự bắt buộc phải nhập',
+            'loaipheptoan_id.required'=>'tên khái niệm bắt buộc phải nhập',
+            'vetruoc.required'=>'định nghĩa bắt buộc phải nhập',
+            'vesau.required'=>'ký tự bắt buộc phải nhập',
             
         ]);
-        
+        //dd($request->vesau,);
         $data=[
             $this->bieuthuc->layidcuoidanhsach(),
-            $request->tenbieuthuc,
-            $request->dinhnghia,
-            $request->kyhieu,
+            $request->loaipheptoan_id,
+            $request->vetruoc,
+            $request->vesau,
         ];
         //dd($data);
         $this->bieuthuc->thembieuthuc($data);
