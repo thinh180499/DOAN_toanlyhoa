@@ -109,11 +109,46 @@ class BieuthucController extends Controller
      */
     public function edit($id)
     {
+        $khainiem=new Khainiem();
+        $hangso=new Hangso();
+        $loaipheptoan=new Loaipheptoan();
+        $list_khainiem=$khainiem->danhsachkhainiem();
+        $list_hangso=$hangso->danhsachhangso();
+        $list_loaipheptoan=$loaipheptoan->danhsachloaipheptoan();
+        $list_bieuthuc=$this->bieuthuc->danhsachbieuthuc();
         $bieuthuc=$this->bieuthuc->chitietbieuthuc($id);
         $title="sửa khái niệm";
         $bieuthuc=$bieuthuc[0];  
+        $vetruoc="";
+        $vesau="";
+        $tenkhainiem=$khainiem->xacdinhlakhainiem($bieuthuc->vetruoc);
+        if(!empty($tenkhainiem)){
+            $vetruoc=$tenkhainiem;
+        }
+        $lahangso=$hangso->xacdinhlahangso($bieuthuc->vetruoc);
+        if(!empty($lahangso)){
+            $vetruoc=$lahangso;
+        }
+        $motabieuthuc=$this->bieuthuc->xacdinhlabieuthuc($bieuthuc->vetruoc);
+        if(!empty($motabieuthuc)){
+            $vetruoc=$motabieuthuc;
+        }
+
+
+        $tenkhainiem=$khainiem->xacdinhlakhainiem($bieuthuc->vesau);
+        if(!empty($tenkhainiem)){
+            $vesau=$tenkhainiem;
+        }
+        $lahangso=$hangso->xacdinhlahangso($bieuthuc->vesau);
+        if(!empty($lahangso)){
+            $vesau=$lahangso;
+        }
+        $motabieuthuc=$this->bieuthuc->xacdinhlabieuthuc($bieuthuc->vesau);
+        if(!empty($motabieuthuc)){
+            $vesau=$motabieuthuc;
+        }
         
-        return view('admin.bieuthuc.edit',compact('bieuthuc','title'));
+        return view('admin.bieuthuc.edit',compact('list_khainiem','list_hangso','list_loaipheptoan','list_bieuthuc','bieuthuc','title','vetruoc','vesau'));
     }
 
     /**
@@ -126,24 +161,27 @@ class BieuthucController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tenbieuthuc'=>'required|min:5',
-            'dinhnghia'=>'required',
-            'kyhieu'=>'required',
-            
+
+            'loaipheptoan_id'=>'required',
+            'vetruoc'=>'required',
+            'vesau'=>'required',
         ],[
-            'tenbieuthuc.required'=>'tên khái niệm bắt buộc phải nhập',
-            'tenbieuthuc.min'=>'tên khái niệm phải hơn 5 ký tự',
-            'dinhnghia.required'=>'định nghĩa bắt buộc phải nhập',
-            'kyhieu.required'=>'ký hiệu bắt buộc phải nhập',
+            'loaipheptoan_id.required'=>'tên khái niệm bắt buộc phải nhập',
+            'vetruoc.required'=>'định nghĩa bắt buộc phải nhập',
+            'vesau.required'=>'ký tự bắt buộc phải nhập',
+            
         ]);
+        //dd($request->vetruoc,);
         $data=[
-            $request->tenbieuthuc,
-            $request->dinhnghia,
-            $request->kyhieu,
+            $request->loaipheptoan_id,
+            $request->vetruoc,
+            $request->vesau,
+            $this->bieuthuc->motavemotbieuthuc( $request->loaipheptoan_id,$request->vetruoc,$request->vesau)
         ];
+        //dd($data);
         $this->bieuthuc->suabieuthuc($data,$id);
 
-        return back()->with('msr','sửa thành công');
+        return  redirect()->route('admin.bieuthuc.index')->with('msr','sửa thành công');
     }
 
     /**

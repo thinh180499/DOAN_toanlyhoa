@@ -45,8 +45,9 @@ class Bieuthuc extends Model
         $danhsachid=DB::table($table)
         ->where('bieuthuc_id',"=", $id)
         ->get();
+        
         if(!empty($danhsachid[0]->id)){
-        $khainiem="(".$danhsachid[0]->motabieuthuc.")";
+            $khainiem="(".$danhsachid[0]->motabieuthuc.")";
         }else{
             $khainiem="";
         }
@@ -72,7 +73,7 @@ class Bieuthuc extends Model
 
         return $mota;
     }
-    public function chitietbieuthuccuadoituong($id){
+    public function chitietbieuthuc($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
     }
@@ -84,10 +85,49 @@ class Bieuthuc extends Model
      }
      public function suabieuthuc($data,$id){
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET tenbieuthuc=?,dinhnghia=?,kyhieu=? WHERE id=?',$data);
+        //dd($data);
+        return DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=? WHERE id=?',$data);
     }
     public function xoabieuthuc($id){
         return DB::delete('DELETE FROM '.$this->table.' WHERE id=?',[$id]);
-    
     }
+    // public function suabieuthuctoanbo($data,$id){
+    //     $data[]=$id;
+    //     //dd($data);
+    //     $bieuthuc=new Bieuthuc();
+    //     DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=? WHERE id=?',$data);
+    //     $table=$this->table;
+    //     $bieuthucupdata=DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
+    //     $idbieuthucupdata=$bieuthucupdata[0]->bieuthuc_id;
+    //     $danhsachbieuthuc=DB::select('SELECT * FROM '.$table);
+    //     foreach($danhsachbieuthuc as $bieuthuc){
+    //         if($bieuthuc->vetruoc==$idbieuthucupdata){
+    //             $databieuthuc=[
+    //                 $bieuthuc->loaipheptoan_id,
+    //                 $bieuthuc->vetruoc,
+    //                 $bieuthuc->vesau,
+    //                 $bieuthuc->motavemotbieuthuc( $bieuthuc->loaipheptoan_id,$bieuthuc->vetruoc,$bieuthuc->vesau)
+    //             ];
+    //             $bieuthuc->suabieuthuctoanbo($databieuthuc,$bieuthuc->bieuthuc_id);
+    //         }
+    //         if($bieuthuc->vesau==$idbieuthucupdata){
+    //             $databieuthuc=[
+    //                 $bieuthuc->loaipheptoan_id,
+    //                 $bieuthuc->vetruoc,
+    //                 $bieuthuc->vesau,
+    //                 $bieuthuc->motavemotbieuthuc( $bieuthuc->loaipheptoan_id,$bieuthuc->vetruoc,$bieuthuc->vesau)
+    //             ];
+    //             $bieuthuc->suabieuthuctoanbo($databieuthuc,$bieuthuc->bieuthuc_id);
+    //         }
+    //     }
+    // }
+    public function xetvetruoc($id){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE vetruoc='.$id);
+    }
+    public function xetvesau($id){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE vesau='.$id);
+    }
+
 }

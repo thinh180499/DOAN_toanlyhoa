@@ -34,82 +34,79 @@
                                     <td>
                                         {{ $bieuthuc->bieuthuc_id }}
                                     </td>
-                                    
-                                        @if (!empty($list_loaipheptoan))
+
+                                    @if (!empty($list_loaipheptoan))
                                         @foreach ($list_loaipheptoan as $loaipheptoan)
-                                            @if($bieuthuc->loaipheptoan_id == $loaipheptoan->loaipheptoan_id) 
-                                            <td>
-                                                {{$loaipheptoan->loaipheptoan}}  
-                                            </td>
+                                            @if ($bieuthuc->loaipheptoan_id == $loaipheptoan->loaipheptoan_id)
+                                                <td>
+                                                    {{ $loaipheptoan->loaipheptoan }}
+                                                </td>
                                             @endif
-                                            
                                         @endforeach
                                     @endif
-                                       
-                                       
-                                    
+
+
+
                                     <td>
                                         @if (!empty($list_khainiem))
-                                        @foreach ($list_khainiem as $khainiem)
-                                            @if($khainiem->khainiem_id==$bieuthuc->vetruoc ) 
-                                                {{$khainiem->kyhieu}}  
-                                            @endif
-                                            
-                                        @endforeach
-                                    @endif
-                                    @if (!empty($list_hangso))
-                                        @foreach ($list_hangso as $hangso)
-                                            @if($bieuthuc->vetruoc == $hangso->hangso_id) 
-                                                {{$hangso->hangso}}  
-                                            @endif
-                                            
-                                        @endforeach
-                                    @endif
-                                    @if (!empty($list_bieuthuc))
-                                        @foreach ($list_bieuthuc as $key)
-                                            @if($bieuthuc->vetruoc == $key->bieuthuc_id) 
-                                                {{$key->motabieuthuc}}  
-                                            @endif
-                                            
-                                        @endforeach
-                                    @endif
-                                        
+                                            @foreach ($list_khainiem as $khainiem)
+                                                @if ($khainiem->khainiem_id == $bieuthuc->vetruoc)
+                                                    {{ $khainiem->kyhieu }}
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        @if (!empty($list_hangso))
+                                            @foreach ($list_hangso as $hangso)
+                                                @if ($bieuthuc->vetruoc == $hangso->hangso_id)
+                                                    {{ $hangso->hangso }}
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        @if (!empty($list_bieuthuc))
+                                            @foreach ($list_bieuthuc as $key)
+                                                @if ($bieuthuc->vetruoc == $key->bieuthuc_id)
+                                                    {{ $key->motabieuthuc }}
+                                                @endif
+                                            @endforeach
+                                        @endif
+
                                     </td>
                                     <td>
                                         @if (!empty($list_khainiem))
-                                        @foreach ($list_khainiem as $khainiem)
-                                            @if($bieuthuc->vesau== $khainiem->khainiem_id) 
-                                                {{$khainiem->kyhieu}}  
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                    @if (!empty($list_hangso))
-                                        @foreach ($list_hangso as $hangso)
-                                            @if($bieuthuc->vesau == $hangso->hangso_id) 
-                                                {{$hangso->hangso}}  
-                                            @endif
-                                            
-                                        @endforeach
-                                    @endif
-                                    @if (!empty($list_bieuthuc))
-                                        @foreach ($list_bieuthuc as $key)
-                                            @if($bieuthuc->vesau == $key->bieuthuc_id) 
-                                                {{$key->motabieuthuc}}  
-                                            @endif
-                                            
-                                        @endforeach
-                                    @endif
-                                        
+                                            @foreach ($list_khainiem as $khainiem)
+                                                @if ($bieuthuc->vesau == $khainiem->khainiem_id)
+                                                    {{ $khainiem->kyhieu }}
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        @if (!empty($list_hangso))
+                                            @foreach ($list_hangso as $hangso)
+                                                @if ($bieuthuc->vesau == $hangso->hangso_id)
+                                                    {{ $hangso->hangso }}
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        @if (!empty($list_bieuthuc))
+                                            @foreach ($list_bieuthuc as $key)
+                                                @if ($bieuthuc->vesau == $key->bieuthuc_id)
+                                                    {{ $key->motabieuthuc }}
+                                                @endif
+                                            @endforeach
+                                        @endif
+
                                     </td>
                                     <td>
-                                        {{$bieuthuc->motabieuthuc}}
+                                        {{ $bieuthuc->motabieuthuc }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.bieuthuc.edit',['bieuthuc' => $bieuthuc->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
-                                        <form class="d-inline-block" action="{{ route('admin.bieuthuc.destroy', ['bieuthuc' => $bieuthuc->id]) }}" method="post">
+                                        <a href="{{ route('admin.bieuthuc.edit', ['bieuthuc' => $bieuthuc->id]) }}"
+                                            class="btn btn-info px-3 mr-2">Sửa</a>
+                                        <form class="d-inline-block"
+                                            action="{{ route('admin.bieuthuc.destroy', ['bieuthuc' => $bieuthuc->id]) }}"
+                                            method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger px-3" >Xóa</button>
+                                            <button type="submit" class="btn btn-danger px-3">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -127,4 +124,3 @@
         </div>
     </div>
 @endsection
-
