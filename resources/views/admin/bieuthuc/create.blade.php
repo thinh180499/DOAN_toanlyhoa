@@ -4,10 +4,10 @@
     <h4 class="mb-4">Thêm biểu thức</h4>
     <div class="row mb-5">
         <div class="col">
-            <label class="control-label mt-3 mt-lg-0">Vế trái</label>
-            <div class="vetrai input-group">
-                <input type="text" id="inputvetrai" class="form-control" readonly>
-                <button class="xoainputvetrai btn btn-danger">Xóa</button>
+            <label class="control-label mt-3 mt-lg-0">Vế trước</label>
+            <div class="vetruoc input-group">
+                <input type="text" id="inputvetruoc" class="form-control" readonly>
+                <button class="xoainputvetruoc btn btn-danger">Xóa</button>
             </div>
         </div>
         <div class="col">
@@ -22,10 +22,10 @@
             </select>
         </div>
         <div class="col">
-            <label class="control-label mt-3 mt-lg-0">Vế phải</label>
-            <div class="vephai input-group">
-                <input type="text" id="inputvephai" class="form-control" readonly>
-                <button class="xoainputvephai btn btn-danger">Xóa</button>
+            <label class="control-label mt-3 mt-lg-0">Vế sau</label>
+            <div class="vesau input-group">
+                <input type="text" id="inputvesau" class="form-control" readonly>
+                <button class="xoainputvesau btn btn-danger">Xóa</button>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
                 <option value="none" selected disabled hidden>Chọn một biểu thức</option>
                 @if (!empty($list_bieuthuc))
                         @foreach ($list_bieuthuc as $bieuthuc)
-                            <option value="{{ $bieuthuc->bieuthuc_id }}">{{ $bieuthuc->bieuthuc_id }}
+                            <option value="{{ $bieuthuc->bieuthuc_id }}">{{ $bieuthuc->motabieuthuc }}
                             </option>
                         @endforeach
                     @endif
@@ -84,9 +84,9 @@
                         <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}
                         </option>
                     </select> --}}
-                    <input type="hidden" name="vetruoc" id="inputvetraisubmit">
+                    <input type="hidden" name="vetruoc" id="inputvetruocsubmit">
                     <input type="hidden" name="loaipheptoan_id" id="loaipheptoansubmit">
-                    <input type="hidden" name="vesau" id="inputvephaisubmit">
+                    <input type="hidden" name="vesau" id="inputvesausubmit">
                     <button type="submit" class="btn btn-success px-5 ml-4">Thêm</button>
                 </form>
 
@@ -108,20 +108,20 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            var inputvetrai = $('#inputvetrai');
-            var inputvephai = $('#inputvephai');
+            var inputvetruoc = $('#inputvetruoc');
+            var inputvesau = $('#inputvesau');
             var loaipheptoan = $('#loaipheptoan');
-            var inputvetraisubmit = $('#inputvetraisubmit');
-            var inputvephaisubmit = $('#inputvephaisubmit');
+            var inputvetruocsubmit = $('#inputvetruocsubmit');
+            var inputvesausubmit = $('#inputvesausubmit');
             var loaipheptoansubmit = $('#loaipheptoansubmit');
             var inputhientai;
 
-            inputvetrai.on('click', function() {
-                inputhientai = inputvetrai;
+            inputvetruoc.on('click', function() {
+                inputhientai = inputvetruoc;
             });
 
-            inputvephai.on('click', function() {
-                inputhientai = inputvephai;
+            inputvesau.on('click', function() {
+                inputhientai = inputvesau;
             });
 
             document.getElementById('loaipheptoansubmit').value = document.getElementById('loaipheptoan').value;
@@ -138,10 +138,10 @@
                 if (value !== "") {
                     if (inputhientai) {
 
-                        if (inputhientai == inputvetrai) {
-                            inputvetraisubmit.val(valuesubmit)
-                        } else if (inputhientai == inputvephai) {
-                            inputvephaisubmit.val(valuesubmit)
+                        if (inputhientai == inputvetruoc) {
+                            inputvetruocsubmit.val(valuesubmit)
+                        } else if (inputhientai == inputvesau) {
+                            inputvesausubmit.val(valuesubmit)
                         }
                         inputhientai.val(value);
                         inputhientai = null;
@@ -153,20 +153,20 @@
                 }
             });
 
-            $('.xoainputvetrai').on('click', function() {
-                inputvetrai.val('');
-                inputvetraisubmit.val('');
+            $('.xoainputvetruoc').on('click', function() {
+                inputvetruoc.val('');
+                inputvetruocsubmit.val('');
             });
-            $('.xoainputvephai').on('click', function() {
-                inputvephai.val('');
-                inputvephaisubmit.val('');
+            $('.xoainputvesau').on('click', function() {
+                inputvesau.val('');
+                inputvesausubmit.val('');
             });
 
             $('#resetgiatri').on('click', function() {
-                inputvetrai.val('');
-                inputvetraisubmit.val('');
-                inputvephai.val('');
-                inputvephaisubmit.val('');
+                inputvetruoc.val('');
+                inputvetruocsubmit.val('');
+                inputvesau.val('');
+                inputvesausubmit.val('');
                 $('select').val('');
                 inputhientai = null;
             });

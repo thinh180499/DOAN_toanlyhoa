@@ -10,7 +10,7 @@
             </h4>
 
             <div class="table-responsive">
-                <a href="{{ route('admin.bieuthuc.create') }}" class="btn btn-success mb-4">Thêm hằng số</a>
+                <a href="{{ route('admin.bieuthuc.create') }}" class="btn btn-success mb-4">Thêm biểu thức</a>
                 <table class="table m-0">
                     <thead>
                         <tr>
