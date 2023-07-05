@@ -13,6 +13,7 @@
         <div class="col">
             <label class="control-label mt-3 mt-lg-0">Phép toán</label>
             <select name="loaipheptoan" id="loaipheptoan" class="form-control">
+                <option value="none" selected disabled hidden>Chọn một phép toán</option>
                 @if (!empty($list_loaipheptoan))
                     @foreach ($list_loaipheptoan as $loaipheptoan)
                         <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}
@@ -34,6 +35,7 @@
         <div class="doituong col form-group">
             <label class="control-label mt-3 mt-lg-0">Khái niệm</label>
             <select name="khainiem" class="form-control">
+                <option value="none" selected disabled hidden>Chọn một khái niệm</option>
                 @if (!empty($list_khainiem))
                     @foreach ($list_khainiem as $khainiem)
                         <option value="{{ $khainiem->khainiem_id }}">{{ $khainiem->kyhieu }}
@@ -46,6 +48,7 @@
         <div class="doituong col form-group">
             <label class="control-label mt-3 mt-lg-0">Hằng số</label>
             <select name="hangso" class="form-control">
+                <option value="none" selected disabled hidden>Chọn một hằng số</option>
                 @if (!empty($list_hangso))
                     @foreach ($list_hangso as $hangso)
                         <option value="{{ $hangso->hangso_id }}">{{ $hangso->hangso }}
@@ -59,6 +62,7 @@
             {{-- Chỗ này thay bằng biểu thức --}}
             <label class="control-label mt-3 mt-lg-0">Biểu thức</label>
             <select name="" class="form-control">
+                <option value="none" selected disabled hidden>Chọn một biểu thức</option>
                 @if (!empty($list_bieuthuc))
                         @foreach ($list_bieuthuc as $bieuthuc)
                             <option value="{{ $bieuthuc->bieuthuc_id }}">{{ $bieuthuc->bieuthuc_id }}
@@ -75,7 +79,7 @@
                 <button class="btn btn-danger px-4" id="resetgiatri">Reset giá trị</button>
 
                 <form action="{{ route('admin.bieuthuc.store') }}" method="post">
-                    
+
                     @csrf
                     {{-- <select name="loaipheptoan" id="loaipheptoansubmit" class="form-control">
                         <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}
@@ -142,8 +146,10 @@
                         }
                         inputhientai.val(value);
                         inputhientai = null;
+                        $(this).prop('selectedIndex',0);
                     } else {
                         alert('Hãy chọn ô bạn muốn nhập trước khi chọn giá trị');
+                        $(this).prop('selectedIndex',0);
                     }
                 }
             });
