@@ -40,7 +40,7 @@ class Loaipheptoan extends Model
         ->where('loaipheptoan_id',"=", $id)
         ->get();
         if(!empty($danhsachid[0]->id)){
-        $khainiem=$danhsachid[0]->loaipheptoan;
+        $khainiem=" ".$danhsachid[0]->loaipheptoan." ";
         }else{
             $khainiem="";
         }

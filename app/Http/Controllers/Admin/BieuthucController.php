@@ -85,7 +85,7 @@ class BieuthucController extends Controller
             $this->bieuthuc->motavemotbieuthuc( $request->loaipheptoan_id,$request->vetruoc,$request->vesau)
         ];
 
-        dd($data);
+        //dd($data);
         $this->bieuthuc->thembieuthuc($data);
         return redirect()->route('admin.bieuthuc.index');
     }

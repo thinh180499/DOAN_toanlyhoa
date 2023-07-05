@@ -19,6 +19,7 @@
                             <th>loại phép toán</th>
                             <th>Vế trước</th>
                             <th>Vế sau</th>
+                            <th>Mô tả</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -33,22 +34,24 @@
                                     <td>
                                         {{ $bieuthuc->bieuthuc_id }}
                                     </td>
-                                    <td>
+                                    
                                         @if (!empty($list_loaipheptoan))
                                         @foreach ($list_loaipheptoan as $loaipheptoan)
                                             @if($bieuthuc->loaipheptoan_id == $loaipheptoan->loaipheptoan_id) 
+                                            <td>
                                                 {{$loaipheptoan->loaipheptoan}}  
+                                            </td>
                                             @endif
                                             
                                         @endforeach
                                     @endif
                                        
                                        
-                                    </td>
+                                    
                                     <td>
                                         @if (!empty($list_khainiem))
                                         @foreach ($list_khainiem as $khainiem)
-                                            @if($bieuthuc->vetruoc== $khainiem->khainiem_id) 
+                                            @if($khainiem->khainiem_id==$bieuthuc->vetruoc ) 
                                                 {{$khainiem->kyhieu}}  
                                             @endif
                                             
@@ -63,9 +66,9 @@
                                         @endforeach
                                     @endif
                                     @if (!empty($list_bieuthuc))
-                                        @foreach ($list_bieuthuc as $bieuthuc)
-                                            @if($bieuthuc->vetruoc == $bieuthuc->bieuthuc_id) 
-                                                {{$bieuthuc->bieuthuc_id}}  
+                                        @foreach ($list_bieuthuc as $key)
+                                            @if($bieuthuc->vetruoc == $key->bieuthuc_id) 
+                                                {{$key->motabieuthuc}}  
                                             @endif
                                             
                                         @endforeach
@@ -78,7 +81,6 @@
                                             @if($bieuthuc->vesau== $khainiem->khainiem_id) 
                                                 {{$khainiem->kyhieu}}  
                                             @endif
-                                            
                                         @endforeach
                                     @endif
                                     @if (!empty($list_hangso))
@@ -90,14 +92,17 @@
                                         @endforeach
                                     @endif
                                     @if (!empty($list_bieuthuc))
-                                        @foreach ($list_bieuthuc as $bieuthuc)
-                                            @if($bieuthuc->vesau == $bieuthuc->bieuthuc_id) 
-                                                {{$bieuthuc->bieuthuc_id}}  
+                                        @foreach ($list_bieuthuc as $key)
+                                            @if($bieuthuc->vesau == $key->bieuthuc_id) 
+                                                {{$key->motabieuthuc}}  
                                             @endif
                                             
                                         @endforeach
                                     @endif
                                         
+                                    </td>
+                                    <td>
+                                        {{$bieuthuc->motabieuthuc}}
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.bieuthuc.edit',['bieuthuc' => $bieuthuc->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>

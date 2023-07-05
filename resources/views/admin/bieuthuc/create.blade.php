@@ -13,7 +13,6 @@
         <div class="col">
             <label class="control-label mt-3 mt-lg-0">Phép toán</label>
             <select name="loaipheptoan" id="loaipheptoan" class="form-control">
-                <option value="none" selected disabled hidden>Chọn một phép toán</option>
                 @if (!empty($list_loaipheptoan))
                     @foreach ($list_loaipheptoan as $loaipheptoan)
                         <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}

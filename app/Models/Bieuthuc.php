@@ -46,7 +46,7 @@ class Bieuthuc extends Model
         ->where('bieuthuc_id',"=", $id)
         ->get();
         if(!empty($danhsachid[0]->id)){
-        $khainiem=$danhsachid[0]->motabieuthuc;
+        $khainiem="(".$danhsachid[0]->motabieuthuc.")";
         }else{
             $khainiem="";
         }
@@ -61,16 +61,16 @@ class Bieuthuc extends Model
         $loaipheptoan=new Loaipheptoan();
 
 
-        $mota=$mota." ".$khainiem->xacdinhlakhainiem($vetruoc_id);
-        $mota=$mota." ".$hangso->xacdinhlahangso($vetruoc_id);
-        $mota=$mota." (".$bieuthuc->xacdinhlabieuthuc($vetruoc_id).")";
-        $mota=$mota." ".$loaipheptoan->xacdinhloaipheptoan($pheptoan_id);
-        $mota=$mota." ".$khainiem->xacdinhlakhainiem($vesau_id);
-        $mota=$mota." ".$hangso->xacdinhlahangso($vesau_id);
-        $mota=$mota." (".$bieuthuc->xacdinhlabieuthuc($vesau_id).")";
-        dd($mota);
+        $mota=$mota.$khainiem->xacdinhlakhainiem($vetruoc_id);
+        $mota=$mota.$hangso->xacdinhlahangso($vetruoc_id);
+        $mota=$mota.$bieuthuc->xacdinhlabieuthuc($vetruoc_id);
+        $mota=$mota.$loaipheptoan->xacdinhloaipheptoan($pheptoan_id);
+        $mota=$mota.$khainiem->xacdinhlakhainiem($vesau_id);
+        $mota=$mota.$hangso->xacdinhlahangso($vesau_id);
+        $mota=$mota.$bieuthuc->xacdinhlabieuthuc($vesau_id);
+        // dd($mota);
 
-        
+        return $mota;
     }
     public function chitietbieuthuccuadoituong($id){
         $table=$this->table;
@@ -80,7 +80,7 @@ class Bieuthuc extends Model
         $table=$this->table;
         // $count=DB::table($table)->count();
         // $setid="BT-".$count;
-        DB::insert('INSERT INTO bieuthucs(bieuthuc_id,loaipheptoan_id,vetruoc,vesau)value(?,?,?,?)',$data);
+        DB::insert('INSERT INTO bieuthucs(bieuthuc_id,loaipheptoan_id,vetruoc,vesau,motabieuthuc)value(?,?,?,?,?)',$data);
      }
      public function suabieuthuc($data,$id){
         $data[]=$id;
