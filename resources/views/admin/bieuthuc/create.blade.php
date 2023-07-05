@@ -60,7 +60,7 @@
         <div class="doituong col">
             {{-- Chỗ này thay bằng biểu thức --}}
             <label class="control-label mt-3 mt-lg-0">Biểu thức</label>
-            <select name="" class="form-control">
+            <select name="bieuthuc" class="form-control">
                 <option value="none" selected disabled hidden>Chọn một biểu thức</option>
                 @if (!empty($list_bieuthuc))
                         @foreach ($list_bieuthuc as $bieuthuc)

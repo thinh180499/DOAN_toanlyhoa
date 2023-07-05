@@ -109,13 +109,14 @@ class DonviController extends Controller
 
             'tendonvi'=>'required',
             'kyhieu'=>'required',
-            'dinhnghia'=>'required',
+            'loaidonvi'=>'required',
         ],[
             'tendonvi.required'=>'* tên khái niệm bắt buộc phải nhập',
             'kyhieu.required'=>'* ký tự bắt buộc phải nhập',
             'loaidonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
 
         ]);
+        
         $data=[
             $request->tendonvi,
             $request->kyhieu,

@@ -34,16 +34,23 @@
                         value="{{ old('kyhieu') ?? $donvi->kyhieu }}">
                     </div>
                 </div>
-                <select name="loaidonvi">
-                    @if (!empty($list_loaidonvi))
-                        @foreach ($list_loaidonvi as $loaidonvi)
-                            <option <?php if ($donvi->loaidonvi_id == $loaidonvi->id) {
-                                echo 'selected ';
-                            } ?>value="{{ $loaidonvi->id }}">{{ $loaidonvi->tenloaidonvi}}
-                            </option>
-                        @endforeach
-                    @endif
-                </select>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Loại đơn vị</label>
+                    <div class="col-md-10">
+                        <select name="loaidonvi" class="form-control">
+                            @if (!empty($list_loaidonvi))
+                                @foreach ($list_loaidonvi as $loaidonvi)
+                                    <option 
+                                    <?php if ($donvi->loaidonvi_id == $loaidonvi->id) {
+                                        echo 'selected ';
+                                    } ?>
+                                    value="{{ $loaidonvi->id }}">{{ $loaidonvi->tenloaidonvi }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">sửa</button>
                     <a href="{{ route('admin.donvi.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>

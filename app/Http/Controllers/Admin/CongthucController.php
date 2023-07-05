@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Congthuc;
 
+use App\Models\Bieuthuc;
+
+use App\Models\Khainiem;
+
+
 class CongthucController extends Controller
 {
     private $congthuc;
@@ -24,8 +29,13 @@ class CongthucController extends Controller
     public function index()
     {
         $list_congthuc=$this->congthuc->danhsachcongthuc();
+        
+        $khainiem=new Khainiem();
+        $bieuthuc=new Bieuthuc();
+        $list_khainiem=$khainiem->danhsachkhainiem();
+        $list_bieuthuc=$bieuthuc->danhsachbieuthuc();
         $title="danh sách công thức";
-        return view('admin.congthuc.index',compact('list_congthuc','title'));
+        return view('admin.congthuc.index',compact('list_khainiem','list_bieuthuc','list_congthuc','title'));
     }
 
     /**
@@ -35,8 +45,12 @@ class CongthucController extends Controller
      */
     public function create()
     {
+        $khainiem=new Khainiem();
+        $bieuthuc=new Bieuthuc();
+        $list_khainiem=$khainiem->danhsachkhainiem();
+        $list_bieuthuc=$bieuthuc->danhsachbieuthuc();
         $title="thêm công thức";
-        return view('admin.congthuc.create',compact('title'));
+        return view('admin.congthuc.create',compact('list_khainiem','list_bieuthuc','title'));
     }
 
     /**
@@ -48,21 +62,19 @@ class CongthucController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
+            'tenkhainiem'=>'required',
             'tencongthuc'=>'required',
-            'dinhnghia'=>'required',
-            'kyhieu'=>'required',
+            'bieuthuc'=>'required',
         ],[
-            'tencongthuc.required'=>'tên khái niệm bắt buộc phải nhập',
-            'dinhnghia.min'=>'định nghĩa bắt buộc phải nhập',
-            'kyhieu.required'=>'ký tự bắt buộc phải nhập',
+            'tenkhainiem.required'=>'khái niệm bắt buộc phải nhập',
+            'tencongthuc.required'=>'tên công thức bắt buộc phải nhập',
+            'bieuthuc.required'=>'biểu thức bắt buộc phải nhập',
             
         ]);
-        
         $data=[
+            $request->tenkhainiem,
+            $request->bieuthuc,
             $request->tencongthuc,
-            $request->dinhnghia,
-            $request->kyhieu,
         ];
         //dd($data);
         $this->congthuc->themcongthuc($data);
@@ -89,10 +101,14 @@ class CongthucController extends Controller
     public function edit($id)
     {
         $congthuc=$this->congthuc->chitietcongthuc($id);
-        $title="sửa khái niệm";
-        $congthuc=$congthuc[0];  
-        
-        return view('admin.congthuc.edit',compact('congthuc','title'));
+        $congthuc=$congthuc[0];
+        //dd($congthuc);
+        $khainiem=new Khainiem();
+        $bieuthuc=new Bieuthuc();
+        $list_khainiem=$khainiem->danhsachkhainiem();
+        $list_bieuthuc=$bieuthuc->danhsachbieuthuc();
+        $title="sửa công thức";
+        return view('admin.congthuc.edit',compact('list_khainiem','list_bieuthuc','congthuc','title'));
     }
 
     /**
@@ -105,20 +121,19 @@ class CongthucController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tencongthuc'=>'required|min:5',
-            'dinhnghia'=>'required',
-            'kyhieu'=>'required',
-            
+            'tenkhainiem'=>'required',
+            'tencongthuc'=>'required',
+            'bieuthuc'=>'required',
         ],[
-            'tencongthuc.required'=>'tên khái niệm bắt buộc phải nhập',
-            'tencongthuc.min'=>'tên khái niệm phải hơn 5 ký tự',
-            'dinhnghia.required'=>'định nghĩa bắt buộc phải nhập',
-            'kyhieu.required'=>'ký hiệu bắt buộc phải nhập',
+            'tenkhainiem.required'=>'khái niệm bắt buộc phải nhập',
+            'tencongthuc.required'=>'tên công thức bắt buộc phải nhập',
+            'bieuthuc.required'=>'biểu thức bắt buộc phải nhập',
+            
         ]);
         $data=[
+            $request->tenkhainiem,
+            $request->bieuthuc,
             $request->tencongthuc,
-            $request->dinhnghia,
-            $request->kyhieu,
         ];
         $this->congthuc->suacongthuc($data,$id);
 
