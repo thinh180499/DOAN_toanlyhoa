@@ -86,7 +86,10 @@ class Bieuthuc extends Model
      public function suabieuthuc($data,$id){
         $data[]=$id;
         //dd($data);
+        
+        
         return DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=? WHERE id=?',$data);
+        
     }
     public function xoabieuthuc($id){
         return DB::delete('DELETE FROM '.$this->table.' WHERE id=?',[$id]);
@@ -123,11 +126,19 @@ class Bieuthuc extends Model
     // }
     public function xetvetruoc($id){
         $table=$this->table;
-        return DB::select('SELECT * FROM '.$table.' WHERE vetruoc='.$id);
+        $danhsachid=DB::table($table)
+        ->where('vetruoc',"=", $id)
+        ->get();
+        return $danhsachid;
     }
     public function xetvesau($id){
         $table=$this->table;
-        return DB::select('SELECT * FROM '.$table.' WHERE vesau='.$id);
+        $table=$this->table;
+        $danhsachid=DB::table($table)
+        ->where('vesau',"=", $id)
+        ->get();
+        return $danhsachid;
+       
     }
 
 }

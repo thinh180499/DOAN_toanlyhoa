@@ -35,7 +35,7 @@ class CongthucController extends Controller
      */
     public function create()
     {
-        $title="thêm khái niệm";
+        $title="thêm công thức";
         return view('admin.congthuc.create',compact('title'));
     }
 

@@ -84,8 +84,8 @@ class BieuthucController extends Controller
             $request->vesau,
             $this->bieuthuc->motavemotbieuthuc( $request->loaipheptoan_id,$request->vetruoc,$request->vesau)
         ];
-
         //dd($data);
+        
         $this->bieuthuc->thembieuthuc($data);
         return redirect()->route('admin.bieuthuc.index');
     }
@@ -178,10 +178,23 @@ class BieuthucController extends Controller
             $request->vesau,
             $this->bieuthuc->motavemotbieuthuc( $request->loaipheptoan_id,$request->vetruoc,$request->vesau)
         ];
-        //dd($data);
+        
+        $bieuthucupdata=$this->bieuthuc->chitietbieuthuc($id);
+       
+        $idbieuthucupdata=$bieuthucupdata[0]->bieuthuc_id;
+        
+        $vetruoc=$this->bieuthuc->xetvetruoc($idbieuthucupdata);
+        
+        $vesau=$this->bieuthuc->xetvesau($idbieuthucupdata);
+        if(!empty($vetruoc[0]->id)){
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'sửa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+        }
+        
+        if(!empty($vesau[0]->id)){
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'sửa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+        }
         $this->bieuthuc->suabieuthuc($data,$id);
-
-        return  redirect()->route('admin.bieuthuc.index')->with('msr','sửa thành công');
+        return  redirect()->route('admin.bieuthuc.index')->with('msgthanhcong', 'sửa thành công');;
     }
 
     /**
@@ -192,8 +205,22 @@ class BieuthucController extends Controller
      */
     public function destroy($id)
     {
+        $bieuthucupdata=$this->bieuthuc->chitietbieuthuc($id);
+       
+        $idbieuthucupdata=$bieuthucupdata[0]->bieuthuc_id;
+        
+        $vetruoc=$this->bieuthuc->xetvetruoc($idbieuthucupdata);
+        
+        $vesau=$this->bieuthuc->xetvesau($idbieuthucupdata);
+        if(!empty($vetruoc[0]->id)){
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'xóa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+        }
+        
+        if(!empty($vesau[0]->id)){
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'xóa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+        }
         $this->bieuthuc->xoabieuthuc($id);
-        $title="danh sách khái niệm";  
-        return redirect()->route('admin.bieuthuc.index',compact('title'));
+        return  redirect()->route('admin.bieuthuc.index')->with('msgthanhcong', 'xóa thành công');;
+       
     }
 }
