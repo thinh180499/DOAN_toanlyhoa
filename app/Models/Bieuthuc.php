@@ -5,12 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\Khainiem;
+
+use App\Models\Loaipheptoan;
+
+use App\Models\Hangso;
 
 class Bieuthuc extends Model
 {
     use HasFactory;
     protected $table='bieuthucs';
-    protected $fillable=['bieuthuc_id','loaipheptoan_id','vetruoc','vesau'];
+    protected $fillable=['bieuthuc_id','loaipheptoan_id','vetruoc','vesau','bieuthuc'];
     public function danhsachbieuthuc(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
@@ -27,13 +32,46 @@ class Bieuthuc extends Model
         $idbieuthuc=$danhsachid[0]->id;
         //dd($idbieuthuc);
         (int)$idbieuthuc++;
-        $idbieuthuc="BT-".$idbieuthuc;
+        $idbieuthuc="BT".$idbieuthuc;
         }else{
-            $idbieuthuc="BT-1";
+            $idbieuthuc="BT1";
         }
         return $idbieuthuc;
     }
-    
+    public function xacdinhlabieuthuc($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('bieuthuc_id',"=", $id)
+        ->get();
+        if(!empty($danhsachid[0]->id)){
+        $khainiem=$danhsachid[0]->motabieuthuc;
+        }else{
+            $khainiem="";
+        }
+        return $khainiem;
+    }
+    public function motavemotbieuthuc($pheptoan_id,$vetruoc_id,$vesau_id){
+        $table=$this->table;
+        $mota="";
+        $bieuthuc=new Bieuthuc();
+        $khainiem=new Khainiem();
+        $hangso=new Hangso();
+        $loaipheptoan=new Loaipheptoan();
+
+
+        $mota=$mota." ".$khainiem->xacdinhlakhainiem($vetruoc_id);
+        $mota=$mota." ".$hangso->xacdinhlahangso($vetruoc_id);
+        $mota=$mota." (".$bieuthuc->xacdinhlabieuthuc($vetruoc_id).")";
+        $mota=$mota." ".$loaipheptoan->xacdinhloaipheptoan($pheptoan_id);
+        $mota=$mota." ".$khainiem->xacdinhlakhainiem($vesau_id);
+        $mota=$mota." ".$hangso->xacdinhlahangso($vesau_id);
+        $mota=$mota." (".$bieuthuc->xacdinhlabieuthuc($vesau_id).")";
+        dd($mota);
+
+        
+    }
     public function chitietbieuthuccuadoituong($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);

@@ -28,15 +28,28 @@ class Hangso extends Model
         if(!empty($danhsachid[0]->id)){
             $idhangso=$danhsachid[0]->id;
             (int)$idhangso++;
-            $idhangso="HS-".$idhangso;
+            $idhangso="HS".$idhangso;
         }else{
-            $idhangso="HS-1";
+            $idhangso="HS1";
         }
        
         //dd($idhangso);
         return $idhangso;
     }
-
+    public function xacdinhlahangso($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('hangso_id',"=", $id)
+        ->get();
+        if(!empty($danhsachid[0]->id)){
+        $mota=$danhsachid[0]->hangso;
+        }else{
+            $mota="";
+        }
+        return $mota;
+    }
     public function themhangso($data){
         $table=$this->table;
         

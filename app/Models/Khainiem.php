@@ -26,11 +26,25 @@ class Khainiem extends Model
         if(!empty($danhsachid[0]->id)){
         $idkhainiem=$danhsachid[0]->id;
         (int)$idkhainiem++;
-        $idkhainiem="KN-".$idkhainiem;
+        $idkhainiem="KN".$idkhainiem;
         }else{
-            $idkhainiem="KN-1";
+            $idkhainiem="KN1";
         }
         return $idkhainiem;
+    }
+    public function xacdinhlakhainiem($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('khainiem_id',"=", $id)
+        ->get();
+        if(!empty($danhsachid[0]->id)){
+        $khainiem=$danhsachid[0]->kyhieu;
+        }else{
+            $khainiem="";
+        }
+        return $khainiem;
     }
     
     public function themkhainiem($data){

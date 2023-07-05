@@ -25,12 +25,26 @@ class Loaipheptoan extends Model
         if(!empty($danhsachid[0]->id)){
             $idloaipheptoan=$danhsachid[0]->id;
             (int)$idloaipheptoan++;
-            $idloaipheptoan="LPT-".$idloaipheptoan;
+            $idloaipheptoan="LPT".$idloaipheptoan;
         }else{
-            $idloaipheptoan="LPT-1";
+            $idloaipheptoan="LPT1";
         }
         //dd($idloaipheptoan);
         return $idloaipheptoan;
+    }
+    public function xacdinhloaipheptoan($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('loaipheptoan_id',"=", $id)
+        ->get();
+        if(!empty($danhsachid[0]->id)){
+        $khainiem=$danhsachid[0]->loaipheptoan;
+        }else{
+            $khainiem="";
+        }
+        return $khainiem;
     }
     public function themloaipheptoan($data){
         $table=$this->table;
