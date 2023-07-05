@@ -37,7 +37,7 @@
                 <option value="none" selected disabled hidden>Chọn một khái niệm</option>
                 @if (!empty($list_khainiem))
                     @foreach ($list_khainiem as $khainiem)
-                        <option value="{{ $khainiem->khainiem_id }}">{{ $khainiem->kyhieu }}
+                        <option value="{{ $khainiem->khainiem_id }}">{{ $khainiem->kyhieu."-".$khainiem->tenkhainiem }}
                         </option>
                     @endforeach
                 @endif
