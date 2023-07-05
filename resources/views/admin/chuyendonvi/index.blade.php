@@ -33,10 +33,26 @@
                                         {{ $chuyendonvi->hesonhan }}
                                     </td>
                                     <td>
-                                        {{ $chuyendonvi->tudonvi}}
+                                        @if (!empty($list_donvi))
+                                            @foreach ($list_donvi as $donvi)
+                                                @if($chuyendonvi->tudonvi == $donvi->id) 
+                                                    {{$donvi->tendonvi}}     
+                                                @endif
+                                                
+                                            @endforeach
+                                        @endif
+                                        
                                     </td>
                                     <td>
-                                        {{ $chuyendonvi->dendonvi }}
+                                        @if (!empty($list_donvi))
+                                        @foreach ($list_donvi as $donvi)
+                                            @if($chuyendonvi->dendonvi == $donvi->id) 
+                                                {{$donvi->tendonvi}}  
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                       
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.chuyendonvi.edit',['chuyendonvi' => $chuyendonvi->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>

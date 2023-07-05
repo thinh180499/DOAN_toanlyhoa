@@ -52,7 +52,25 @@ class ChuyendonviController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'hesonhan'=>'required',
+            'tudonvi'=>'required',
+            'dendonvi'=>'required',
+        ],[
+            'hesonhan.required'=>'* hệ số nhân bắt buộc phải nhập',
+            'tudonvi.required'=>'* ký tự bắt buộc phải nhập',
+            'dendonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+
+        ]);
+        $data=[
+            $request->hesonhan,
+            $request->tudonvi,
+            $request->dendonvi,
+        ];
+        //dd($data);
+        $this->chuyendonvi->themchuyendonvi($data);
+        return redirect()->route('admin.chuyendonvi.index');
     }
 
     /**
@@ -63,7 +81,7 @@ class ChuyendonviController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->chuyendonvi->chitietchuyendonvi($id);
     }
 
     /**
@@ -74,7 +92,12 @@ class ChuyendonviController extends Controller
      */
     public function edit($id)
     {
-        //
+        $chuyendonvi=$this->chuyendonvi->chitietchuyendonvi($id);
+        //dd($chuyendonvi);
+        $title="sửa chuyển đơn vi";
+        $chuyendonvi=$chuyendonvi[0];
+        $list_donvi=$this->donvi->danhsachdonvi();
+        return view('admin.chuyendonvi.edit',compact('list_donvi','chuyendonvi','title'));
     }
 
     /**
@@ -86,7 +109,25 @@ class ChuyendonviController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+
+            'hesonhan'=>'required',
+            'tudonvi'=>'required',
+            'dendonvi'=>'required',
+        ],[
+            'hesonhan.required'=>'* hệ số nhân bắt buộc phải nhập',
+            'tudonvi.required'=>'* ký tự bắt buộc phải nhập',
+            'dendonvi.required'=>'* loại đơn vi bắt buộc phải nhập',
+
+        ]);
+        $data=[
+            $request->hesonhan,
+            $request->tudonvi,
+            $request->dendonvi,
+        ];
+        $this->chuyendonvi->suachuyendonvi($data,$id);
+
+        return back()->with('msr','sửa thành công');
     }
 
     /**
@@ -97,6 +138,8 @@ class ChuyendonviController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->chuyendonvi->xoachuyendonvi($id);
+        $title="danh sách chuyển đơn vị";
+        return redirect()->route('admin.chuyendonvi.index',compact('title'));
     }
 }

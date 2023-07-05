@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{ route('admin.donvi.update',['donvi' => $donvi->id]) }}" method="post">
+    <form action="{{ route('admin.chuyendonvi.update',['chuyendonvi' => $chuyendonvi->id]) }}" method="post">
         @method('PUT')
         @csrf
 
@@ -17,36 +17,39 @@
                 </h4>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="tendonvi">Tên đơn vị</label>
+                    <label class="col-md-2 col-form-label" for="hesonhan">Hệ số nhân</label>
                     <div class="col-md-10">
-                        <input name="tendonvi" type="text" class="form-control" id="tendonvi" placeholder="Nhập tên đơn vi" 
-                            value="{{ old('tendonvi') ?? $donvi->tendonvi }}">
-                            @error('tendonvi')
+                        <input name="hesonhan" type="text" class="form-control" id="hesonhan" placeholder="Nhập tên đơn vi" 
+                            value="{{ old('hesonhan') ?? $chuyendonvi->hesonhan }}">
+                            @error('hesonhan')
                                 <span style="color: red;">{{ $message }}</span>
                              @enderror
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="kyhieu">Ký hiệu</label>
-                    <div class="col-md-10">
-                        <input name="kyhieu" type="text" class="form-control" id="kyhieu" placeholder="Nhập ký hiệu"
-                        value="{{ old('kyhieu') ?? $donvi->kyhieu }}">
-                    </div>
-                </div>
-                <select name="loaidonvi">
-                    @if (!empty($list_loaidonvi))
-                        @foreach ($list_loaidonvi as $loaidonvi)
-                            <option <?php if ($donvi->loaidonvi_id == $loaidonvi->id) {
+                <select name="tudonvi">
+                    @if (!empty($list_donvi))
+                        @foreach ($list_donvi as $donvi)
+                            <option <?php if ($chuyendonvi->tudonvi == $donvi->id) {
                                 echo 'selected ';
-                            } ?>value="{{ $loaidonvi->id }}">{{ $loaidonvi->tenloaidonvi}}
+                            } ?>value="{{ old('donvi')??$donvi->id }}">{{ $donvi->tendonvi}}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
+                <select name="dendonvi">
+                    @if (!empty($list_donvi))
+                        @foreach ($list_donvi as $donvi)
+                            <option <?php if ($chuyendonvi->dendonvi == $donvi->id) {
+                                echo 'selected ';
+                            } ?>value="{{ old('donvi')??$donvi->id }}">{{ $donvi->tendonvi}}
                             </option>
                         @endforeach
                     @endif
                 </select>
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">sửa</button>
-                    <a href="{{ route('admin.donvi.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
+                    <a href="{{ route('admin.chuyendonvi.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>
         </div>
@@ -71,3 +74,5 @@
         }
     </style>
 @endsection
+
+

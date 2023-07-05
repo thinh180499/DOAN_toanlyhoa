@@ -121,7 +121,7 @@ class DonviController extends Controller
             $request->kyhieu,
             $request->loaidonvi,
         ];
-        dd($data);
+        //dd($data);
         $this->donvi->suadonvi($data,$id);
 
         return back()->with('msr','sửa thành công');

@@ -23,4 +23,21 @@ class Chuyendonvi extends Model
         return DB::select('SELECT * FROM '.$table);
         
     }
+    public function themchuyendonvi($data){
+        $table=$this->table;
+        
+        DB::insert('INSERT INTO chuyendonvis(hesonhan,tudonvi,dendonvi)value(?,?,?)',$data);
+     }
+     public function chitietchuyendonvi($id){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
+     }
+     public function suachuyendonvi($data,$id){
+        $data[]=$id;
+        return DB::update('UPDATE '.$this->table.' SET hesonhan=?,tudonvi=?,dendonvi=? WHERE id=?',$data);
+    }
+    public function xoachuyendonvi($id){
+        return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
+    
+    }
 }
