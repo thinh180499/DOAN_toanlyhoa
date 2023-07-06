@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\BieuthucController;
 use App\Http\Controllers\Admin\ChuyendonviController;
 use App\Http\Controllers\Admin\DonvicuakhainiemController;
 use App\Http\Controllers\Admin\CongthuccuamonController;
+use App\Http\Controllers\ChitietcongthucController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +36,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/chitietcongthuc/{id}', [ChitietcongthucController::class, 'chitietcongthuc'])->name('chitietcongthuc');
 Route::get('/admin', [KhainiemController::class, 'index'])->name('admin');
 Route::get('dodai', [HomeController::class, 'dodai'])->name('dodai');
     Route::post('dodai', [HomeController::class, 'doidodai']);
 
 Route::prefix('/admin')->name('admin.')->group(function () {
 
-    
     Route::resource('congthuc', CongthucController::class);
     Route::resource('donvi', DonviController::class);
     Route::resource('khainiem', KhainiemController::class);

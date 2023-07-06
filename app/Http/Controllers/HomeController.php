@@ -16,6 +16,7 @@ class HomeController extends Controller
         $congthuccuamon=new Congthuccuamon();
         $list_mon=$mon->danhsachmon();
         $list_congthuccuamon=$congthuccuamon->danhsachcongthuccuamonkethop();
+        //dd($list_congthuccuamon);
         view()->share(compact('list_mon','list_congthuccuamon'));
     }
     /**
@@ -35,8 +36,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mons = Mon::paginate(1);
-        return view('home',['mons'=>$mons]);
+        return view('home');
     }
     public function dodai(){
         $donvi= new Donvi();
@@ -65,4 +65,5 @@ class HomeController extends Controller
         $ketqua=$donvi->chuyendonvi($a,$i,$j);
         return response()->json(['ketqua' => $ketqua]);
     }
+    
 }

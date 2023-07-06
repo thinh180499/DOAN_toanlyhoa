@@ -1,26 +1,41 @@
-@extends('layouts.layout')
+@extends('layouts.client')
 
-@section('title', '')
+@section('title', '{{ $chitietcongthuc->tencongthuc }}')
 
 @section('content')
     <div class="row mt-4">
         <div class="col-lg-5 congthuc">
             <div class="card-style cardform h-100">
                 <div class="mt-1 mb-80">
-                    <h3 class="mb-4">Trong đó</h3>
+                    {{-- <h3 class="mb-4">Trong đó</h3>
                     <ul>
                         <li>n: số mol (mol)</li>
                         <li>m: khối lượng chất (gam)</li>
                         <li>M: khối lượng Mol (gam/mol)</li>
-                    </ul>
+                    </ul> --}}
+                    @if (!empty($list_khainiem))
+                            @foreach ($list_khainiem as $khainiem)
+                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                    {{ $khainiem->kyhieu." = " }}
+                                @endif
+                            @endforeach
+                        @endif
+                    @if (!empty($list_bieuthuc))
+                        @foreach ($list_bieuthuc as $key)
+                            @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
+                               
+                                {{ $key->motabieuthuc }}
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
         <div class="col-lg-7 tinhtoan">
             <div class="card-style cardform h-100">
-                <h2 class="mb-4">Tính số mol theo khối lượng:</h2>
+                <h2 class="mb-4">{{ $chitietcongthuc->tencongthuc }}</h2>
 
-                <form action="moltheokhoiluong" method="post">
+                {{-- <form action="moltheokhoiluong" method="post">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                     <div class="container-fluid mb-5">
@@ -38,7 +53,12 @@
                         </div>
                     </div>
 
-
+                    
+                    
+                    
+                        
+                       
+                    
                     <div class="container mb-4">
                         <div class="row d-flex flex-column">
                             <div class="col">
@@ -74,17 +94,25 @@
                         </div>
                     </div>
 
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col lythuyet">
-            <div class="mb-30">
-                <h2 class="mb-30">Lý thuyết</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ratione vel, eveniet sunt inventore nemo
-                    debitis deleniti quisquam aliquid tenetur, earum maxime vitae id molestiae expedita quasi dolorum!
-                    Consequatur, provident?</p>
+            <div class="card-style cardform h-100">
+                <div class="mb-30">
+                    <h2 class="mb-30">Lý thuyết</h2>
+                    <p>
+                        @if (!empty($list_khainiem))
+                            @foreach ($list_khainiem as $khainiem)
+                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                    {{ $khainiem->dinhnghia }}
+                                @endif
+                            @endforeach
+                        @endif
+                    </p>
+                </div>
             </div>
         </div>
     </div>

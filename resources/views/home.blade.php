@@ -20,11 +20,11 @@
                                         </div>
                                         <div class="content">
                                             <h6 class="mb-10">
-                                                {{ substr($congthuccuamon->tencongthuc, 0, 6) }}
+                                                Công thức
                                             </h6>
                                             <h3 class="text-bold mb-10">
-                                                <a href="#"
-                                                    class="stretched-link">{{ substr($congthuccuamon->tencongthuc, 6) }}</a>
+                                                <a href="chitietcongthuc/{{$congthuccuamon->congthuc_id}}"
+                                                    class="stretched-link">{{ $congthuccuamon->tencongthuc }}</a>
                                             </h3>
                                         </div>
                                     </div>
