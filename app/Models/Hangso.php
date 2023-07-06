@@ -50,6 +50,20 @@ class Hangso extends Model
         }
         return $mota;
     }
+    public function xacdinhlahangsoid($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('hangso_id',"=", $id)
+        ->get();
+        if(!empty($danhsachid[0]->id)){
+        $mota=$danhsachid[0];
+        }else{
+            $mota="";
+        }
+        return $mota;
+    }
     public function themhangso($data){
         $table=$this->table;
         

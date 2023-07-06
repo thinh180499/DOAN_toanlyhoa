@@ -43,26 +43,28 @@ class HomeController extends Controller
         
         $chuyendonvi= new Chuyendonvi();
         $list_donvi = $donvi->danhsachdonvi();
-        $a=6;
-         $i=2;
-         $j=3;
-         $ketqua=$chuyendonvi->chuyendonvithanh($a,$i,$j);
-        //dd($ketqua);
+       
         return view('dodai',compact('list_donvi'));
     }
     public function doidodai(Request $request){
         $request->validate([
-            'a'=>'required|numeric|min:0.00000000000000000000001',
+            'a'=>'required|numeric|min:0',
         ],[
             'a.required'=>'độ dài bắt buộc phải nhập',
             'a.numeric'=>'độ dài điện buộc phải là số',
-            'a.min'=>'độ dài phải lớn hơn 0.00000000000000000000001',
+            'a.min'=>'độ dài phải lớn hơn 0',
         ]);
-        $a = $request->input('a');
-        $i = $request->input('i');
-        $j = $request->input('j');
-        $donvi= new Donvi();
-        $ketqua=$donvi->chuyendonvi($a,$i,$j);
+         $a = $request->input('a');
+         $i = $request->input('i');
+         $j = $request->input('j');
+        // $a=6;
+        // $i=2;
+        // $j=3;
+       
+       
+        $chuyendonvi= new Chuyendonvi();
+        $ketqua=$chuyendonvi->chuyendonvithanh($a,$i,$j);
+        //dd($ketqua);
         return response()->json(['ketqua' => $ketqua]);
     }
     

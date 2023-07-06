@@ -46,7 +46,20 @@ class Khainiem extends Model
         }
         return $khainiem;
     }
-    
+    public function xacdinhlakhainiemid($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('khainiem_id',"=", $id)
+        ->get();
+        if(!empty($danhsachid[0]->id)){
+        $khainiem=$danhsachid[0]->kyhieu;
+        }else{
+            $khainiem="";
+        }
+        return $khainiem;
+    }
     public function themkhainiem($data){
         $table=$this->table;
         // $count=DB::table($table)->count();

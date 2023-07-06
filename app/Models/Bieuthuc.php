@@ -53,6 +53,21 @@ class Bieuthuc extends Model
         }
         return $khainiem;
     }
+    public function xacdinhlabieuthucid($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('bieuthuc_id',"=", $id)
+        ->get();
+        
+        if(!empty($danhsachid[0]->id)){
+            $khainiem=$danhsachid[0];
+        }else{
+            $khainiem="";
+        }
+        return $khainiem;
+    }
     public function motavemotbieuthuc($pheptoan_id,$vetruoc_id,$vesau_id){
         $table=$this->table;
         $mota="";
@@ -76,6 +91,11 @@ class Bieuthuc extends Model
     public function chitietbieuthuc($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
+    }
+    public function chitietbieuthucid($id){
+        $table=$this->table;
+        $data[]=$id;
+        return DB::select('SELECT * FROM '.$table.' WHERE bieuthuc_id=?',$data);
     }
     public function thembieuthuc($data){
         $table=$this->table;
