@@ -28,10 +28,10 @@ use App\Http\Controllers\Admin\CongthuccuamonController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
+// Route::get('/', function () {
+//     return view('home');
+// });
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

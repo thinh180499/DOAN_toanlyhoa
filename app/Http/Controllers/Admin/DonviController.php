@@ -13,7 +13,7 @@ class DonviController extends Controller
     private $donvi;
     public function __construct(){
         $this->donvi=new Donvi();
-       // $this->middleware('auth');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

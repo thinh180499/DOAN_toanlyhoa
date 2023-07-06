@@ -17,7 +17,7 @@ class CongthucController extends Controller
     
     public function __construct(){
         $this->congthuc=new Congthuc();
-       // $this->middleware('auth');
+       $this->middleware('auth');
        
        
     }

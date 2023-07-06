@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.client')
 
 @section('content')
 <div class="container">
@@ -16,6 +16,10 @@
                     
 
                     {{ __('You are logged in!') }}
+                    @foreach ($mons as $mon)
+                        {{$mon->tenmon}}
+                    @endforeach
+                    {{$mons->links()}}
                 </div>
             </div>
         </div>

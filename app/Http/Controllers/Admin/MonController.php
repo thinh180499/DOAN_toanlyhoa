@@ -11,7 +11,7 @@ class MonController extends Controller
     private $mon;
     public function __construct(){
         $this->mon=new Mon();
-       // $this->middleware('auth');
+       $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

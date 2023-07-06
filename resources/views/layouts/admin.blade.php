@@ -29,7 +29,7 @@
 
             <ul class="list-unstyled topnav-menu float-right mb-0">
 
-                <li class="dropdown notification-list">
+                {{-- <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
 
@@ -51,7 +51,45 @@
                             @csrf
                         </form>
                     </div>
-                </li>
+                </li> --}}
+                @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            {{-- @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif --}}
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
+
+                        <span class="pro-user-name ml-1">
+                            {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
+                        </span>
+                    </a>
+
+                                <div class="dropdown-menu dropdown-menu-right profile-dropdown" style="">
+
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">
+                                        <i class="mdi mdi-logout-variant"></i>
+                                        <span>{{ __('Logout') }}</span>
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest 
 
 
             </ul>

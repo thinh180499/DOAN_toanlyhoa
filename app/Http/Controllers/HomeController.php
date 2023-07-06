@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Donvi;
 use App\Models\Chuyendonvi;
+use App\Models\Congthuccuamon;
+use App\Models\Mon;
 
 class HomeController extends Controller
 {
+    public function __construct(){
+        
+        $mon=new Mon();
+        $congthuccuamon=new Congthuccuamon();
+        $list_mon=$mon->danhsachmon();
+        $list_congthuccuamon=$congthuccuamon->danhsachcongthuccuamonkethop();
+        view()->share(compact('list_mon','list_congthuccuamon'));
+    }
     /**
      * Create a new controller instance.
      *
@@ -25,7 +35,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $mons = Mon::paginate(1);
+        return view('home',['mons'=>$mons]);
     }
     public function dodai(){
         $donvi= new Donvi();

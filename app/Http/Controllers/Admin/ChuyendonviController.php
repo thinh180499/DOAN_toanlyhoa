@@ -17,7 +17,7 @@ class ChuyendonviController extends Controller
     public function __construct(){
         $this->donvi=new Donvi();
         $this->chuyendonvi=new Chuyendonvi();
-       // $this->middleware('auth');
+       $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

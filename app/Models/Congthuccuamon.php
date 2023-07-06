@@ -15,6 +15,13 @@ class Congthuccuamon extends Model
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
     }
+    public function danhsachcongthuccuamonkethop(){
+        $table=$this->table;
+        return DB::table($table)
+        ->join('congthucs', 'congthuccuamons.congthuc_id', '=', 'congthucs.id')
+        ->select('congthuccuamons.*', 'congthucs.tencongthuc')
+        ->get();
+    }
     public function themcongthuccuamon($data){
         $table=$this->table;
 

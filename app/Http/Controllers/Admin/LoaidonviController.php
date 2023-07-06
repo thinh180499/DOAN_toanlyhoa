@@ -11,7 +11,7 @@ class LoaidonviController extends Controller
     private $loaidonvi;
     public function __construct(){
         $this->loaidonvi=new Loaidonvi();
-       // $this->middleware('auth');
+       $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
