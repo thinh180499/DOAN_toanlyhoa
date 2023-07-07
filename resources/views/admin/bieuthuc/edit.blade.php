@@ -14,7 +14,7 @@
         </div>
         <div class="col">
             <label class="control-label mt-3 mt-lg-0">Phép toán</label>
-            <select name="loaipheptoan" id="loaipheptoan" class="form-control">
+            <select name="loaipheptoan" id="loaipheptoan" class="form-control select2-multiple">
                 @if (!empty($list_loaipheptoan))
                     @foreach ($list_loaipheptoan as $loaipheptoan)
                         <option <?php if ($loaipheptoan->loaipheptoan_id == $bieuthuc->loaipheptoan_id) {
@@ -39,7 +39,7 @@
     <div class="row mb-5">
         <div class="doituong col form-group">
             <label class="control-label mt-3 mt-lg-0">Khái niệm</label>
-            <select name="khainiem" class="form-control">
+            <select name="khainiem" class="form-control select2-multiple">
                 <option value="none" selected disabled hidden>Chọn một khái niệm</option>
                 @if (!empty($list_khainiem))
                     @foreach ($list_khainiem as $khainiem)
@@ -52,7 +52,7 @@
 
         <div class="doituong col form-group">
             <label class="control-label mt-3 mt-lg-0">Hằng số</label>
-            <select name="hangso" class="form-control">
+            <select name="hangso" class="form-control select2-multiple">
                 <option value="none" selected disabled hidden>Chọn một hằng số</option>
                 @if (!empty($list_hangso))
                     @foreach ($list_hangso as $hangso)
@@ -66,7 +66,7 @@
         <div class="doituong col">
             {{-- Chỗ này thay bằng biểu thức --}}
             <label class="control-label mt-3 mt-lg-0">Biểu thức</label>
-            <select name="" class="form-control">
+            <select name="" class="form-control select2-multiple">
                 <option value="none" selected disabled hidden>Chọn một biểu thức</option>
                 @if (!empty($list_bieuthuc))
                     @foreach ($list_bieuthuc as $key)
@@ -103,6 +103,17 @@
 @endsection
 
 @section('css')
+    <!-- Plugin css -->
+    <link href="{{ asset('admin1\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin1\assets\libs\switchery\switchery.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin1\assets\libs\select2\select2.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin1\assets\libs\clockpicker\bootstrap-clockpicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin1\assets\libs\bootstrap-timepicker\bootstrap-timepicker.min.css') }}" rel="stylesheet"
+        type="text/css">
+    <link href="{{ asset('admin1\assets\libs\bootstrap-colorpicker\bootstrap-colorpicker.min.css') }}" rel="stylesheet"
+        type="text/css">
+    <link href="{{ asset('admin1\assets\libs\bootstrap-datepicker\bootstrap-datepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin1\assets\libs\bootstrap-daterangepicker\daterangepicker.css') }}" rel="stylesheet">
     <style>
         input.form-control:focus {
             border: 3px solid #458bc4;
@@ -112,8 +123,25 @@
 @endsection
 
 @section('script')
+    <!-- Vendor js -->
+    <script src="{{ asset('admin1\assets\js\vendor.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\moment\moment.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\switchery\switchery.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\select2\select2.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\parsleyjs\parsley.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\bootstrap-filestyle2\bootstrap-filestyle.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\bootstrap-timepicker\bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\bootstrap-colorpicker\bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\clockpicker\bootstrap-clockpicker.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('admin1\assets\libs\bootstrap-daterangepicker\daterangepicker.js') }}"></script>
+    <!-- Init js-->
+    <script src="{{ asset('admin1\assets\js\pages\form-advanced.init.js') }}"></script>
     <script>
         $(document).ready(function() {
+            $('.select2-multiple').select2();
+
             var inputvetruoc = $('#inputvetruoc');
             var inputvesau = $('#inputvesau');
             var loaipheptoan = $('#loaipheptoan');
