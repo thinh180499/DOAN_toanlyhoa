@@ -18,4 +18,4 @@ use App\Http\Controllers\ApiController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/congthuc/{id}', [ApiController::class, 'congthuc'])->name('api.congthuc');
+Route::get('/search', [ApiController::class, 'Search'])->name('search');

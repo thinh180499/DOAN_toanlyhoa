@@ -177,6 +177,39 @@ class HomeController extends Controller
         return view('phuongtrinhbachai',compact('ketqua','a','b','c'));
 
     }
-
+//phương trình bậc 1
+public function phuongtrinhbacnhat(){
+    return view('phuongtrinhbacnhat');
+}
+public function tinhphuongtrinhbacnhat(Request $request){
+    $request->validate([
+        'a'=>'required|numeric',
+        'b'=>'required|numeric',
+        ],[
+        'a.required'=>'a bắt buộc phải nhập',
+        'a.numeric'=>'a buộc phải là số',
+        'b.required'=>'b bắt buộc phải nhập',
+        'b.numeric'=>'b bắt buộc phải là số',
+        
+    ]);
+    $a=$_POST['a'];
+    $b=$_POST['b'];
+    if($a==0){
+        $ketqua="phương trình vô nghiệm";
+        return view('phuongtrinhbacnhat',compact('ketqua','a','b'));
+    }
+    //tính kết quả
+    $ketqua=-$b/$a;
+    //xét kết quả là số vô hạn
+    if(is_infinite($ketqua)){
+        $ketqua="kết quả vượt qua giới hạn tính";
+        return view('phuongtrinhbacnhat',compact('ketqua','a','b'));
+    }
+    else{
+        $ketqua="x=".$ketqua;
+        return view('phuongtrinhbacnhat',compact('ketqua','a','b'));
+    }
+   
+}
     
 }

@@ -12,6 +12,8 @@ use App\Models\Bieuthuc;
 use App\Models\Hangso;
 use App\Models\Khainiem;
 
+use App\Models\Hinhcuacongthuc;
+
 class ChitietcongthucController extends Controller
 {
 
@@ -29,8 +31,10 @@ class ChitietcongthucController extends Controller
     {
         $khainiem = new Khainiem();
         $bieuthuc = new Bieuthuc();
-
+        $hinhcuacongthuc = new Hinhcuacongthuc();
         $congthuc = new Congthuc();
+        
+        $list_hinh = $hinhcuacongthuc->danhsachhinhcuacongthuc();
         $list_khainiem = $khainiem->danhsachkhainiem();
         $list_bieuthuc = $bieuthuc->danhsachbieuthuc();
         $chitietcongthuc = $congthuc->chitietcongthuc($id);
@@ -39,7 +43,7 @@ class ChitietcongthucController extends Controller
         $mangkhainiem = [];
         $mangkhainiem = $this->phantukhainiemcuabieuthuc($chitietcongthuc->bieuthuc_id, $mangkhainiem);
         //dd($mangkhainiem);
-        return view('chitietcongthuc', compact('list_khainiem', 'list_bieuthuc', 'chitietcongthuc', 'mangkhainiem'));
+        return view('chitietcongthuc', compact('list_hinh','list_khainiem', 'list_bieuthuc', 'chitietcongthuc', 'mangkhainiem'));
     }
     public function phantucuabieuthuc($bieuthuc_id, $mangkhainiem)
     {
@@ -208,9 +212,16 @@ class ChitietcongthucController extends Controller
         $vetruoclakhainiem = $khainiem->xacdinhlakhainiemid($chitietbieuthuc->vetruoc);
         //dd($vetruoclakhainiem);
         if (!empty($vetruoclakhainiem)) {
-            $request->validate([
-                $vetruoclakhainiem->khainiem_id => 'required|numeric|min:0',
-            ]);
+            if($vetruoclakhainiem->cotheam){
+                $request->validate([
+                    $vetruoclakhainiem->khainiem_id => 'required|numeric|min:0',
+                ]);
+            }else{
+                $request->validate([
+                    $vetruoclakhainiem->khainiem_id => 'required|numeric',
+                ]);
+            }
+            
             $a = $request->input($vetruoclakhainiem->khainiem_id);
             //dd($vetruoc);
         }
@@ -230,9 +241,16 @@ class ChitietcongthucController extends Controller
 
         $vesaulakhainiem = $khainiem->xacdinhlakhainiemid($chitietbieuthuc->vesau);
         if (!empty($vesaulakhainiem)) {
-            $request->validate([
-                $vesaulakhainiem->khainiem_id => 'required|numeric|min:0',
-            ]);
+            if($vesaulakhainiem->cotheam){
+                $request->validate([
+                    $vesaulakhainiem->khainiem_id => 'required|numeric|min:0',
+                ]);
+            }else{
+                $request->validate([
+                    $vesaulakhainiem->khainiem_id => 'required|numeric',
+                ]);
+            }
+           
             $b = $request->input($vesaulakhainiem->khainiem_id);
         }
         $vesaulahangso = $hangso->xacdinhlahangsoid($chitietbieuthuc->vesau);

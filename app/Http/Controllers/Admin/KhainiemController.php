@@ -9,10 +9,10 @@ use App\Models\Khainiem;
 class KhainiemController extends Controller
 {
     private $khainiem;
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
-        $this->khainiem=new Khainiem();
-
+        $this->khainiem = new Khainiem();
     }
     /**
      * Display a listing of the resource.
@@ -21,10 +21,10 @@ class KhainiemController extends Controller
      */
     public function index()
     {
-        $list_khainiem=$this->khainiem->danhsachkhainiem();
+        $list_khainiem = $this->khainiem->danhsachkhainiem();
         //dd($list_khainiem);
-        $title="danh sách khái niệm";
-        return view('admin.khainiem.index',compact('list_khainiem','title'));
+        $title = "danh sách khái niệm";
+        return view('admin.khainiem.index', compact('list_khainiem', 'title'));
     }
 
     /**
@@ -34,8 +34,8 @@ class KhainiemController extends Controller
      */
     public function create()
     {
-        $title="Thêm khái niệm";
-        return view('admin.khainiem.create',compact('title'));
+        $title = "Thêm khái niệm";
+        return view('admin.khainiem.create', compact('title'));
     }
 
     /**
@@ -48,21 +48,26 @@ class KhainiemController extends Controller
     {
         $request->validate([
 
-            'tenkhainiem'=>'required',
-            'dinhnghia'=>'required',
-            'kyhieu'=>'required',
-        ],[
-            'tenkhainiem.required'=>'* tên khái niệm bắt buộc phải nhập',
-            'dinhnghia.required'=>'* định nghĩa bắt buộc phải nhập',
-            'kyhieu.required'=>'* ký tự bắt buộc phải nhập',
+            'tenkhainiem' => 'required',
+            'dinhnghia' => 'required',
+            'kyhieu' => 'required',
+        ], [
+            'tenkhainiem.required' => '* tên khái niệm bắt buộc phải nhập',
+            'dinhnghia.required' => '* định nghĩa bắt buộc phải nhập',
+            'kyhieu.required' => '* ký tự bắt buộc phải nhập',
 
         ]);
-
-        $data=[
+        if ($request->cotheam) {
+            $i = 1;
+        } else {
+            $i = 0;
+        }
+        $data = [
             $this->khainiem->layidcuoidanhsach(),
             $request->tenkhainiem,
             $request->dinhnghia,
             $request->kyhieu,
+            $i,
         ];
         //dd($data);
         $this->khainiem->themkhainiem($data);
@@ -88,11 +93,11 @@ class KhainiemController extends Controller
      */
     public function edit($id)
     {
-        $khainiem=$this->khainiem->chitietkhainiem($id);
-        $title="sửa khái niệm";
-        $khainiem=$khainiem[0];
+        $khainiem = $this->khainiem->chitietkhainiem($id);
+        $title = "sửa khái niệm";
+        $khainiem = $khainiem[0];
 
-        return view('admin.khainiem.edit',compact('khainiem','title'));
+        return view('admin.khainiem.edit', compact('khainiem', 'title'));
     }
 
     /**
@@ -105,24 +110,24 @@ class KhainiemController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tenkhainiem'=>'required|min:5',
-            'dinhnghia'=>'required',
-            'kyhieu'=>'required',
+            'tenkhainiem' => 'required|min:5',
+            'dinhnghia' => 'required',
+            'kyhieu' => 'required',
 
-        ],[
-            'tenkhainiem.required'=>'* tên khái niệm bắt buộc phải nhập',
-            'tenkhainiem.min'=>'* tên khái niệm phải hơn 5 ký tự',
-            'dinhnghia.required'=>'* định nghĩa bắt buộc phải nhập',
-            'kyhieu.required'=>'* ký hiệu bắt buộc phải nhập',
+        ], [
+            'tenkhainiem.required' => '* tên khái niệm bắt buộc phải nhập',
+            'tenkhainiem.min' => '* tên khái niệm phải hơn 5 ký tự',
+            'dinhnghia.required' => '* định nghĩa bắt buộc phải nhập',
+            'kyhieu.required' => '* ký hiệu bắt buộc phải nhập',
         ]);
-        $data=[
+        $data = [
             $request->tenkhainiem,
             $request->dinhnghia,
             $request->kyhieu,
         ];
-        $this->khainiem->suakhainiem($data,$id);
+        $this->khainiem->suakhainiem($data, $id);
 
-        return back()->with('msr','sửa thành công');
+        return back()->with('msr', 'sửa thành công');
     }
 
     /**
@@ -134,8 +139,7 @@ class KhainiemController extends Controller
     public function destroy($id)
     {
         $this->khainiem->xoakhainiem($id);
-        $title="danh sách khái niệm";
-        return redirect()->route('admin.khainiem.index',compact('title'));
+        $title = "danh sách khái niệm";
+        return redirect()->route('admin.khainiem.index', compact('title'));
     }
-
 }

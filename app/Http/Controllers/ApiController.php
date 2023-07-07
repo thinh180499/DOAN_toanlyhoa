@@ -1,18 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Congthuc;
+use App\Models\Khainiem;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    private $congthuc;
-    public function __construct(){
-        $this->congthuc=new Congthuc();
-    }
-    public function congthuc($id)
-    {
-    $list_congthuc=$this->congthuc->chitietcongthuc($id);
-    return $list_congthuc;
+    public function Search($tukhoa){
+        $khainiem=new Khainiem();
+        $data=$khainiem->timkiem($tukhoa);
+        
+        return $data;
     }
 }

@@ -111,7 +111,7 @@
                             Tìm nghiệm
                         </h6>
                         <h3 class="text-bold mb-10">
-                            <a href="#"
+                            <a href="<?php echo route('phuongtrinhbacnhat'); ?>"
                                 class="stretched-link">Phương trình bậc 1</a>
                         </h3>
                     </div>

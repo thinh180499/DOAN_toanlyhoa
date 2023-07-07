@@ -15,6 +15,15 @@
                         <li>m: khối lượng chất (gam)</li>
                         <li>M: khối lượng Mol (gam/mol)</li>
                     </ul> --}}
+                    @if (!empty($list_hinh))
+                        @foreach ($list_hinh as $hinh)
+                            @if ($chitietcongthuc->id == $hinh->congthuc_id)
+                            <div>
+                                <img src="{{ asset('images').'/'.$hinh->img}}">
+                            </div>
+                            @endif
+                        @endforeach
+                    @endif
                     @if (!empty($list_khainiem))
                         @foreach ($list_khainiem as $khainiem)
                             @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)

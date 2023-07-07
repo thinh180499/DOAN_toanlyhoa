@@ -48,7 +48,9 @@ Route::post('/thetich', [HomeController::class, 'doithetich']);
 Route::get('khoiluong', [HomeController::class, 'khoiluong'])->name('khoiluong');
 Route::post('/khoiluong', [HomeController::class, 'doikhoiluong']);
 Route::get('phuongtrinhbachai', [HomeController::class, 'phuongtrinhbachai'])->name('phuongtrinhbachai');
-    Route::post('phuongtrinhbachai', [HomeController::class, 'tinhphuongtrinhbachai']);
+Route::post('phuongtrinhbachai', [HomeController::class, 'tinhphuongtrinhbachai']);
+Route::get('phuongtrinhbacnhat', [HomeController::class, 'phuongtrinhbacnhat'])->name('phuongtrinhbacnhat');
+Route::post('phuongtrinhbacnhat', [HomeController::class, 'tinhphuongtrinhbacnhat']);
 
 
 Route::prefix('/admin')->name('admin.')->group(function () {
@@ -65,5 +67,4 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('donvicuakhainiem', DonvicuakhainiemController::class);
     Route::resource('congthuccuamon', CongthuccuamonController::class);
     Route::resource('hinhcuacongthuc', HinhcuacongthucController::class);
-
 });

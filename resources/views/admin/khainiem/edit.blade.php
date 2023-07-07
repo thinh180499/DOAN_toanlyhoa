@@ -41,6 +41,19 @@
                         >{{ old('dinhnghia') ?? $khainiem->dinhnghia }}</textarea>
                     </div>
                 </div>
+                <div class="form-group row justify-content-center">
+                    <div class="col-8 my-3">
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox2" type="checkbox" name="cotheam" <?php if ($khainiem->cotheam) {
+                                echo 'checked ';
+                            } ?>
+                            >
+                            <label for="checkbox2">
+                                Có thể là số âm
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">sửa</button>
                     <a href="{{ route('admin.khainiem.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
