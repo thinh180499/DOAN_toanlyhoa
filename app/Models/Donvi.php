@@ -21,6 +21,21 @@ class Donvi extends Model
         return DB::select('SELECT '.$table.'.id,tendonvi,kyhieu,loaidonvis.tenloaidonvi FROM '.$table.',loaidonvis WHERE loaidonvi_id=loaidonvis.id');
         
     }
+    public function danhsachdonvicuadodai(){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE loaidonvi_id=1');
+        
+    }
+    public function danhsachdonvicuathetich(){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE loaidonvi_id=2');
+        
+    }
+    public function danhsachdonvicuakhoiluong(){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE loaidonvi_id=3');
+        
+    }
 
     public function themdonvi($data){
         $table=$this->table;

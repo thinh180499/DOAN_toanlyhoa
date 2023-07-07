@@ -43,6 +43,13 @@ Route::post('/chitietcongthuc/{id}', [ChitietcongthucController::class, 'tinhcon
 Route::get('/admin', [KhainiemController::class, 'index'])->name('admin');
 Route::get('dodai', [HomeController::class, 'dodai'])->name('dodai');
 Route::post('/dodai', [HomeController::class, 'doidodai']);
+Route::get('thetich', [HomeController::class, 'thetich'])->name('thetich');
+Route::post('/thetich', [HomeController::class, 'doithetich']);
+Route::get('khoiluong', [HomeController::class, 'khoiluong'])->name('khoiluong');
+Route::post('/khoiluong', [HomeController::class, 'doikhoiluong']);
+Route::get('phuongtrinhbachai', [HomeController::class, 'phuongtrinhbachai'])->name('phuongtrinhbachai');
+    Route::post('phuongtrinhbachai', [HomeController::class, 'tinhphuongtrinhbachai']);
+
 
 Route::prefix('/admin')->name('admin.')->group(function () {
 

@@ -27,7 +27,7 @@ class Hinhcuacongthuc extends Model
      public function suahinhcuacongthuc($data,$id){
         $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET img=?,congthuc_id=?,updated_at=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET img=?,congthuc_id=?,updated_at=?  WHERE id=?',$data);
     }
     public function xoahinhcuacongthuc($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
