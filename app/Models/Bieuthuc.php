@@ -99,16 +99,18 @@ class Bieuthuc extends Model
     }
     public function thembieuthuc($data){
         $table=$this->table;
+        $data[]=date('Y-m-d H:i:s');
         // $count=DB::table($table)->count();
         // $setid="BT-".$count;
-        DB::insert('INSERT INTO bieuthucs(bieuthuc_id,loaipheptoan_id,vetruoc,vesau,motabieuthuc)value(?,?,?,?,?)',$data);
+        DB::insert('INSERT INTO bieuthucs(bieuthuc_id,loaipheptoan_id,vetruoc,vesau,motabieuthuc,created_at)value(?,?,?,?,?,?)',$data);
      }
      public function suabieuthuc($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
         //dd($data);
         
         
-        return DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=?,updated_at=? WHERE id=?',$data);
         
     }
     public function xoabieuthuc($id){

@@ -66,8 +66,8 @@ class Hangso extends Model
     }
     public function themhangso($data){
         $table=$this->table;
-        
-        DB::insert('INSERT INTO hangsos(hangso_id,hangso)value(?,?)',$data);
+        $data[]=date('Y-m-d H:i:s');
+        DB::insert('INSERT INTO hangsos(hangso_id,hangso,created_at)value(?,?,?)',$data);
      }
 
      public function chitiethangso($id){
@@ -76,8 +76,9 @@ class Hangso extends Model
      }
      
      public function suahangso($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET hangso=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET hangso=?,updated_at=? WHERE id=?',$data);
     }
     
     public function xoahangso($id){

@@ -19,8 +19,8 @@ class Loaidonvi extends Model
 
     public function themloaidonvi($data){
         $table=$this->table;
-
-        DB::insert('INSERT INTO loaidonvis(tenloaidonvi)value(?)',$data);
+        $data[]=date('Y-m-d H:i:s');
+        DB::insert('INSERT INTO loaidonvis(tenloaidonvi,created_at)value(?,?)',$data);
      }
 
      public function chitietloaidonvi($id){
@@ -29,8 +29,9 @@ class Loaidonvi extends Model
      }
 
      public function sualoaidonvi($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET tenloaidonvi=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET tenloaidonvi=?,updated_at=? WHERE id=?',$data);
     }
 
     public function xoaloaidonvi($id){

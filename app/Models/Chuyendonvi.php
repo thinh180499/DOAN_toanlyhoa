@@ -25,16 +25,17 @@ class Chuyendonvi extends Model
     }
     public function themchuyendonvi($data){
         $table=$this->table;
-        
-        DB::insert('INSERT INTO chuyendonvis(hesonhan,tudonvi,dendonvi)value(?,?,?)',$data);
+        $data[]=date('Y-m-d H:i:s');
+        DB::insert('INSERT INTO chuyendonvis(hesonhan,tudonvi,dendonvi,created_at)value(?,?,?,?)',$data);
      }
      public function chitietchuyendonvi($id){
+        $data[]=date('Y-m-d H:i:s');
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
      public function suachuyendonvi($data,$id){
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET hesonhan=?,tudonvi=?,dendonvi=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET hesonhan=?,tudonvi=?,dendonvi=?,updated_at=? WHERE id=?',$data);
     }
     public function xoachuyendonvi($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);

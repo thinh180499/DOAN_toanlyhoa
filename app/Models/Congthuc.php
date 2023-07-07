@@ -23,9 +23,10 @@ class Congthuc extends Model
 
     public function themcongthuc($data){
         $table=$this->table;
+        $data[]=date('Y-m-d H:i:s');
         // $count=DB::table($table)->count();
         // $setid="BT-".$count;
-        DB::insert('INSERT INTO congthucs(khainiem_id,bieuthuc_id,tencongthuc)value(?,?,?)',$data);
+        DB::insert('INSERT INTO congthucs(khainiem_id,bieuthuc_id,tencongthuc,created_at)value(?,?,?,?)',$data);
      }
 
      public function chitietcongthuc($id){
@@ -33,8 +34,9 @@ class Congthuc extends Model
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
     } 
     public function suacongthuc($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET khainiem_id=?,bieuthuc_id=?,tencongthuc=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET khainiem_id=?,bieuthuc_id=?,tencongthuc=?,updated_at=? WHERE id=?',$data);
     }
     public function xoacongthuc($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);

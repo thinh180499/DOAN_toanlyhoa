@@ -48,16 +48,17 @@ class Loaipheptoan extends Model
     }
     public function themloaipheptoan($data){
         $table=$this->table;
-        
-        DB::insert('INSERT INTO loaipheptoans(loaipheptoan_id,loaipheptoan)value(?,?)',$data);
+        $data[]=date('Y-m-d H:i:s');
+        DB::insert('INSERT INTO loaipheptoans(loaipheptoan_id,loaipheptoan,created_at)value(?,?,?)',$data);
      }
      public function chitietloaipheptoan($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
      public function sualoaipheptoan($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET loaipheptoan=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET loaipheptoan=?,updated_at=? WHERE id=?',$data);
     }
     public function xoaloaipheptoan($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);

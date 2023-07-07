@@ -16,17 +16,19 @@ class Donvicuakhainiem extends Model
         return DB::select('SELECT * FROM '.$table);
     }
     public function themdonvicuakhainiem($data){
+        $data[]=date('Y-m-d H:i:s');
         $table=$this->table;
 
-        DB::insert('INSERT INTO donvicuakhainiems(khainiem_id,donvi_id)value(?,?)',$data);
+        DB::insert('INSERT INTO donvicuakhainiems(khainiem_id,donvi_id,created_at)value(?,?,?)',$data);
      }
      public function chitietdonvicuakhainiem($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
      public function suadonvicuakhainiem($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET khainiem_id=?,donvi_id=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET khainiem_id=?,donvi_id=?,updated_at=? WHERE id=?',$data);
     }
     public function xoadonvicuakhainiem($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);

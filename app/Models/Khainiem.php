@@ -62,18 +62,20 @@ class Khainiem extends Model
     }
     public function themkhainiem($data){
         $table=$this->table;
+        $data[]=date('Y-m-d H:i:s');
         // $count=DB::table($table)->count();
         // $count++;
         // $setid="KN".$count;
-        DB::insert('INSERT INTO khainiems(khainiem_id,tenkhainiem,dinhnghia,kyhieu)value(?,?,?,?)',$data);
+        DB::insert('INSERT INTO khainiems(khainiem_id,tenkhainiem,dinhnghia,kyhieu,created_at)value(?,?,?,?,?)',$data);
      }
      public function chitietkhainiem($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
      public function suakhainiem($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET tenkhainiem=?,dinhnghia=?,kyhieu=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET tenkhainiem=?,dinhnghia=?,kyhieu=?,updated_at=? WHERE id=?',$data);
     }
     public function xoakhainiem($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);

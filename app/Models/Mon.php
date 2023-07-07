@@ -19,8 +19,8 @@ class Mon extends Model
 
     public function themmon($data){
         $table=$this->table;
-
-        DB::insert('INSERT INTO mons(tenmon)value(?)',$data);
+        $data[]=date('Y-m-d H:i:s');
+        DB::insert('INSERT INTO mons(tenmon,created_at)value(?,?)',$data);
      }
 
      public function chitietmon($id){
@@ -29,8 +29,9 @@ class Mon extends Model
      }
 
      public function suamon($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
-        return DB::update('UPDATE '.$this->table.' SET tenmon=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET tenmon=?,updated_at=? WHERE id=?',$data);
     }
 
     public function xoamon($id){
