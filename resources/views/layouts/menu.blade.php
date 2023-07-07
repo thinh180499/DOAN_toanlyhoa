@@ -19,7 +19,9 @@
                 @if (!empty($list_congthuccuamon))
                     @foreach ($list_congthuccuamon as $congthuccuamon)
                         @if ($mon->id==$congthuccuamon->mon_id)
-                            <li><a href="{{ route('chitietcongthuc',[$congthuccuamon->congthuc_id]) }}">{{ $congthuccuamon->tencongthuc }}</a></li>
+                            <li>
+                                <a href="{{ route('chitietcongthuc',[$congthuccuamon->congthuc_id]) }}">{{ $congthuccuamon->tencongthuc }}</a>
+                            </li>
                         @endif
                     @endforeach
                 @endif

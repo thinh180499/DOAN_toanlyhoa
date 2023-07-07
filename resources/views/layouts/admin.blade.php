@@ -89,7 +89,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest 
+                        @endguest
 
 
             </ul>
@@ -139,8 +139,8 @@
                     {{-- Chức năng --}}
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-light-bulb"></i>
-                            <span> Chức năng </span>
+                            <i class="mdi mdi-math-integral"></i>
+                            <span> Công thức </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
@@ -151,59 +151,57 @@
                                 <a href="<?php echo route('admin.hangso.index'); ?>">Hằng số</a>
                             </li>
                             <li>
+                                <a href="<?php echo route('admin.loaipheptoan.index'); ?>">Loại phép toán</a>
+                            </li>
+                            <li>
                                 <a href="<?php echo route('admin.bieuthuc.index'); ?>">Biểu thức</a>
                             </li>
                             <li>
                                 <a href="<?php echo route('admin.congthuc.index'); ?>">Công thức</a>
                             </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class=" mdi mdi-arrow-left-right"></i>
+                            <span> Đơn vị </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a href="<?php echo route('admin.donvi.index'); ?>">Đơn vị</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo route('admin.loaipheptoan.index'); ?>">Loại phép toán</a>
                             </li>
                             <li>
                                 <a href="<?php echo route('admin.loaidonvi.index'); ?>">Loại đơn vị</a>
                             </li>
                             <li>
-                                <a href="<?php echo route('admin.mon.index'); ?>">Môn</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo route('admin.chuyendonvi.index'); ?>">chuyển đổi đơn vị</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo route('admin.donvicuakhainiem.index'); ?>">đơn vị của khái niệm</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo route('admin.congthuccuamon.index'); ?>">công thức của môn</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo route('admin.hinhcuacongthuc.index'); ?>">Khái niệm</a>
+                                <a href="<?php echo route('admin.chuyendonvi.index'); ?>">Chuyển đổi đơn vị</a>
                             </li>
                         </ul>
                     </li>
 
-                    {{-- <li>
+                    <li>
                         <a href="javascript: void(0);">
-                            <i class=" mdi mdi-math-integral"></i>
-                            <span> Toán </span>
+                            <i class=" mdi mdi-settings-outline"></i>
+                            <span> Khác </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="<?php echo route('toan.luythuamunguyenduong'); ?>">lũy thừa với mũ nguyên dương n</a></li>
+                            <li>
+                                <a href="<?php echo route('admin.mon.index'); ?>">Môn</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo route('admin.congthuccuamon.index'); ?>">Công thức của môn</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo route('admin.hinhcuacongthuc.index'); ?>">Hình của công thức</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo route('admin.donvicuakhainiem.index'); ?>">Đơn vị của khái niệm</a>
+                            </li>
                         </ul>
-                    </li> --}}
-
-                    {{-- <li>
-                        <a href="javascript: void(0);">
-                            <i class=" mdi mdi-flask-outline"></i>
-                            <span> Hóa học </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="<?php echo route('hoa.moltheokhoiluong'); ?>">tính số mol theo khối lượng</a></li>
-                        </ul>
-                    </li> --}}
+                    </li>
 
                 </ul>
 
