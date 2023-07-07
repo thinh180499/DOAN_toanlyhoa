@@ -55,5 +55,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('chuyendonvi', ChuyendonviController::class);
     Route::resource('donvicuakhainiem', DonvicuakhainiemController::class);
     Route::resource('congthuccuamon', CongthuccuamonController::class);
+    Route::resource('hinhcuacongthuc', HinhcuacongthucController::class);
 
 });

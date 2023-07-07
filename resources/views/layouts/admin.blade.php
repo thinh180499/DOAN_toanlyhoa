@@ -177,6 +177,9 @@
                             <li>
                                 <a href="<?php echo route('admin.congthuccuamon.index'); ?>">công thức của môn</a>
                             </li>
+                            <li>
+                                <a href="<?php echo route('admin.hinhcuacongthuc.index'); ?>">Khái niệm</a>
+                            </li>
                         </ul>
                     </li>
 
