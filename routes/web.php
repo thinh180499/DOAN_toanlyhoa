@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\DonvicuakhainiemController;
 use App\Http\Controllers\Admin\CongthuccuamonController;
 use App\Http\Controllers\ChitietcongthucController;
 
+use App\Http\Controllers\Admin\HinhcuacongthucController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
