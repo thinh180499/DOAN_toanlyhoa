@@ -8,7 +8,7 @@
                 <div class="container">
                     <form action="{{ route('thetich') }}" method="post" id="input-form">
                         @csrf
-                        <h2 class="mb-5">Chuyển đổi đơn vị độ dài</h2>
+                        <h2 class="mb-5">Chuyển đổi đơn vị thế tích</h2>
 
                         {{-- Phần đơn vị gốc --}}
                         <div class="row mb-4 d-flex flex-wrap justify-content-center">
