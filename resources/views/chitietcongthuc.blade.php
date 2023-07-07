@@ -1,11 +1,13 @@
 @extends('layouts.client')
 
-@section('title', '{{ $chitietcongthuc->tencongthuc }}')
-
+{{-- @section('title', '{{ $chitietcongthuc->tencongthuc }}') --}}
 @section('content')
     <div class="row mt-4">
+        <h2 class="mb-4">{{ $chitietcongthuc->tencongthuc }}</h2>
+
         <div class="col-lg-5 congthuc">
             <div class="card-style cardform h-100">
+
                 <div class="mt-1 mb-80">
                     {{-- <h3 class="mb-4">Trong đó</h3>
                     <ul>
@@ -14,18 +16,31 @@
                         <li>M: khối lượng Mol (gam/mol)</li>
                     </ul> --}}
                     @if (!empty($list_khainiem))
-                            @foreach ($list_khainiem as $khainiem)
-                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
-                                    {{ $khainiem->kyhieu." = " }}
-                                @endif
-                            @endforeach
-                        @endif
+                        @foreach ($list_khainiem as $khainiem)
+                            @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                {{ $khainiem->kyhieu . ' = ' }}
+                            @endif
+                        @endforeach
+                    @endif
                     @if (!empty($list_bieuthuc))
                         @foreach ($list_bieuthuc as $key)
                             @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
-                               
-                                {{ $key->motabieuthuc }}
+                                {{ $key->motabieuthuc }}<br>
                             @endif
+                        @endforeach
+                    @endif
+
+                    @if (!empty($list_khainiem))
+                        @foreach ($list_khainiem as $khainiem)
+                            @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                {{ $khainiem->tenkhainiem . ' (' . $khainiem->kyhieu . ') :' . $khainiem->dinhnghia }}<br>
+                            @endif
+                        @endforeach
+                    @endif
+
+                    @if (!empty($mangkhainiem))
+                        @foreach ($mangkhainiem as $key)
+                            {{ $key->tenkhainiem . ' (' . $key->kyhieu . ') :' . $key->dinhnghia }}<br>
                         @endforeach
                     @endif
                 </div>
@@ -33,8 +48,40 @@
         </div>
         <div class="col-lg-7 tinhtoan">
             <div class="card-style cardform h-100">
-                <h2 class="mb-4">{{ $chitietcongthuc->tencongthuc }}</h2>
+                <form action="{{ route('chitietcongthuc', [$chitietcongthuc->id]) }}" method="post">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                    <div class="container mb-4">
+                        <div class="row d-flex flex-column">
 
+                            @if (!empty($mangkhainiem))
+                                @foreach ($mangkhainiem as $key)
+                                    <div class="col">
+                                        <div class="input-style-1">
+                                            <label>{{ $key->tenkhainiem . ' (' . $key->kyhieu . ') ' }}</label>
+
+                                            <input type="number" name="{{ $key->khainiem_id }}"
+                                                placeholder="Nhập {{ $key->tenkhainiem }}" class="input" step="any"
+                                                value="{{ old($key->khainiem_id) }}" />
+
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
+                            <div class="col d-flex align-items-center">
+                                <button class="btn btn-primary me-5 py-0 px-4 calculate" type="submit">=</button>
+                                <span>
+                                    {!! isset($ketqua) ? $ketqua : false !!}
+                                    @if ($errors->any())
+                                        <p class="text-danger fs-6">* Kiểm tra dữ liệu nhập</p>
+                                    @endif
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
                 {{-- <form action="moltheokhoiluong" method="post">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -95,24 +142,6 @@
                     </div>
 
                 </form> --}}
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col lythuyet">
-            <div class="card-style cardform h-100">
-                <div class="mb-30">
-                    <h2 class="mb-30">Lý thuyết</h2>
-                    <p>
-                        @if (!empty($list_khainiem))
-                            @foreach ($list_khainiem as $khainiem)
-                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
-                                    {{ $khainiem->dinhnghia }}
-                                @endif
-                            @endforeach
-                        @endif
-                    </p>
-                </div>
             </div>
         </div>
     </div>

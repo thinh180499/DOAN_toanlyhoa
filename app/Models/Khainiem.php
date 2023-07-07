@@ -54,7 +54,7 @@ class Khainiem extends Model
         ->where('khainiem_id',"=", $id)
         ->get();
         if(!empty($danhsachid[0]->id)){
-        $khainiem=$danhsachid[0]->kyhieu;
+        $khainiem=$danhsachid[0];
         }else{
             $khainiem="";
         }

@@ -37,9 +37,10 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/chitietcongthuc/{id}', [ChitietcongthucController::class, 'chitietcongthuc'])->name('chitietcongthuc');
+Route::post('/chitietcongthuc/{id}', [ChitietcongthucController::class, 'tinhcongthuc']);
 Route::get('/admin', [KhainiemController::class, 'index'])->name('admin');
 Route::get('dodai', [HomeController::class, 'dodai'])->name('dodai');
- Route::post('/dodai', [HomeController::class, 'doidodai']);
+Route::post('/dodai', [HomeController::class, 'doidodai']);
 
 Route::prefix('/admin')->name('admin.')->group(function () {
 
