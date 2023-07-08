@@ -31,23 +31,40 @@
     .main-wrapper .header {
         position: sticky;
         top: 0;
-        z-index: 1;
+        z-index: 2;
         padding: 12px 0;
         border-radius: 0 0 10px 10px;
         box-shadow: 0px 10px 20px rgba(200, 208, 216, 0.3);
         background: #fff;
     }
 
+    .header .header-left .header-search form{
+        max-width: 330px;
+    }
+
+    .header .header-left .menu-toggle-btn .main-btn {
+        height: 50px;
+        width: 50px;
+        border-radius: 40px;
+    }
+
     .header .header-left .header-search form button {
-        left: 28px;
+        left: 22px;
         top: 5px;
     }
 
     .header .header-left .header-search form input {
-        background: rgb(241, 245, 249);
+        background: #fff;
         height: 50px;
+        width: 330px;
+        border: 2px solid #e9e9e9;
         border-radius: 40px;
-        padding-left: 100px
+        padding-left: 50px;
+    }
+
+    .header .header-left .header-search form input:focus{
+        border-color: #0067FF;
+        box-shadow: 0px 10px 20px rgba(200, 208, 216, 0.3);
     }
 
     .input {
@@ -147,14 +164,19 @@
               <div class="header-left d-flex align-items-center">
                 <div class="menu-toggle-btn mr-20">
                   <button id="menu-toggle" class="main-btn light-btn-outline rounded-md btn-hover">
-                    <i class="lni lni-chevron-left me-2"></i> Menu
+                    <i class="lni lni-chevron-left"></i>
                   </button>
                 </div>
-                <div class="header-search d-none d-md-flex">
+                <div class="header-search position-relative">
                   <form action="#">
-                    <input type="text" placeholder="Tìm kiếm" />
+                    <input class="header-search-input" type="text" placeholder="Tìm kiếm theo khái niệm" />
                     <button><i class="lni lni-search-alt"></i></button>
                   </form>
+                  <div class="result position-absolute">
+                    <div class="card-style cardform header-search-result">
+
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -274,6 +296,43 @@
                 }
             }
         });
+    });
+
+
+    // let status = query === "" ? "none" : "block" //If input value is empty, set to "none"
+    // document.querySelector(".header-search-result").style.display = status;
+
+    // $('.header-search-result').css("display", "none");
+    $('.header-search-input').keyup(function() {
+        var _text = $(this).val();
+
+        $.ajax({
+            url: '{{ route('search') }}?tukhoa=' + _text,
+            type: 'GET',
+            success: function(res){
+                var _html = '';
+
+                // @php
+                //     $ctkn = route('chitietkhainiem');
+                // @endphp
+
+                for(var pro of res){
+                    // var khainiemid= pro.id;
+                    var _url = '{{ url("chitietkhainiem"); }}';
+                    // alert(_url);
+                    _html += '<div class="card-content mb-4">';
+                    _html += '<h5><a href="' + _url + '/' + pro.id + '">' + pro.kyhieu + ' - ' + pro.tenkhainiem + '</a></h5>';
+                    _html += '<p class="fs-6">';
+                    _html += 'With supporting text below as a natural lead-in to';
+                    _html += 'additional content.';
+                    _html += '</p>';
+                    _html += '</div>';
+                }
+                $('.header-search-result').html(_html);
+                $('.header-search-result').css("display", "block");
+            }
+        });
+
     });
   </script>
   @yield('script')
