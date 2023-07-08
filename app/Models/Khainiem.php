@@ -91,4 +91,21 @@ class Khainiem extends Model
             ->get();
         }
     }
+    public function xetcongthuc($id){
+        $table=$this->table;
+        $danhsachid=DB::table('congthucs')
+        ->where('khainiem_id',"=", $id)
+        ->get();
+        return $danhsachid;
+       
+    }
+    public function xetdonvicuakhainiem($id){
+        $table=$this->table;
+        $danhsachid=DB::table('donvicuakhainiems')
+        ->where('khainiem_id',"=", $id)
+        ->get();
+        return $danhsachid;
+       
+    }
+
 }

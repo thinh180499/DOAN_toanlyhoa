@@ -121,7 +121,8 @@
         <h3>
             <a href="<?php echo route('home'); ?>">
             {{-- <img src="{{ asset('client/assets/images/logo/logo.svg') }}" alt="logo" /> --}}
-            Tool
+            {{-- @lang('lang.tool') --}}
+            TOOL
             </a>
         </h3>
       </div>
@@ -167,8 +168,8 @@
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="profile-info">
 
-                      <div class="info">
-                        <p>Tiếng Việt</p>
+                      {{-- <div class="info">
+                        <p>@lang('lang.language')</p>
                       </div>
                     </div>
                     <i class="lni lni-chevron-down"></i>
@@ -181,11 +182,11 @@
                     </li>
                     <li>
                       <a href="{{url('lang/en')}}">
-                        <i class="lni lni-alarm"></i> Tiếng Anh
+                        <i class="lni lni-alarm"></i>English
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> --}}
                 <!-- profile end -->
               </div>
             </div>

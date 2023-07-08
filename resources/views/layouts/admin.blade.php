@@ -172,9 +172,9 @@
                             <li>
                                 <a href="<?php echo route('admin.donvi.index'); ?>">Đơn vị</a>
                             </li>
-                            <li>
-                                <a href="<?php echo route('admin.loaidonvi.index'); ?>">Loại đơn vị</a>
-                            </li>
+                            {{-- <li>
+                                <a href="">Loại đơn vị</a>
+                            </li> --}}
                             <li>
                                 <a href="<?php echo route('admin.chuyendonvi.index'); ?>">Chuyển đổi đơn vị</a>
                             </li>
@@ -188,9 +188,9 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="<?php echo route('admin.mon.index'); ?>">Môn</a>
-                            </li>
+                            {{-- <li>
+                                <a href="">Môn</a>
+                            </li> --}}
                             <li>
                                 <a href="<?php echo route('admin.congthuccuamon.index'); ?>">Công thức của môn</a>
                             </li>

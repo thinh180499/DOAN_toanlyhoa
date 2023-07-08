@@ -9,6 +9,7 @@ use App\Models\Khainiem;
 
 use App\Models\Loaipheptoan;
 
+use App\Models\Congthuc;
 use App\Models\Hangso;
 
 class Bieuthuc extends Model
@@ -155,9 +156,16 @@ class Bieuthuc extends Model
     }
     public function xetvesau($id){
         $table=$this->table;
-        $table=$this->table;
         $danhsachid=DB::table($table)
         ->where('vesau',"=", $id)
+        ->get();
+        return $danhsachid;
+       
+    }
+    public function xetcongthuc($id){
+        $table=$this->table;
+        $danhsachid=DB::table('congthucs')
+        ->where('bieuthuc_id',"=", $id)
         ->get();
         return $danhsachid;
        

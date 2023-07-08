@@ -15,10 +15,10 @@ use App\Models\Hangso;
 class BieuthucController extends Controller
 {
     private $bieuthuc;
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
-        $this->bieuthuc=new Bieuthuc();
-       
+        $this->bieuthuc = new Bieuthuc();
     }
     /**
      * Display a listing of the resource.
@@ -27,16 +27,16 @@ class BieuthucController extends Controller
      */
     public function index()
     {
-        $khainiem=new Khainiem();
-        $hangso=new Hangso();
-        $loaipheptoan=new Loaipheptoan();
-        $list_khainiem=$khainiem->danhsachkhainiem();
-        $list_hangso=$hangso->danhsachhangso();
-        $list_loaipheptoan=$loaipheptoan->danhsachloaipheptoan();
-        $list_bieuthuc=$this->bieuthuc->danhsachbieuthuc();
+        $khainiem = new Khainiem();
+        $hangso = new Hangso();
+        $loaipheptoan = new Loaipheptoan();
+        $list_khainiem = $khainiem->danhsachkhainiem();
+        $list_hangso = $hangso->danhsachhangso();
+        $list_loaipheptoan = $loaipheptoan->danhsachloaipheptoan();
+        $list_bieuthuc = $this->bieuthuc->danhsachbieuthuc();
         //dd($list_bieuthuc);
-        $title="danh sách biểu thức";
-        return view('admin.bieuthuc.index',compact('list_khainiem','list_hangso','list_loaipheptoan','list_bieuthuc','title'));
+        $title = "danh sách biểu thức";
+        return view('admin.bieuthuc.index', compact('list_khainiem', 'list_hangso', 'list_loaipheptoan', 'list_bieuthuc', 'title'));
     }
 
     /**
@@ -46,15 +46,15 @@ class BieuthucController extends Controller
      */
     public function create()
     {
-        $khainiem=new Khainiem();
-        $hangso=new Hangso();
-        $loaipheptoan=new Loaipheptoan();
-        $list_khainiem=$khainiem->danhsachkhainiem();
-        $list_hangso=$hangso->danhsachhangso();
-        $list_loaipheptoan=$loaipheptoan->danhsachloaipheptoan();
-        $list_bieuthuc=$this->bieuthuc->danhsachbieuthuc();
-        $title="thêm biểu thức";
-        return view('admin.bieuthuc.create',compact('list_khainiem','list_hangso','list_loaipheptoan','list_bieuthuc','title'));
+        $khainiem = new Khainiem();
+        $hangso = new Hangso();
+        $loaipheptoan = new Loaipheptoan();
+        $list_khainiem = $khainiem->danhsachkhainiem();
+        $list_hangso = $hangso->danhsachhangso();
+        $list_loaipheptoan = $loaipheptoan->danhsachloaipheptoan();
+        $list_bieuthuc = $this->bieuthuc->danhsachbieuthuc();
+        $title = "thêm biểu thức";
+        return view('admin.bieuthuc.create', compact('list_khainiem', 'list_hangso', 'list_loaipheptoan', 'list_bieuthuc', 'title'));
     }
 
     /**
@@ -67,25 +67,25 @@ class BieuthucController extends Controller
     {
         $request->validate([
 
-            'loaipheptoan_id'=>'required',
-            'vetruoc'=>'required',
-            'vesau'=>'required',
-        ],[
-            'loaipheptoan_id.required'=>'tên khái niệm bắt buộc phải nhập',
-            'vetruoc.required'=>'định nghĩa bắt buộc phải nhập',
-            'vesau.required'=>'ký tự bắt buộc phải nhập',
-            
+            'loaipheptoan_id' => 'required',
+            'vetruoc' => 'required',
+            'vesau' => 'required',
+        ], [
+            'loaipheptoan_id.required' => 'tên khái niệm bắt buộc phải nhập',
+            'vetruoc.required' => 'định nghĩa bắt buộc phải nhập',
+            'vesau.required' => 'ký tự bắt buộc phải nhập',
+
         ]);
         //dd($request->vesau,);
-        $data=[
+        $data = [
             $this->bieuthuc->layidcuoidanhsach(),
             $request->loaipheptoan_id,
             $request->vetruoc,
             $request->vesau,
-            $this->bieuthuc->motavemotbieuthuc( $request->loaipheptoan_id,$request->vetruoc,$request->vesau)
+            $this->bieuthuc->motavemotbieuthuc($request->loaipheptoan_id, $request->vetruoc, $request->vesau)
         ];
         //dd($data);
-        
+
         $this->bieuthuc->thembieuthuc($data);
         return redirect()->route('admin.bieuthuc.index');
     }
@@ -109,46 +109,46 @@ class BieuthucController extends Controller
      */
     public function edit($id)
     {
-        $khainiem=new Khainiem();
-        $hangso=new Hangso();
-        $loaipheptoan=new Loaipheptoan();
-        $list_khainiem=$khainiem->danhsachkhainiem();
-        $list_hangso=$hangso->danhsachhangso();
-        $list_loaipheptoan=$loaipheptoan->danhsachloaipheptoan();
-        $list_bieuthuc=$this->bieuthuc->danhsachbieuthuc();
-        $bieuthuc=$this->bieuthuc->chitietbieuthuc($id);
-        $title="sửa khái niệm";
-        $bieuthuc=$bieuthuc[0];  
-        $vetruoc="";
-        $vesau="";
-        $tenkhainiem=$khainiem->xacdinhlakhainiem($bieuthuc->vetruoc);
-        if(!empty($tenkhainiem)){
-            $vetruoc=$tenkhainiem;
+        $khainiem = new Khainiem();
+        $hangso = new Hangso();
+        $loaipheptoan = new Loaipheptoan();
+        $list_khainiem = $khainiem->danhsachkhainiem();
+        $list_hangso = $hangso->danhsachhangso();
+        $list_loaipheptoan = $loaipheptoan->danhsachloaipheptoan();
+        $list_bieuthuc = $this->bieuthuc->danhsachbieuthuc();
+        $bieuthuc = $this->bieuthuc->chitietbieuthuc($id);
+        $title = "sửa khái niệm";
+        $bieuthuc = $bieuthuc[0];
+        $vetruoc = "";
+        $vesau = "";
+        $tenkhainiem = $khainiem->xacdinhlakhainiem($bieuthuc->vetruoc);
+        if (!empty($tenkhainiem)) {
+            $vetruoc = $tenkhainiem;
         }
-        $lahangso=$hangso->xacdinhlahangso($bieuthuc->vetruoc);
-        if(!empty($lahangso)){
-            $vetruoc=$lahangso;
+        $lahangso = $hangso->xacdinhlahangso($bieuthuc->vetruoc);
+        if (!empty($lahangso)) {
+            $vetruoc = $lahangso;
         }
-        $motabieuthuc=$this->bieuthuc->xacdinhlabieuthuc($bieuthuc->vetruoc);
-        if(!empty($motabieuthuc)){
-            $vetruoc=$motabieuthuc;
+        $motabieuthuc = $this->bieuthuc->xacdinhlabieuthuc($bieuthuc->vetruoc);
+        if (!empty($motabieuthuc)) {
+            $vetruoc = $motabieuthuc;
         }
 
 
-        $tenkhainiem=$khainiem->xacdinhlakhainiem($bieuthuc->vesau);
-        if(!empty($tenkhainiem)){
-            $vesau=$tenkhainiem;
+        $tenkhainiem = $khainiem->xacdinhlakhainiem($bieuthuc->vesau);
+        if (!empty($tenkhainiem)) {
+            $vesau = $tenkhainiem;
         }
-        $lahangso=$hangso->xacdinhlahangso($bieuthuc->vesau);
-        if(!empty($lahangso)){
-            $vesau=$lahangso;
+        $lahangso = $hangso->xacdinhlahangso($bieuthuc->vesau);
+        if (!empty($lahangso)) {
+            $vesau = $lahangso;
         }
-        $motabieuthuc=$this->bieuthuc->xacdinhlabieuthuc($bieuthuc->vesau);
-        if(!empty($motabieuthuc)){
-            $vesau=$motabieuthuc;
+        $motabieuthuc = $this->bieuthuc->xacdinhlabieuthuc($bieuthuc->vesau);
+        if (!empty($motabieuthuc)) {
+            $vesau = $motabieuthuc;
         }
-        
-        return view('admin.bieuthuc.edit',compact('list_khainiem','list_hangso','list_loaipheptoan','list_bieuthuc','bieuthuc','title','vetruoc','vesau'));
+
+        return view('admin.bieuthuc.edit', compact('list_khainiem', 'list_hangso', 'list_loaipheptoan', 'list_bieuthuc', 'bieuthuc', 'title', 'vetruoc', 'vesau'));
     }
 
     /**
@@ -162,39 +162,44 @@ class BieuthucController extends Controller
     {
         $request->validate([
 
-            'loaipheptoan_id'=>'required',
-            'vetruoc'=>'required',
-            'vesau'=>'required',
-        ],[
-            'loaipheptoan_id.required'=>'tên khái niệm bắt buộc phải nhập',
-            'vetruoc.required'=>'định nghĩa bắt buộc phải nhập',
-            'vesau.required'=>'ký tự bắt buộc phải nhập',
-            
+            'loaipheptoan_id' => 'required',
+            'vetruoc' => 'required',
+            'vesau' => 'required',
+        ], [
+            'loaipheptoan_id.required' => 'tên khái niệm bắt buộc phải nhập',
+            'vetruoc.required' => 'định nghĩa bắt buộc phải nhập',
+            'vesau.required' => 'ký tự bắt buộc phải nhập',
+
         ]);
         //dd($request->vetruoc,);
-        $data=[
+        $data = [
             $request->loaipheptoan_id,
             $request->vetruoc,
             $request->vesau,
-            $this->bieuthuc->motavemotbieuthuc( $request->loaipheptoan_id,$request->vetruoc,$request->vesau)
+            $this->bieuthuc->motavemotbieuthuc($request->loaipheptoan_id, $request->vetruoc, $request->vesau)
         ];
-        
-        $bieuthucupdata=$this->bieuthuc->chitietbieuthuc($id);
-       
-        $idbieuthucupdata=$bieuthucupdata[0]->bieuthuc_id;
-        
-        $vetruoc=$this->bieuthuc->xetvetruoc($idbieuthucupdata);
-        
-        $vesau=$this->bieuthuc->xetvesau($idbieuthucupdata);
-        if(!empty($vetruoc[0]->id)){
-            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'sửa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+
+        $bieuthucupdata = $this->bieuthuc->chitietbieuthuc($id);
+
+        $idbieuthucupdata = $bieuthucupdata[0]->bieuthuc_id;
+
+        $vetruoc = $this->bieuthuc->xetvetruoc($idbieuthucupdata);
+
+        $vesau = $this->bieuthuc->xetvesau($idbieuthucupdata);
+        if (!empty($vetruoc[0]->id)) {
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'sửa không thành công vì biểu thức này tồn tại trong biểu thức khác');
         }
-        
-        if(!empty($vesau[0]->id)){
-            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'sửa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+
+        if (!empty($vesau[0]->id)) {
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'sửa không thành công vì biểu thức này tồn tại trong biểu thức khác');
         }
-        $this->bieuthuc->suabieuthuc($data,$id);
-        return  redirect()->route('admin.bieuthuc.index')->with('msgthanhcong', 'sửa thành công');;
+        $kiemtra = $this->bieuthuc->xetcongthuc($idbieuthucupdata);
+        if (!empty($kiemtra[0]->id)) {
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'sửa không thành công vì biểu thức này tồn tại trong công thức');
+        }
+        //dd($bieuthucupdata);
+        $this->bieuthuc->suabieuthuc($data, $id);
+        return  redirect()->route('admin.bieuthuc.index')->with('msgthanhcong', 'sửa thành công');
     }
 
     /**
@@ -205,22 +210,25 @@ class BieuthucController extends Controller
      */
     public function destroy($id)
     {
-        $bieuthucupdata=$this->bieuthuc->chitietbieuthuc($id);
-       
-        $idbieuthucupdata=$bieuthucupdata[0]->bieuthuc_id;
-        
-        $vetruoc=$this->bieuthuc->xetvetruoc($idbieuthucupdata);
-        
-        $vesau=$this->bieuthuc->xetvesau($idbieuthucupdata);
-        if(!empty($vetruoc[0]->id)){
-            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'xóa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+        $bieuthucupdata = $this->bieuthuc->chitietbieuthuc($id);
+
+        $idbieuthucupdata = $bieuthucupdata[0]->bieuthuc_id;
+
+        $vetruoc = $this->bieuthuc->xetvetruoc($idbieuthucupdata);
+
+        $vesau = $this->bieuthuc->xetvesau($idbieuthucupdata);
+        if (!empty($vetruoc[0]->id)) {
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'xóa không thành công vì biểu thức này tồn tại trong biểu thức khác');
         }
-        
-        if(!empty($vesau[0]->id)){
-            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'xóa không thành công vì biểu thức này tồn tại trong biểu thức khác');;
+
+        if (!empty($vesau[0]->id)) {
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'xóa không thành công vì biểu thức này tồn tại trong biểu thức khác');
+        }
+        $kiemtra = $this->bieuthuc->xetcongthuc($idbieuthucupdata);
+        if (!empty($kiemtra[0]->id)) {
+            return  redirect()->route('admin.bieuthuc.index')->with('msgloi', 'xóa không thành công vì biểu thức này tồn tại trong công thức');
         }
         $this->bieuthuc->xoabieuthuc($id);
-        return  redirect()->route('admin.bieuthuc.index')->with('msgthanhcong', 'xóa thành công');;
-       
+        return  redirect()->route('admin.bieuthuc.index')->with('msgthanhcong', 'xóa thành công');
     }
 }
