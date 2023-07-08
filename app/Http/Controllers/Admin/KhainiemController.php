@@ -120,10 +120,16 @@ class KhainiemController extends Controller
             'dinhnghia.required' => '* định nghĩa bắt buộc phải nhập',
             'kyhieu.required' => '* ký hiệu bắt buộc phải nhập',
         ]);
+        if ($request->cotheam) {
+            $i = 1;
+        } else {
+            $i = 0;
+        }
         $data = [
             $request->tenkhainiem,
             $request->dinhnghia,
             $request->kyhieu,
+            $i,
         ];
         $this->khainiem->suakhainiem($data, $id);
 

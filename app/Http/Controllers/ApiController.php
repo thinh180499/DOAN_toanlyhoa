@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    public function Search($tukhoa){
+    public function Search(){
         $khainiem=new Khainiem();
-        $data=$khainiem->timkiem($tukhoa);
-        
+        $data=$khainiem->timkiem();
+        //dd($data);
         return $data;
     }
 }

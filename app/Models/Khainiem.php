@@ -81,11 +81,14 @@ class Khainiem extends Model
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
     
     }
-    public function timkiem($tukhoa){
-        $tukhoa='%'.$tukhoa.'%';
-        return DB::table($this->table)
-        ->where('tenkhainiem','like',$tukhoa)
-        ->orwhere('dinhnghia','like',$tukhoa)
-        ->get();
+    public function timkiem(){
+        if(request('tukhoa')){
+            $tukhoa=request('tukhoa');
+            $tukhoa="%".$tukhoa."%";
+            return DB::table($this->table)
+            ->where('tenkhainiem','like',$tukhoa)
+            ->orwhere('dinhnghia','like',$tukhoa)
+            ->get();
+        }
     }
 }

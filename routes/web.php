@@ -61,7 +61,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('loaidonvi', LoaidonviController::class);
     Route::resource('mon', MonController::class);
     Route::resource('hangso', HangsoController::class);
-    Route::resource('loaipheptoan', LoaipheptoanController::class);
+    // Route::resource('loaipheptoan', LoaipheptoanController::class);
     Route::resource('bieuthuc', BieuthucController::class);
     Route::resource('chuyendonvi', ChuyendonviController::class);
     Route::resource('donvicuakhainiem', DonvicuakhainiemController::class);

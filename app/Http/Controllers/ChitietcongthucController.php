@@ -124,11 +124,16 @@ class ChitietcongthucController extends Controller
         if (!empty($vetruoclakhainiem)) {
             if(!empty($mangkhainiem))
             {
+                
+                $khongtontai=1;
                 foreach($mangkhainiem as $key){
-                    if($key->khainiem_id !=$vetruoclakhainiem->khainiem_id){
-                        $mangkhainiem[] = $vetruoclakhainiem;
+                    if($key->khainiem_id == $vetruoclakhainiem->khainiem_id){
+                        $khongtontai=0;
+                        break;
                     }
-
+                }
+                if($khongtontai){
+                    $mangkhainiem[] = $vetruoclakhainiem;
                 }
             }else{
                 $mangkhainiem[] = $vetruoclakhainiem;
@@ -140,7 +145,7 @@ class ChitietcongthucController extends Controller
         //dd($vetruoclahangso);
         if (!empty($vetruoclahangso)) {
             $vetruoc = $vetruoclahangso->hangso;
-            //dd($vetruoc);
+           //dd($vetruoc);
         }
         $vetruoclabieuthuc = $bieuthuc->xacdinhlabieuthucid($chitietbieuthuc->vetruoc);
         //dd($vetruoclabieuthuc->bieuthuc_id);
@@ -154,30 +159,32 @@ class ChitietcongthucController extends Controller
         if (!empty($vesaulakhainiem)) {
             if(!empty($mangkhainiem))
             {
+                $khongtontai=1;
                 foreach($mangkhainiem as $key){
-                    if($vesaulakhainiem->khainiem_id !=$key->khainiem_id){
-                        $mangkhainiem[] = $vesaulakhainiem;
+                    if($vesaulakhainiem->khainiem_id == $key->khainiem_id){
+                        $khongtontai=0;
                         break;
                     }
                 }
+                if($khongtontai){
+                    $mangkhainiem[] = $vesaulakhainiem;
+                }
             }else{
                 $mangkhainiem[] = $vesaulakhainiem;
-                
+                //dd($mangkhainiem);
             }
             
         }
         $vesaulahangso = $hangso->xacdinhlahangsoid($chitietbieuthuc->vesau);
         if (!empty($vesaulahangso)) {
             $vesau = $vesaulahangso->hangso;
+            //dd($vesau);
         }
         $vesaulabieuthuc = $bieuthuc->xacdinhlabieuthucid($chitietbieuthuc->vesau);
         if (!empty($vesaulabieuthuc)) {
             $mangkhainiem = $this->phantukhainiemcuabieuthuc($vesaulabieuthuc->bieuthuc_id, $mangkhainiem);
         }
 
-
-
-        
         return $mangkhainiem;
     }
 
@@ -185,20 +192,22 @@ class ChitietcongthucController extends Controller
     {
         $khainiem = new Khainiem();
         $bieuthuc = new Bieuthuc();
-
+        $hinhcuacongthuc = new Hinhcuacongthuc();
         $congthuc = new Congthuc();
         $list_khainiem = $khainiem->danhsachkhainiem();
         $list_bieuthuc = $bieuthuc->danhsachbieuthuc();
         $chitietcongthuc = $congthuc->chitietcongthuc($id);
         $chitietcongthuc = $chitietcongthuc[0];
+        
+        $list_hinh = $hinhcuacongthuc->danhsachhinhcuacongthuc();
         //dd($chitietcongthuc);
         //dd($chitietcongthuc);
         $mangkhainiem = [];
         $mangkhainiem = $this->phantukhainiemcuabieuthuc($chitietcongthuc->bieuthuc_id, $mangkhainiem);
         $ketqua = 0;
         $ketqua = $this->ketquacongthuc($chitietcongthuc->bieuthuc_id, $ketqua, $request);
-        //dd($mangkhainiem);
-        return view('chitietcongthuc', compact('list_khainiem', 'list_bieuthuc', 'chitietcongthuc', 'mangkhainiem','ketqua'));
+        //dd($ketqua);
+        return view('chitietcongthuc', compact('list_hinh','list_khainiem', 'list_bieuthuc', 'chitietcongthuc', 'mangkhainiem','ketqua'));
     }
     public function ketquacongthuc($bieuthuc_id, $ketqua, $request)
     {
@@ -214,27 +223,27 @@ class ChitietcongthucController extends Controller
         if (!empty($vetruoclakhainiem)) {
             if($vetruoclakhainiem->cotheam){
                 $request->validate([
-                    $vetruoclakhainiem->khainiem_id => 'required|numeric|min:0',
+                    $vetruoclakhainiem->khainiem_id => 'required|numeric',
                 ]);
             }else{
                 $request->validate([
-                    $vetruoclakhainiem->khainiem_id => 'required|numeric',
+                    $vetruoclakhainiem->khainiem_id => 'required|numeric|min:0',
                 ]);
             }
             
-            $a = $request->input($vetruoclakhainiem->khainiem_id);
-            //dd($vetruoc);
+            (float)$a = $request->input($vetruoclakhainiem->khainiem_id);
+            //dd($a);
         }
         $vetruoclahangso = $hangso->xacdinhlahangsoid($chitietbieuthuc->vetruoc);
         //dd($vetruoclahangso);
         if (!empty($vetruoclahangso)) {
-            $a = $vetruoclahangso->hangso;
+            (float)$a = $vetruoclahangso->hangso;
             //dd($vetruoc);
         }
         $vetruoclabieuthuc = $bieuthuc->xacdinhlabieuthucid($chitietbieuthuc->vetruoc);
         //dd($vetruoclabieuthuc->bieuthuc_id);
         if (!empty($vetruoclabieuthuc)) {
-            $a = $this->ketquacongthuc($vetruoclabieuthuc->bieuthuc_id, $ketqua, $request);
+            (float) $a = $this->ketquacongthuc($vetruoclabieuthuc->bieuthuc_id, $ketqua, $request);
             //dd($vetruoc);
         }
 
@@ -243,49 +252,50 @@ class ChitietcongthucController extends Controller
         if (!empty($vesaulakhainiem)) {
             if($vesaulakhainiem->cotheam){
                 $request->validate([
-                    $vesaulakhainiem->khainiem_id => 'required|numeric|min:0',
+                    $vesaulakhainiem->khainiem_id => 'required|numeric',
                 ]);
             }else{
                 $request->validate([
-                    $vesaulakhainiem->khainiem_id => 'required|numeric',
+                    $vesaulakhainiem->khainiem_id => 'required|numeric|min:0',
                 ]);
             }
            
-            $b = $request->input($vesaulakhainiem->khainiem_id);
+            (float) $b = $request->input($vesaulakhainiem->khainiem_id);
+            // dd($b);
         }
         $vesaulahangso = $hangso->xacdinhlahangsoid($chitietbieuthuc->vesau);
         if (!empty($vesaulahangso)) {
-            $b = $vesaulahangso->hangso;
+            (float)$b = $vesaulahangso->hangso;
         }
         $vesaulabieuthuc = $bieuthuc->xacdinhlabieuthucid($chitietbieuthuc->vesau);
         if (!empty($vesaulabieuthuc)) {
-            $b = $this->ketquacongthuc($vesaulabieuthuc->bieuthuc_id, $ketqua, $request);
+            (float)$b = $this->ketquacongthuc($vesaulabieuthuc->bieuthuc_id, $ketqua, $request);
         }
+
+        
         if ($chitietbieuthuc->loaipheptoan_id == "LPT1") {
-            $ketqua = $a + $b;
+            (float)$ketqua = $a + $b;
         }
         if ($chitietbieuthuc->loaipheptoan_id == "LPT2") {
-            $ketqua = $a - $b;
+            (float)$ketqua = $a - $b;
         }
         if ($chitietbieuthuc->loaipheptoan_id == "LPT3") {
-            $ketqua = $a * $b;
+            (float) $ketqua = $a * $b;
         }
         if ($chitietbieuthuc->loaipheptoan_id == "LPT4") {
             if($b==0){
                 $ketqua="không tính được";
             }else{
-                $ketqua = $a / $b;
+                (float)$ketqua = $a / $b;
             }
-            
         }
         if ($chitietbieuthuc->loaipheptoan_id == "LPT5") {
-            $ketqua = pow($a, $b);
+            (float)$ketqua = pow($a, $b);
         }
-        if ($chitietbieuthuc->loaipheptoan_id == "LPT6") {
-            $ketqua = pow($a, 1 / $b);
+        if ($chitietbieuthuc->loaipheptoan_id == "LPT7") {
+            (float)$ketqua = pow($a, 1 / $b);
+            
         }
-
-        //dd($ketqua);
         return $ketqua;
     }
 }
