@@ -150,9 +150,9 @@
                             <li>
                                 <a href="<?php echo route('admin.hangso.index'); ?>">Hằng số</a>
                             </li>
-                            <li>
-                                <a href="<?php echo route('admin.loaipheptoan.index'); ?>">Loại phép toán</a>
-                            </li>
+                            {{-- <li>
+                                <a href="">Loại phép toán</a>
+                            </li> --}}
                             <li>
                                 <a href="<?php echo route('admin.bieuthuc.index'); ?>">Biểu thức</a>
                             </li>
