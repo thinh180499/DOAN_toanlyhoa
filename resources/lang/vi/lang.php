@@ -1,9 +1,8 @@
 <?php
 
 return[
-    'physics'=>'Vật Lý',
-    'chemistry'=>'Hóa Học',
-    'maths'=>'Toán Học',
+    'language'=>'Ngôn ngữ',
+    'tool'=>'Công cụ',
 ]
 
 ?>

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ChuyendonviController;
 use App\Http\Controllers\Admin\DonvicuakhainiemController;
 use App\Http\Controllers\Admin\CongthuccuamonController;
 use App\Http\Controllers\ChitietcongthucController;
+use App\Http\Controllers\ChitietkhainiemController;
 
 use App\Http\Controllers\Admin\HinhcuacongthucController;
 
@@ -59,8 +60,8 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('congthuc', CongthucController::class);
     Route::resource('donvi', DonviController::class);
     Route::resource('khainiem', KhainiemController::class);
-    Route::resource('loaidonvi', LoaidonviController::class);
-    Route::resource('mon', MonController::class);
+    //Route::resource('loaidonvi', LoaidonviController::class);
+    //Route::resource('mon', MonController::class);
     Route::resource('hangso', HangsoController::class);
     // Route::resource('loaipheptoan', LoaipheptoanController::class);
     Route::resource('bieuthuc', BieuthucController::class);
@@ -68,4 +69,12 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('donvicuakhainiem', DonvicuakhainiemController::class);
     Route::resource('congthuccuamon', CongthuccuamonController::class);
     Route::resource('hinhcuacongthuc', HinhcuacongthucController::class);
+});
+
+Route::get('lang/{locale}',function($locale){
+    if(!in_array($locale,['en','vi'])){
+        abort(404);
+    }
+    session()->put('locale',$locale);
+    return redirect()->back();
 });

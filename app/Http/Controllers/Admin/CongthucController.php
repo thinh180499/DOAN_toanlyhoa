@@ -135,9 +135,24 @@ class CongthucController extends Controller
             $request->bieuthuc,
             $request->tencongthuc,
         ];
+        $congthucupdata = $this->congthuc->chitietcongthuc($id);
+        
+        $idcongthucupdata = $congthucupdata[0];
+        
+        
+        $kiemtra = $this->congthuc->xethinhcuacongthuc($idcongthucupdata->id);
+        if (!empty($kiemtra[0]->id)) {
+            return  redirect()->route('admin.congthuc.index')->with('msgloi', 'sửa không thành công vì công thức này tồn tại trong hình của công thức');
+        }
+        $kiemtra = $this->congthuc->xetcongthuccuamon($idcongthucupdata->id);
+        
+        if (!empty($kiemtra[0]->id)) {
+            return  redirect()->route('admin.congthuc.index')->with('msgloi', 'sửa không thành công vì công thức này tồn tại trong công thức của môn');
+        }
+        $this->congthuc->suacongthuc($data,$id);
+        return  redirect()->route('admin.congthuc.index')->with('msgthanhcong', 'sửa thành công');
         $this->congthuc->suacongthuc($data,$id);
 
-        return back()->with('msr','sửa thành công');
     }
 
     /**
@@ -148,9 +163,22 @@ class CongthucController extends Controller
      */
     public function destroy($id)
     {
+        $congthucupdata = $this->congthuc->chitietcongthuc($id);
+        
+        $idcongthucupdata = $congthucupdata[0];
+        
+        
+        $kiemtra = $this->congthuc->xethinhcuacongthuc($idcongthucupdata->id);
+        if (!empty($kiemtra[0]->id)) {
+            return  redirect()->route('admin.congthuc.index')->with('msgloi', 'xóa không thành công vì công thức này tồn tại trong hình của công thức');
+        }
+        $kiemtra = $this->congthuc->xetcongthuccuamon($idcongthucupdata->id);
+        
+        if (!empty($kiemtra[0]->id)) {
+            return  redirect()->route('admin.congthuc.index')->with('msgloi', 'xóa không thành công vì công thức này tồn tại trong công thức của môn');
+        }
         $this->congthuc->xoacongthuc($id);
-        $title="danh sách khái niệm";  
-        return redirect()->route('admin.congthuc.index',compact('title'));
+        return  redirect()->route('admin.congthuc.index')->with('msgthanhcong', 'xóa thành công');
     }
     
 }

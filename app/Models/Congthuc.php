@@ -42,5 +42,22 @@ class Congthuc extends Model
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
     
     }
+    public function xethinhcuacongthuc($id){
+        $table=$this->table;
+        $danhsachid=DB::table('hinhcuacongthucs')
+        ->where('congthuc_id',"=", $id)
+        ->get();
+        //dd($danhsachid);
+        return $danhsachid;
+       
+    }
+    public function xetcongthuccuamon($id){
+        $table=$this->table;
+        $danhsachid=DB::table('congthuccuamons')
+        ->where('congthuc_id',"=", $id)
+        ->get();
+        return $danhsachid;
+       
+    }
 
 }

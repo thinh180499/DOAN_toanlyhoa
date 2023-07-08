@@ -62,9 +62,18 @@
         padding-left: 50px;
     }
 
-    .header .header-left .header-search form input:focus{
+    .header .header-left .header-search form input:focus {
         border-color: #0067FF;
         box-shadow: 0px 10px 20px rgba(200, 208, 216, 0.3);
+    }
+
+    .header-search-result {
+        display: none;
+        padding-bottom: 0;
+    }
+
+    .result{
+        width: 330px;
     }
 
     .input {
@@ -138,7 +147,8 @@
         <h3>
             <a href="<?php echo route('home'); ?>">
             {{-- <img src="{{ asset('client/assets/images/logo/logo.svg') }}" alt="logo" /> --}}
-            Tool
+            {{-- @lang('lang.tool') --}}
+            TOOL
             </a>
         </h3>
       </div>
@@ -189,8 +199,8 @@
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="profile-info">
 
-                      <div class="info">
-                        <p>Tiếng Việt</p>
+                      {{-- <div class="info">
+                        <p>@lang('lang.language')</p>
                       </div>
                     </div>
                     <i class="lni lni-chevron-down"></i>
@@ -203,11 +213,11 @@
                     </li>
                     <li>
                       <a href="{{url('lang/en')}}">
-                        <i class="lni lni-alarm"></i> Tiếng Anh
+                        <i class="lni lni-alarm"></i>English
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> --}}
                 <!-- profile end -->
               </div>
             </div>
@@ -299,10 +309,6 @@
     });
 
 
-    // let status = query === "" ? "none" : "block" //If input value is empty, set to "none"
-    // document.querySelector(".header-search-result").style.display = status;
-
-    // $('.header-search-result').css("display", "none");
     $('.header-search-input').keyup(function() {
         var _text = $(this).val();
 
@@ -312,28 +318,24 @@
             success: function(res){
                 var _html = '';
 
-                // @php
-                //     $ctkn = route('chitietkhainiem');
-                // @endphp
-
                 for(var pro of res){
-                    // var khainiemid= pro.id;
                     var _url = '{{ url("chitietkhainiem"); }}';
-                    // alert(_url);
+
                     _html += '<div class="card-content mb-4">';
                     _html += '<h5><a href="' + _url + '/' + pro.id + '">' + pro.kyhieu + ' - ' + pro.tenkhainiem + '</a></h5>';
-                    _html += '<p class="fs-6">';
-                    _html += 'With supporting text below as a natural lead-in to';
-                    _html += 'additional content.';
-                    _html += '</p>';
                     _html += '</div>';
                 }
-                $('.header-search-result').html(_html);
-                $('.header-search-result').css("display", "block");
+                if(res){
+                    $('.header-search-result').html(_html);
+                    $('.header-search-result').show();
+                }
+                else{
+                    $('.header-search-result').hide();
+                }
             }
         });
 
-    });
+    }).keyup();
   </script>
   @yield('script')
 </body>
