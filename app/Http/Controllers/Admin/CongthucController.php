@@ -151,7 +151,6 @@ class CongthucController extends Controller
         }
         $this->congthuc->suacongthuc($data,$id);
         return  redirect()->route('admin.congthuc.index')->with('msgthanhcong', 'sửa thành công');
-        $this->congthuc->suacongthuc($data,$id);
 
     }
 

@@ -56,4 +56,20 @@ class Donvi extends Model
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
     
     }
+    public function xettudonvi($id){
+        $table=$this->table;
+        $danhsachid=DB::table('chuyendonvis')
+        ->where('tudonvi',"=", $id)
+        ->get();
+        return $danhsachid;
+       
+    }
+    public function xetdendonvi($id){
+        $table=$this->table;
+        $danhsachid=DB::table('chuyendonvis')
+        ->where('dendonvi',"=", $id)
+        ->get();
+        return $danhsachid;
+       
+    }
 }
