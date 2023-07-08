@@ -151,6 +151,7 @@
                                 <a href="<?php echo route('admin.hangso.index'); ?>">Hằng số</a>
                             </li>
                             {{-- <li>
+                                <a href="#">Loại phép toán</a>
                                 <a href="">Loại phép toán</a>
                             </li> --}}
                             <li>
