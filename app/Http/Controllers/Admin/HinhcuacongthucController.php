@@ -129,6 +129,10 @@ class HinhcuacongthucController extends Controller
             $new_img,
             $request->congthuc,
         ];
+        
+        $img=$this->hinhcuacongthuc->chitiethinhcuacongthuc($id);
+        $img=$img[0]->img;
+        unlink('images/'.$img);
         $this->hinhcuacongthuc->suahinhcuacongthuc($data,$id);
         return  redirect()->route('admin.hinhcuacongthuc.index')->with('msgthanhcong', 'sửa thành công');;
     }
@@ -141,6 +145,9 @@ class HinhcuacongthucController extends Controller
      */
     public function destroy($id)
     {
+        $img=$this->hinhcuacongthuc->chitiethinhcuacongthuc($id);
+        $img=$img[0]->img;
+        unlink('images/'.$img);
         $this->hinhcuacongthuc->xoahinhcuacongthuc($id);
         return  redirect()->route('admin.hinhcuacongthuc.index')->with('msgthanhcong', 'xóa thành công');;
     }

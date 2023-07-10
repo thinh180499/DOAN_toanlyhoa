@@ -18,7 +18,7 @@
                 </h4>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="mon">Tên môn</label>
+                    <label class="col-md-2 col-form-label" for="mon"></label>
                     <div class="col-md-10">
                         <input type="file" name="img" placeholder="nhập tên hình"
                             value="{{ old('img') ?? $hinhcuacongthuc->img }}">
