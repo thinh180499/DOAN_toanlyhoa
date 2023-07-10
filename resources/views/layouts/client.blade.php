@@ -342,7 +342,7 @@
                     _html += '<h5><a href="' + _url + '/' + pro.id + '">' + pro.kyhieu + ' - ' + pro.tenkhainiem + '</a></h5>';
                     _html += '</div>';
                 }
-                if(res){
+                if(res && res.length != 0){
                     $('.header-search-result').html(_html);
                     $('.header-search-result').show();
                 }
