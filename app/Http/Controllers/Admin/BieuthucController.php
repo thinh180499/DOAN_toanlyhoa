@@ -82,7 +82,8 @@ class BieuthucController extends Controller
             $request->loaipheptoan_id,
             $request->vetruoc,
             $request->vesau,
-            $this->bieuthuc->motavemotbieuthuc($request->loaipheptoan_id, $request->vetruoc, $request->vesau)
+            $this->bieuthuc->motavemotbieuthuc($request->loaipheptoan_id, $request->vetruoc, $request->vesau),
+            $this->bieuthuc->motavemotbieuthuchtml($request->loaipheptoan_id, $request->vetruoc, $request->vesau),
         ];
         //dd($data);
 
@@ -176,7 +177,8 @@ class BieuthucController extends Controller
             $request->loaipheptoan_id,
             $request->vetruoc,
             $request->vesau,
-            $this->bieuthuc->motavemotbieuthuc($request->loaipheptoan_id, $request->vetruoc, $request->vesau)
+            $this->bieuthuc->motavemotbieuthuc($request->loaipheptoan_id, $request->vetruoc, $request->vesau),
+            $this->bieuthuc->motavemotbieuthuchtml($request->loaipheptoan_id, $request->vetruoc, $request->vesau),
         ];
 
         $bieuthucupdata = $this->bieuthuc->chitietbieuthuc($id);

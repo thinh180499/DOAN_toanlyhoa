@@ -86,8 +86,11 @@ class Khainiem extends Model
             $tukhoa=request('tukhoa');
             $tukhoa="%".$tukhoa."%";
             return DB::table($this->table)
+            ->join('congthucs', 'khainiems.khainiem_id', '=', 'congthucs.khainiem_id')
             ->where('tenkhainiem','like',$tukhoa)
             ->orwhere('dinhnghia','like',$tukhoa)
+            // ->orwhere('congthucs.tencongthuc','like',$tukhoa)
+            ->select('khainiems.*')
             ->get();
         }
     }
@@ -97,10 +100,8 @@ class Khainiem extends Model
         ->where('khainiem_id',"=", $id)
         ->get();
         return $danhsachid;
-       
     }
     public function xetdonvicuakhainiem($id){
-        $table=$this->table;
         $danhsachid=DB::table('donvicuakhainiems')
         ->where('khainiem_id',"=", $id)
         ->get();

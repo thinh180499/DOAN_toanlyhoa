@@ -29,11 +29,11 @@ class Chuyendonvi extends Model
         DB::insert('INSERT INTO chuyendonvis(hesonhan,tudonvi,dendonvi,created_at)value(?,?,?,?)',$data);
      }
      public function chitietchuyendonvi($id){
-        $data[]=date('Y-m-d H:i:s');
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
      public function suachuyendonvi($data,$id){
+        $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
         return DB::update('UPDATE '.$this->table.' SET hesonhan=?,tudonvi=?,dendonvi=?,updated_at=? WHERE id=?',$data);
     }

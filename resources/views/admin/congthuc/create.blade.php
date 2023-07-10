@@ -21,11 +21,12 @@
                     <div class="col-md-10">
                         <select name="tenkhainiem" class="form-control">
                             @if (!empty($list_khainiem))
-                                    @foreach ($list_khainiem as $khainiem)
-                                        <option value="{{ $khainiem->khainiem_id }}">{{ $khainiem->tenkhainiem." - ".$khainiem->kyhieu }}
-                                        </option>
-                                    @endforeach
-                                @endif
+                                @foreach ($list_khainiem as $khainiem)
+                                    <option value="{{ $khainiem->khainiem_id }}">
+                                        {{ $khainiem->tenkhainiem . ' - ' . $khainiem->kyhieu }}
+                                    </option>
+                                @endforeach
+                            @endif
                         </select>
                         @error('tenkhainiem')
                             <p class="text-danger">{{ $message }}</p>
@@ -36,7 +37,8 @@
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="tencongthuc">Tên công thúc</label>
                     <div class="col-md-10">
-                        <input name="tencongthuc" type="text" class="form-control" id="tencongthuc" placeholder="Nhập tên công thúc" value="{{ old('tencongthuc') }}">
+                        <input name="tencongthuc" type="text" class="form-control" id="tencongthuc"
+                            placeholder="Nhập tên công thúc" value="{{ old('tencongthuc') }}">
                         @error('tencongthuc')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -47,15 +49,27 @@
                     <div class="col-md-10">
                         <select name="bieuthuc" class="form-control">
                             @if (!empty($list_bieuthuc))
-                                    @foreach ($list_bieuthuc as $bieuthuc)
-                                        <option value="{{ $bieuthuc->bieuthuc_id }}">{{ $bieuthuc->motabieuthuc }}
-                                        </option>
-                                    @endforeach
-                                @endif
+                                @foreach ($list_bieuthuc as $bieuthuc)
+                                    <option value="{{ $bieuthuc->bieuthuc_id }}">{{ $bieuthuc->motabieuthuc }}
+                                    </option>
+                                @endforeach
+                            @endif
                         </select>
                         @error('bieuthuc')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Môn</label>
+                    <div class="col-md-10">
+                        <select name="mon" class="form-control">
+
+                            <option value="1">Vật lý</option>
+                            <option value="2">Toán học</option>
+                            <option value="3">Hóa học</option>
+                        </select>
+                       
                     </div>
                 </div>
                 <div class="form-group now d-flex justify-content-end">

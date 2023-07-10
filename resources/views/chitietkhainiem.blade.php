@@ -3,7 +3,7 @@
 {{-- @section('title', '{{ $chitietcongthuc->tencongthuc }}') --}}
 @section('content')
     <div class="row mt-4">
-        <h2 class="mb-4">{{ $chitietkhainiem->tenkhainiem }}</h2>
+        <h2 class="mb-4">{{ $chitietkhainiem->tenkhainiem."(".$chitietkhainiem->kyhieu.")" }}</h2>
 
         <div class="col-lg-5 congthuc">
             <div class="card-style cardform h-100">
@@ -25,23 +25,29 @@
         </div>
         <div class="col-lg-7 tinhtoan">
             <div class="card-style cardform h-100">
-                
-                    <div class="container mb-4">
-                        <div class="row d-flex flex-column">
 
-                            @if (!empty($list_congthuc))
-                                @foreach ($list_congthuc as $congthuc)
-                                    @if ($chitietkhainiem->khainiem_id == $congthuc->khainiem_id)
-                                    <a href="{{ route('chitietcongthuc',[$congthuc->id]) }}"
-                                        class="stretched-link">{{ $congthuc->tencongthuc }}</a>
+                <div class="container mb-4">
+                    <div class="row d-flex flex-column">
+
+                        @if (!empty($list_congthuc))
+                            @foreach ($list_congthuc as $congthuc)
+                                @if ($chitietkhainiem->khainiem_id == $congthuc->khainiem_id)
+                                    @if (!empty($list_bieuthuc))
+                                        @foreach ($list_bieuthuc as $bieuthuc)
+                                            @if ($congthuc->bieuthuc_id == $bieuthuc->bieuthuc_id)
+                                                <a href="{{ route('chitietcongthuc', [$congthuc->id]) }}"
+                                                    class="stretched-link">{{ $congthuc->tencongthuc."(".$bieuthuc->motabieuthuc.")" }}</a>
+                                            @endif
+                                        @endforeach
                                     @endif
-                                @endforeach
-                            @endif
+                                @endif
+                            @endforeach
+                        @endif
 
 
 
-                        </div>
                     </div>
+                </div>
 
                 {{-- <form action="moltheokhoiluong" method="post">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">

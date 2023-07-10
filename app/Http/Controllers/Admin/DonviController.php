@@ -89,7 +89,7 @@ class DonviController extends Controller
     public function edit($id)
     {
         $donvi=$this->donvi->chitietdonvi($id);
-        $title="sửa khái niệm";
+        $title="Sửa đơn vị";
         $donvi=$donvi[0];
         $loaidonvi=new Loaidonvi();
         $list_loaidonvi=$loaidonvi->danhsachloaidonvi();

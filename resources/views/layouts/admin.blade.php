@@ -192,9 +192,9 @@
                             {{-- <li>
                                 <a href="">Môn</a>
                             </li> --}}
-                            <li>
-                                <a href="<?php echo route('admin.congthuccuamon.index'); ?>">Công thức của môn</a>
-                            </li>
+                            {{-- <li>
+                                <a href="">Công thức của môn</a>
+                            </li> --}}
                             <li>
                                 <a href="<?php echo route('admin.hinhcuacongthuc.index'); ?>">Hình của công thức</a>
                             </li>

@@ -8,14 +8,14 @@ use App\Http\Controllers\Admin\CongthucController;
 use App\Http\Controllers\Admin\DonviController;
 use App\Http\Controllers\Admin\KhainiemController;
 use App\Http\Controllers\Admin\LoaidonviController;
-use App\Http\Controllers\Admin\MonController;
+//use App\Http\Controllers\Admin\MonController;
 use App\Http\Controllers\Admin\HangsoController;
 use App\Http\Controllers\Admin\LoaipheptoanController;
 use App\Http\Controllers\Admin\BieuthucController;
 
 use App\Http\Controllers\Admin\ChuyendonviController;
 use App\Http\Controllers\Admin\DonvicuakhainiemController;
-use App\Http\Controllers\Admin\CongthuccuamonController;
+//use App\Http\Controllers\Admin\CongthuccuamonController;
 use App\Http\Controllers\ChitietcongthucController;
 use App\Http\Controllers\ChitietkhainiemController;
 
@@ -67,7 +67,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('bieuthuc', BieuthucController::class);
     Route::resource('chuyendonvi', ChuyendonviController::class);
     Route::resource('donvicuakhainiem', DonvicuakhainiemController::class);
-    Route::resource('congthuccuamon', CongthuccuamonController::class);
+    //Route::resource('congthuccuamon', CongthuccuamonController::class);
     Route::resource('hinhcuacongthuc', HinhcuacongthucController::class);
 });
 

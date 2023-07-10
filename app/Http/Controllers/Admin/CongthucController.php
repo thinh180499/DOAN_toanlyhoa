@@ -71,10 +71,12 @@ class CongthucController extends Controller
             'bieuthuc.required'=>'biểu thức bắt buộc phải nhập',
             
         ]);
+        
         $data=[
             $request->tenkhainiem,
             $request->bieuthuc,
             $request->tencongthuc,
+            $request->mon,
         ];
         //dd($data);
         $this->congthuc->themcongthuc($data);
@@ -128,27 +130,15 @@ class CongthucController extends Controller
             'tenkhainiem.required'=>'khái niệm bắt buộc phải nhập',
             'tencongthuc.required'=>'tên công thức bắt buộc phải nhập',
             'bieuthuc.required'=>'biểu thức bắt buộc phải nhập',
-            
+           
         ]);
         $data=[
             $request->tenkhainiem,
             $request->bieuthuc,
             $request->tencongthuc,
+            $request->mon,
         ];
-        $congthucupdata = $this->congthuc->chitietcongthuc($id);
-        
-        $idcongthucupdata = $congthucupdata[0];
-        
-        
-        $kiemtra = $this->congthuc->xethinhcuacongthuc($idcongthucupdata->id);
-        if (!empty($kiemtra[0]->id)) {
-            return  redirect()->route('admin.congthuc.index')->with('msgloi', 'sửa không thành công vì công thức này tồn tại trong hình của công thức');
-        }
-        $kiemtra = $this->congthuc->xetcongthuccuamon($idcongthucupdata->id);
-        
-        if (!empty($kiemtra[0]->id)) {
-            return  redirect()->route('admin.congthuc.index')->with('msgloi', 'sửa không thành công vì công thức này tồn tại trong công thức của môn');
-        }
+        //dd($data);
         $this->congthuc->suacongthuc($data,$id);
         return  redirect()->route('admin.congthuc.index')->with('msgthanhcong', 'sửa thành công');
 
@@ -171,11 +161,7 @@ class CongthucController extends Controller
         if (!empty($kiemtra[0]->id)) {
             return  redirect()->route('admin.congthuc.index')->with('msgloi', 'xóa không thành công vì công thức này tồn tại trong hình của công thức');
         }
-        $kiemtra = $this->congthuc->xetcongthuccuamon($idcongthucupdata->id);
         
-        if (!empty($kiemtra[0]->id)) {
-            return  redirect()->route('admin.congthuc.index')->with('msgloi', 'xóa không thành công vì công thức này tồn tại trong công thức của môn');
-        }
         $this->congthuc->xoacongthuc($id);
         return  redirect()->route('admin.congthuc.index')->with('msgthanhcong', 'xóa thành công');
     }

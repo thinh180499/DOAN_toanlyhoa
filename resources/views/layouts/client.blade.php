@@ -135,6 +135,23 @@
         color: #0067FF;
     }
 
+    .phanso {
+        display: inline-block;
+    }
+
+    .phanso>span {
+        display: block;
+        padding-top: 2px;
+    }
+
+    .phanso span.vetruoc {
+        text-align: center;
+    }
+    
+    .phanso span.vesau {
+        border-top: thin solid black;
+        text-align: center;
+    }
   </style>
   @yield('css')
 </head>

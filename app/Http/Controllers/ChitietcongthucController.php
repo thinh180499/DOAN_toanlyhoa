@@ -17,15 +17,13 @@ use App\Models\Hinhcuacongthuc;
 class ChitietcongthucController extends Controller
 {
 
-    public function __construct()
-    {
-
-        $mon = new Mon();
-        $congthuccuamon = new Congthuccuamon();
-        $list_mon = $mon->danhsachmon();
-        $list_congthuccuamon = $congthuccuamon->danhsachcongthuccuamonkethop();
+    public function __construct(){
+        $congthuc =new Congthuc();
+       $list_congthuccuavatly=$congthuc->danhsachcongthucvatly();
+       $list_congthuccuatoan=$congthuc->danhsachcongthuctoan();
+       $list_congthuccuahoa=$congthuc->danhsachcongthuchoa();
         //dd($list_congthuccuamon);
-        view()->share(compact('list_mon', 'list_congthuccuamon'));
+        view()->share(compact('list_congthuccuavatly','list_congthuccuatoan','list_congthuccuahoa'));
     }
     public function chitietcongthuc($id)
     {

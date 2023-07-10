@@ -67,6 +67,23 @@
                         @enderror
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Môn</label>
+                    <div class="col-md-10">
+                        <select name="mon" class="form-control">
+                            <option <?php if ($congthuc->mon == 1) {
+                                echo 'selected ';
+                            } ?>value="1">Vật lý</option>
+                            <option <?php if ($congthuc->mon == 2) {
+                                echo 'selected ';
+                            } ?>value="2">Toán học</option>
+                            <option <?php if ($congthuc->mon == 3) {
+                                echo 'selected ';
+                            } ?>value="3">Hóa học</option>
+                        </select>
+                       
+                    </div>
+                </div>
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">Sửa</button>
                     <a href="{{ route('admin.congthuc.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>

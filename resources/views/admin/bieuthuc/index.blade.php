@@ -43,6 +43,7 @@
                             <th>Vế trước</th>
                             <th>Vế sau</th>
                             <th>Mô tả</th>
+                            <th>Mô tả HTMl</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -88,7 +89,7 @@
                                         @if (!empty($list_bieuthuc))
                                             @foreach ($list_bieuthuc as $key)
                                                 @if ($bieuthuc->vetruoc == $key->bieuthuc_id)
-                                                    {{ $key->motabieuthuc }}
+                                                    {!! $key->motabieuthuc !!}
                                                 @endif
                                             @endforeach
                                         @endif
@@ -112,14 +113,17 @@
                                         @if (!empty($list_bieuthuc))
                                             @foreach ($list_bieuthuc as $key)
                                                 @if ($bieuthuc->vesau == $key->bieuthuc_id)
-                                                    {{ $key->motabieuthuc }}
+                                                    {!! $key->motabieuthuc !!}
                                                 @endif
                                             @endforeach
                                         @endif
 
                                     </td>
                                     <td>
-                                        {{ $bieuthuc->motabieuthuc }}
+                                        {!! $bieuthuc->motabieuthuc !!}
+                                    </td>
+                                    <td>
+                                        {!! $bieuthuc->htmlbieuthuc !!}
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.bieuthuc.edit', ['bieuthuc' => $bieuthuc->id]) }}"
@@ -148,4 +152,26 @@
     </div>
 
 
+@endsection
+
+@section('css')
+    <style>
+        .phanso {
+            display: inline-block;
+        }
+
+        .phanso>span {
+            display: block;
+            padding-top: 2px;
+        }
+
+        .phanso span.vetruoc {
+            text-align: center;
+        }
+        
+        .phanso span.vesau {
+            border-top: thin solid black;
+            text-align: center;
+        }
+    </style>
 @endsection

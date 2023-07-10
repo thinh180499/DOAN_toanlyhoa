@@ -40,6 +40,7 @@
                             <th>Khái niệm</th>
                             <th>Biểu thức</th>
                             <th>Tên công thức</th>
+                            <th>Môn</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -64,24 +65,35 @@
                                         @if (!empty($list_bieuthuc))
                                             @foreach ($list_bieuthuc as $key)
                                                 @if ($congthuc->bieuthuc_id == $key->bieuthuc_id)
-                                                    {{ $key->motabieuthuc }}
+                                                    {!! $key->htmlbieuthuc !!}
                                                 @endif
                                             @endforeach
                                         @endif
-                                       
+
                                     </td>
                                     <td>
                                         {{ $congthuc->tencongthuc }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.congthuc.edit', ['congthuc' => $congthuc->id]) }}" 
+                                        @if ($congthuc->mon == 1)
+                                            Vật lý
+                                        @endif
+                                        @if ($congthuc->mon == 2)
+                                            Toán học
+                                        @endif
+                                        @if ($congthuc->mon == 3)
+                                            Hóa học
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.congthuc.edit', ['congthuc' => $congthuc->id]) }}"
                                             class="btn btn-info px-3 mr-2">Sửa</a>
-                                        <form class="d-inline-block" 
-                                            action="{{ route('admin.congthuc.destroy', ['congthuc' => $congthuc->id]) }}" 
+                                        <form class="d-inline-block"
+                                            action="{{ route('admin.congthuc.destroy', ['congthuc' => $congthuc->id]) }}"
                                             method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger px-3">Xóa</button>
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger px-3">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -98,4 +110,26 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('css')
+    <style>
+        .phanso {
+            display: inline-block;
+        }
+
+        .phanso>span {
+            display: block;
+            padding-top: 2px;
+        }
+
+        .phanso span.vetruoc {
+            text-align: center;
+        }
+        
+        .phanso span.vesau {
+            border-top: thin solid black;
+            text-align: center;
+        }
+    </style>
 @endsection

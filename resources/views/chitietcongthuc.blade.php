@@ -18,40 +18,53 @@
                     @if (!empty($list_hinh))
                         @foreach ($list_hinh as $hinh)
                             @if ($chitietcongthuc->id == $hinh->congthuc_id)
-                            <div>
-                                <img src="{{ asset('images').'/'.$hinh->img}}">
-                            </div>
-                            @endif
-                        @endforeach
-                    @endif
-                    @if (!empty($list_khainiem))
-                        @foreach ($list_khainiem as $khainiem)
-                            @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
-                                {{ $khainiem->kyhieu . ' = ' }}
-                            @endif
-                        @endforeach
-                    @endif
-                    @if (!empty($list_bieuthuc))
-                        @foreach ($list_bieuthuc as $key)
-                            @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
-                                {{ $key->motabieuthuc }}<br>
+                                <div class="row img">
+                                    <img src="{{ asset('images') . '/' . $hinh->img }}">
+                                </div>
                             @endif
                         @endforeach
                     @endif
 
-                    @if (!empty($list_khainiem))
-                        @foreach ($list_khainiem as $khainiem)
-                            @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
-                                {{ $khainiem->tenkhainiem . ' (' . $khainiem->kyhieu . ') :' . $khainiem->dinhnghia }}<br>
-                            @endif
-                        @endforeach
-                    @endif
+                    <div class="row congthuc align-items-center justify-content-center">
+                        @if (!empty($list_khainiem))
+                            @foreach ($list_khainiem as $khainiem)
+                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                    <div class="col khainiem text-end">
+                                        <span>{{ $khainiem->kyhieu . ' = ' }}</span>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
+                        @if (!empty($list_bieuthuc))
+                            @foreach ($list_bieuthuc as $key)
+                                @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
+                                <div class="col bieuthuc">
+                                    <span>{!! $key->htmlbieuthuc !!}</span>
+                                </div>
+                                @endif
+                            @endforeach
+                        @endif
+                    </div>
 
-                    @if (!empty($mangkhainiem))
-                        @foreach ($mangkhainiem as $key)
-                            {{ $key->tenkhainiem . ' (' . $key->kyhieu . ') :' . $key->dinhnghia }}<br>
-                        @endforeach
-                    @endif
+                    <div class="row">
+                        @if (!empty($list_khainiem))
+                            @foreach ($list_khainiem as $khainiem)
+                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                    <div>
+                                        <strong>{{  $khainiem->kyhieu  }}</strong>{{': ' . $khainiem->dinhnghia }}
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
+    
+                        @if (!empty($mangkhainiem))
+                            @foreach ($mangkhainiem as $key)
+                                <div>
+                                    <strong>{{  $key->kyhieu  }}</strong>{{': ' . $key->dinhnghia }}
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

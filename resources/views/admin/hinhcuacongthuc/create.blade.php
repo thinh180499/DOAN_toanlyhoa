@@ -45,7 +45,7 @@
 
                 <div class="form-group now d-flex justify-content-end">
                     <button type="submit" class="btn btn-success px-5">Thêm</button>
-                    <a href="{{ route('admin.congthuccuamon.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
+                    <a href="{{ route('admin.hinhcuacongthuc.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>
         </div>

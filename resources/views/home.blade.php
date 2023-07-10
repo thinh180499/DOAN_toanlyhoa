@@ -1,17 +1,15 @@
 @extends('layouts.client')
 
 @section('content')
-    @if (!empty($list_mon))
-        @foreach ($list_mon as $mon)
+    
             <div class="subject">
                 <div class="row p-4">
-                    <h2 class="text-start">{{ $mon->tenmon }}</h2>
+                    <h2 class="text-start">Vật Lý</h2>
                 </div>
 
                 <div class="row">
-                    @if (!empty($list_congthuccuamon))
-                        @foreach ($list_congthuccuamon as $congthuccuamon)
-                            @if ($mon->id == $congthuccuamon->mon_id)
+                    @if (!empty($list_congthuccuavatly))
+                        @foreach ($list_congthuccuavatly as $congthuccuavatly)
                                 <div class="col-xl-3 col-lg-4 col-sm-6 position-relative">
                                     <div class="icon-card mb-30">
                                         <div class="icon primary">
@@ -22,25 +20,89 @@
                                                 Công thức
                                             </h6>
                                             <h3 class="text-bold mb-10">
-                                                <a href="chitietcongthuc/{{ $congthuccuamon->congthuc_id }}"
-                                                    class="stretched-link">{{ $congthuccuamon->tencongthuc }}</a>
+                                                <a href="chitietcongthuc/{{ $congthuccuavatly->id }}"
+                                                    class="stretched-link">{{ $congthuccuavatly->tencongthuc }}</a>
                                             </h3>
                                         </div>
                                     </div>
                                     <!-- End Icon Cart -->
                                 </div>
                                 <!-- End Col -->
-                            @endif
+                            
                         @endforeach
                     @endif
                 </div>
 
             </div>
-        @endforeach
-    @endif
+        
+            <div class="subject">
+                <div class="row p-4">
+                    <h2 class="text-start">Toán Học</h2>
+                </div>
+
+                <div class="row">
+                    @if (!empty($list_congthuccuatoan))
+                        @foreach ($list_congthuccuatoan as $congthuccuatoan)
+                                <div class="col-xl-3 col-lg-4 col-sm-6 position-relative">
+                                    <div class="icon-card mb-30">
+                                        <div class="icon primary">
+                                            <iconify-icon icon="mdi:weight"></iconify-icon>
+                                        </div>
+                                        <div class="content">
+                                            <h6 class="mb-10">
+                                                Công thức
+                                            </h6>
+                                            <h3 class="text-bold mb-10">
+                                                <a href="chitietcongthuc/{{ $congthuccuatoan->id }}"
+                                                    class="stretched-link">{{ $congthuccuatoan->tencongthuc }}</a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <!-- End Icon Cart -->
+                                </div>
+                                <!-- End Col -->
+                            
+                        @endforeach
+                    @endif
+                </div>
+
+            </div>
+            <div class="subject">
+                <div class="row p-4">
+                    <h2 class="text-start">Hóa Học</h2>
+                </div>
+
+                <div class="row">
+                    @if (!empty($list_congthuccuahoa))
+                        @foreach ($list_congthuccuahoa as $congthuccuahoa)
+                                <div class="col-xl-3 col-lg-4 col-sm-6 position-relative">
+                                    <div class="icon-card mb-30">
+                                        <div class="icon primary">
+                                            <iconify-icon icon="mdi:weight"></iconify-icon>
+                                        </div>
+                                        <div class="content">
+                                            <h6 class="mb-10">
+                                                Công thức
+                                            </h6>
+                                            <h3 class="text-bold mb-10">
+                                                <a href="chitietcongthuc/{{ $congthuccuahoa->id }}"
+                                                    class="stretched-link">{{ $congthuccuahoa->tencongthuc }}</a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <!-- End Icon Cart -->
+                                </div>
+                                <!-- End Col -->
+                            
+                        @endforeach
+                    @endif
+                </div>
+
+            </div>
+    </div>
     <div class="khac">
         <div class="row p-4">
-            <h2 class="text-start">Khác</h2>
+            <h2 class="text-start">Chuyển Đơn Vị</h2>
         </div>
 
         <div class="row">
@@ -100,6 +162,18 @@
                 <!-- End Icon Cart -->
             </div>
             <!-- End Col -->
+
+           
+        </div>
+
+    </div>
+    <div class="khac">
+        <div class="row p-4">
+            <h2 class="text-start">Khác</h2>
+        </div>
+
+        <div class="row">
+            
 
             <div class="col-xl-3 col-lg-4 col-sm-6 position-relative">
                 <div class="icon-card mb-30">

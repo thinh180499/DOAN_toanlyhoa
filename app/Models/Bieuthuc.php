@@ -16,7 +16,7 @@ class Bieuthuc extends Model
 {
     use HasFactory;
     protected $table='bieuthucs';
-    protected $fillable=['bieuthuc_id','loaipheptoan_id','vetruoc','vesau','bieuthuc'];
+    protected $fillable=['bieuthuc_id','loaipheptoan_id','vetruoc','vesau','motabieuthuc','htmlbieuthuc'];
     public function danhsachbieuthuc(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
@@ -54,6 +54,21 @@ class Bieuthuc extends Model
         }
         return $khainiem;
     }
+    public function xacdinhlabieuthuchtml($id){
+       
+        $table=$this->table;
+        
+        $danhsachid=DB::table($table)
+        ->where('bieuthuc_id',"=", $id)
+        ->get();
+        
+        if(!empty($danhsachid[0]->id)){
+            $khainiem="(".$danhsachid[0]->htmlbieuthuc.")";
+        }else{
+            $khainiem="";
+        }
+        return $khainiem;
+    }
     public function xacdinhlabieuthucid($id){
        
         $table=$this->table;
@@ -77,7 +92,6 @@ class Bieuthuc extends Model
         $hangso=new Hangso();
         $loaipheptoan=new Loaipheptoan();
 
-
         $mota=$mota.$khainiem->xacdinhlakhainiem($vetruoc_id);
         $mota=$mota.$hangso->xacdinhlahangso($vetruoc_id);
         $mota=$mota.$bieuthuc->xacdinhlabieuthuc($vetruoc_id);
@@ -86,6 +100,49 @@ class Bieuthuc extends Model
         $mota=$mota.$hangso->xacdinhlahangso($vesau_id);
         $mota=$mota.$bieuthuc->xacdinhlabieuthuc($vesau_id);
         // dd($mota);
+
+        return $mota;
+    }
+    public function motavemotbieuthuchtml($pheptoan_id,$vetruoc_id,$vesau_id){
+        
+        $mota="";
+        $motavetruoc="";
+        $motavesau="";
+        $bieuthuc=new Bieuthuc();
+        $khainiem=new Khainiem();
+        $hangso=new Hangso();
+       
+        $motavetruoc=$motavetruoc.$khainiem->xacdinhlakhainiem($vetruoc_id);
+        $motavetruoc=$motavetruoc.$hangso->xacdinhlahangso($vetruoc_id);
+        $motavetruoc=$motavetruoc.$bieuthuc->xacdinhlabieuthuchtml($vetruoc_id);
+        //dd($motavetruoc);
+
+        $motavesau=$motavesau.$khainiem->xacdinhlakhainiem($vesau_id);
+        $motavesau=$motavesau.$hangso->xacdinhlahangso($vesau_id);
+        $motavesau=$motavesau.$bieuthuc->xacdinhlabieuthuchtml($vesau_id);
+        if ($pheptoan_id == "LPT1") {
+            $mota= $motavetruoc." + ".$motavesau;
+        }
+        if ($pheptoan_id == "LPT2") {
+            $mota= $motavetruoc." - ".$motavesau;
+        }
+        if ($pheptoan_id == "LPT3") {
+            $mota= $motavetruoc." * ".$motavesau;
+        }
+        if ($pheptoan_id == "LPT4") {
+            
+            // $mota=$motavetruoc." <hr> ".$motavesau;
+            $mota='<div class="phanso">' . '<span class="vetruoc">' . $motavetruoc . '</span>' . '<span class="vesau">' . $motavesau . '</span> </div>';
+            
+        }
+        if ($pheptoan_id == "LPT5") {
+            $mota=$motavetruoc." <sup> ".$motavesau." </sup> ";
+        }
+        if ($pheptoan_id == "LPT7") {
+            $mota=" <sup> ".$motavesau." </sup>  &radic; ".$motavetruoc;
+            
+        }
+         //dd($mota);
 
         return $mota;
     }
@@ -103,7 +160,7 @@ class Bieuthuc extends Model
         $data[]=date('Y-m-d H:i:s');
         // $count=DB::table($table)->count();
         // $setid="BT-".$count;
-        DB::insert('INSERT INTO bieuthucs(bieuthuc_id,loaipheptoan_id,vetruoc,vesau,motabieuthuc,created_at)value(?,?,?,?,?,?)',$data);
+        DB::insert('INSERT INTO bieuthucs(bieuthuc_id,loaipheptoan_id,vetruoc,vesau,motabieuthuc,htmlbieuthuc,created_at)value(?,?,?,?,?,?,?)',$data);
      }
      public function suabieuthuc($data,$id){
         $data[]=date('Y-m-d H:i:s');
@@ -111,7 +168,7 @@ class Bieuthuc extends Model
         //dd($data);
         
         
-        return DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=?,updated_at=? WHERE id=?',$data);
+        return DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=?,htmlbieuthuc=?,updated_at=? WHERE id=?',$data);
         
     }
     public function xoabieuthuc($id){
