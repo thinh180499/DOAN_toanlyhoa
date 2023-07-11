@@ -25,25 +25,23 @@
                         @endforeach
                     @endif
 
-                    <div class="row congthuc align-items-center justify-content-center">
-                        @if (!empty($list_khainiem))
-                            @foreach ($list_khainiem as $khainiem)
-                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
-                                    <div class="col khainiem text-end">
-                                        <span>{{ $khainiem->kyhieu . ' = ' }}</span>
-                                    </div>
-                                @endif
-                            @endforeach
-                        @endif
-                        @if (!empty($list_bieuthuc))
-                            @foreach ($list_bieuthuc as $key)
-                                @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
-                                <div class="col bieuthuc">
-                                    <span>{!! $key->htmlbieuthuc !!}</span>
-                                </div>
-                                @endif
-                            @endforeach
-                        @endif
+                    <div class="row congthuc">
+                        <div class="col d-flex align-items-center justify-content-center">
+                            @if (!empty($list_khainiem))
+                                @foreach ($list_khainiem as $khainiem)
+                                    @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                        <span>{{ $khainiem->kyhieu . ' = ' }}</span>&nbsp;&nbsp;
+                                    @endif
+                                @endforeach
+                            @endif
+                            @if (!empty($list_bieuthuc))
+                                @foreach ($list_bieuthuc as $key)
+                                    @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
+                                        <span>{!! $key->htmlbieuthuc !!}</span>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
 
                     <div class="row">
@@ -51,16 +49,16 @@
                             @foreach ($list_khainiem as $khainiem)
                                 @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
                                     <div>
-                                        <strong>{{  $khainiem->kyhieu  }}</strong>{{': ' . $khainiem->dinhnghia }}
+                                        <strong>{{ $khainiem->kyhieu }}</strong>{{ ': ' . $khainiem->dinhnghia }}
                                     </div>
                                 @endif
                             @endforeach
                         @endif
-    
+
                         @if (!empty($mangkhainiem))
                             @foreach ($mangkhainiem as $key)
                                 <div>
-                                    <strong>{{  $key->kyhieu  }}</strong>{{': ' . $key->dinhnghia }}
+                                    <strong>{{ $key->kyhieu }}</strong>{{ ': ' . $key->dinhnghia }}
                                 </div>
                             @endforeach
                         @endif
@@ -122,12 +120,12 @@
                         </div>
                     </div>
 
-                    
-                    
-                    
-                        
-                       
-                    
+
+
+
+
+
+
                     <div class="container mb-4">
                         <div class="row d-flex flex-column">
                             <div class="col">

@@ -2,104 +2,131 @@
 
 
 @section('content')
-    <h4 class="mb-4">Sửa biểu thức</h4>
-    <div class="row mb-5">
-        <div class="col">
-            <label class="control-label mt-3 mt-lg-0">Vế trước</label>
-            <div class="vetruoc input-group">
-                <input type="text" id="inputvetruoc" value="{{ old('vetruoc') ?? $vetruoc }}" class="form-control"
-                    readonly>
-                <button class="xoainputvetruoc btn btn-danger">Xóa</button>
+    <form action="{{ route('admin.bieuthuc.update', ['bieuthuc' => $bieuthuc->id]) }}" method="post">
+        @method('PUT')
+        @csrf
+        <h4 class="mb-4">Sửa biểu thức</h4>
+        <div class="row mb-5">
+            <div class="col">
+                <label class="control-label mt-3 mt-lg-0">Vế trước</label>
+                <div class="vetruoc input-group">
+                    <select name="vetruoc" id="selectvetruoc" class="form-control select2-multiple" required>
+                        <option value="" selected disabled hidden>Chọn một đối tượng cho vế trước</option>
+                        <optgroup label="Đối tượng là khái niệm">
+                            @if (!empty($list_khainiem))
+                                @foreach ($list_khainiem as $khainiem)
+                                    <option <?php
+                                    if ($bieuthuc->vetruoc == $khainiem->khainiem_id) {
+                                        echo 'selected ';
+                                    }
+                                    ?> value="{{ $khainiem->khainiem_id }}">
+                                        {{ $khainiem->kyhieu . ' - ' . $khainiem->tenkhainiem }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </optgroup>
+                        <optgroup label="Đối tượng là hằng số">
+                            @if (!empty($list_hangso))
+                                @foreach ($list_hangso as $hangso)
+                                    <option <?php
+                                    if ($bieuthuc->vetruoc == $hangso->hangso_id) {
+                                        echo 'selected ';
+                                    }
+                                    ?> value="{{ $hangso->hangso_id }}">
+                                        {{ $hangso->hangso }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </optgroup>
+                        <optgroup label="Đối tượng là biểu thức">
+                            @if (!empty($list_bieuthuc))
+                                @foreach ($list_bieuthuc as $bieuthucfor)
+                                    <option <?php
+                                    if ($bieuthuc->vetruoc == $bieuthucfor->bieuthuc_id) {
+                                        echo 'selected ';
+                                    }
+                                    ?> value="{{ $bieuthucfor->bieuthuc_id }}">
+                                        {{ $bieuthucfor->motabieuthuc }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <label class="control-label mt-3 mt-lg-0">Phép toán</label>
+                <select name="loaipheptoan_id" id="selectloaipheptoan" class="form-control select2-multiple">
+                    @if (!empty($list_loaipheptoan))
+                        @foreach ($list_loaipheptoan as $loaipheptoan)
+                            <option <?php
+                            if ($loaipheptoan->loaipheptoan_id == $bieuthuc->loaipheptoan_id) {
+                                echo 'selected ';
+                            }
+                            ?> value="{{ $loaipheptoan->loaipheptoan_id }}">
+                                {{ $loaipheptoan->loaipheptoan }}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="col">
+                <label class="control-label mt-3 mt-lg-0">Vế sau</label>
+                <div class="vesau input-group">
+                    <select name="vesau" id="selectvesau" class="form-control select2-multiple" required>
+                        <option value="" selected disabled hidden>Chọn một đối tượng cho vế sau</option>
+                        <optgroup label="Đối tượng là khái niệm">
+                            @if (!empty($list_khainiem))
+                                @foreach ($list_khainiem as $khainiem)
+                                    <option <?php
+                                    if ($bieuthuc->vesau == $khainiem->khainiem_id) {
+                                        echo 'selected ';
+                                    }
+                                    ?> value="{{ $khainiem->khainiem_id }}">
+                                        {{ $khainiem->kyhieu . ' - ' . $khainiem->tenkhainiem }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </optgroup>
+                        <optgroup label="Đối tượng là hằng số">
+                            @if (!empty($list_hangso))
+                                @foreach ($list_hangso as $hangso)
+                                    <option <?php
+                                    if ($bieuthuc->vesau == $hangso->hangso_id) {
+                                        echo 'selected ';
+                                    }
+                                    ?> value="{{ $hangso->hangso_id }}">{{ $hangso->hangso }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </optgroup>
+                        <optgroup label="Đối tượng là biểu thức">
+                            @if (!empty($list_bieuthuc))
+                                @foreach ($list_bieuthuc as $bieuthucfor)
+                                    <option <?php
+                                    if ($bieuthuc->vesau == $bieuthucfor->bieuthuc_id) {
+                                        echo 'selected ';
+                                    }
+                                    ?> value="{{ $bieuthucfor->bieuthuc_id }}">
+                                        {{ $bieuthucfor->motabieuthuc }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </optgroup>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <label class="control-label mt-3 mt-lg-0">Phép toán</label>
-            <select name="loaipheptoan" id="loaipheptoan" class="form-control select2-multiple">
-                @if (!empty($list_loaipheptoan))
-                    @foreach ($list_loaipheptoan as $loaipheptoan)
-                        <option <?php if ($loaipheptoan->loaipheptoan_id == $bieuthuc->loaipheptoan_id) {
-                            echo 'selected ';
-                        } ?> value="{{ $loaipheptoan->loaipheptoan_id }}">
-                            {{ $loaipheptoan->loaipheptoan }}
-                        </option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-        <div class="col">
-            <label class="control-label mt-3 mt-lg-0">Vế sau</label>
-            <div class="vesau input-group">
-                <input type="text" id="inputvesau" value="{{ old('vesau') ?? $vesau }}" class="form-control"
-                    readonly>
-                <button class="xoainputvesau btn btn-danger">Xóa</button>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group now d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success px-5 ml-4">Thêm</button>
+                    <a href="{{ route('admin.bieuthuc.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="row mb-5">
-        <div class="doituong col form-group">
-            <label class="control-label mt-3 mt-lg-0">Khái niệm</label>
-            <select name="khainiem" class="form-control select2-multiple">
-                <option value="none" selected disabled hidden>Chọn một khái niệm</option>
-                @if (!empty($list_khainiem))
-                    @foreach ($list_khainiem as $khainiem)
-                        <option value="{{ $khainiem->khainiem_id }}">{{ $khainiem->kyhieu."-".$khainiem->tenkhainiem  }}
-                        </option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-
-        <div class="doituong col form-group">
-            <label class="control-label mt-3 mt-lg-0">Hằng số</label>
-            <select name="hangso" class="form-control select2-multiple">
-                <option value="none" selected disabled hidden>Chọn một hằng số</option>
-                @if (!empty($list_hangso))
-                    @foreach ($list_hangso as $hangso)
-                        <option value="{{ $hangso->hangso_id }}">{{ $hangso->hangso }}
-                        </option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-
-        <div class="doituong col">
-            {{-- Chỗ này thay bằng biểu thức --}}
-            <label class="control-label mt-3 mt-lg-0">Biểu thức</label>
-            <select name="" class="form-control select2-multiple">
-                <option value="none" selected disabled hidden>Chọn một biểu thức</option>
-                @if (!empty($list_bieuthuc))
-                    @foreach ($list_bieuthuc as $key)
-                        <option value="{{ $key->bieuthuc_id }}">{{ $key->motabieuthuc }}
-                        </option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <div class="form-group now d-flex justify-content-end">
-                <button class="btn btn-danger px-4" id="resetgiatri">Reset giá trị</button>
-
-                <form action="{{ route('admin.bieuthuc.update', ['bieuthuc' => $bieuthuc->id])}}" method="post">
-                    @method('PUT')
-                    @csrf
-                    {{-- <select name="loaipheptoan" id="loaipheptoansubmit" class="form-control">
-                        <option value="{{ $loaipheptoan->loaipheptoan_id }}">{{ $loaipheptoan->loaipheptoan }}
-                        </option>
-                    </select> --}}
-                    <input type="hidden" name="vetruoc" id="inputvetruocsubmit" value="{{ old('vetruoc') ?? $bieuthuc->vetruoc }}">
-                    <input type="hidden" name="loaipheptoan_id" id="loaipheptoansubmit">
-                    <input type="hidden" name="vesau" id="inputvesausubmit" value="{{ old('vesau') ?? $bieuthuc->vesau }}">
-                    <button type="submit" class="btn btn-success px-5 ml-4">Sửa</button>
-                </form>
-
-                <a href="{{ route('admin.bieuthuc.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
-            </div>
-        </div>
-    </div>
+    </form>
 @endsection
 
 @section('css')
@@ -107,103 +134,43 @@
     <link href="{{ asset('admin1\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.css') }}" rel="stylesheet">
     <link href="{{ asset('admin1\assets\libs\switchery\switchery.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin1\assets\libs\select2\select2.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('admin1\assets\libs\clockpicker\bootstrap-clockpicker.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin1\assets\libs\bootstrap-timepicker\bootstrap-timepicker.min.css') }}" rel="stylesheet"
-        type="text/css">
-    <link href="{{ asset('admin1\assets\libs\bootstrap-colorpicker\bootstrap-colorpicker.min.css') }}" rel="stylesheet"
-        type="text/css">
-    <link href="{{ asset('admin1\assets\libs\bootstrap-datepicker\bootstrap-datepicker.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin1\assets\libs\bootstrap-daterangepicker\daterangepicker.css') }}" rel="stylesheet">
     <style>
         input.form-control:focus {
             border: 3px solid #458bc4;
             background: #ffffff;
+        }
+
+        .select2-container .select2-selection--single {
+            height: calc(1.5em + .9rem + 2px);
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: calc(1.5em + .9rem + 2px);
+            padding-left: 18px;
+            padding-right: 30px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: calc(1.5em + .9rem + 2px);
+        }
+
+        /* span ket qua tim kiem select2 */
+        .select2-container--default .select2-results>.select2-results__options {
+            max-height: 500px;
         }
     </style>
 @endsection
 
 @section('script')
     <!-- Vendor js -->
-    <script src="{{ asset('admin1\assets\js\vendor.min.js') }}"></script>
     <script src="{{ asset('admin1\assets\libs\moment\moment.min.js') }}"></script>
     <script src="{{ asset('admin1\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('admin1\assets\libs\switchery\switchery.min.js') }}"></script>
     <script src="{{ asset('admin1\assets\libs\select2\select2.min.js') }}"></script>
     <script src="{{ asset('admin1\assets\libs\parsleyjs\parsley.min.js') }}"></script>
-    <script src="{{ asset('admin1\assets\libs\bootstrap-filestyle2\bootstrap-filestyle.min.js') }}"></script>
-    <script src="{{ asset('admin1\assets\libs\bootstrap-timepicker\bootstrap-timepicker.min.js') }}"></script>
-    <script src="{{ asset('admin1\assets\libs\bootstrap-colorpicker\bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('admin1\assets\libs\clockpicker\bootstrap-clockpicker.min.js') }}"></script>
-    <script src="{{ asset('admin1\assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('admin1\assets\libs\bootstrap-daterangepicker\daterangepicker.js') }}"></script>
-    <!-- Init js-->
-    <script src="{{ asset('admin1\assets\js\pages\form-advanced.init.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.select2-multiple').select2();
-
-            var inputvetruoc = $('#inputvetruoc');
-            var inputvesau = $('#inputvesau');
-            var loaipheptoan = $('#loaipheptoan');
-            var inputvetruocsubmit = $('#inputvetruocsubmit');
-            var inputvesausubmit = $('#inputvesausubmit');
-            var loaipheptoansubmit = $('#loaipheptoansubmit');
-            var inputhientai;
-
-            inputvetruoc.on('click', function() {
-                inputhientai = inputvetruoc;
-            });
-
-            inputvesau.on('click', function() {
-                inputhientai = inputvesau;
-            });
-
-            document.getElementById('loaipheptoansubmit').value = document.getElementById('loaipheptoan').value;
-            $('#loaipheptoan').on('change', function() {
-                var inputloaipheptoanvalue = $(this).find("option:selected").val();
-                loaipheptoansubmit.val(inputloaipheptoanvalue)
-            });
-
-
-            $('.doituong select').on('change', function() {
-                var value = $(this).find("option:selected").text();
-                var valuesubmit = $(this).find("option:selected").val();
-
-                if (value !== "") {
-                    if (inputhientai) {
-
-                        if (inputhientai == inputvetruoc) {
-                            inputvetruocsubmit.val(valuesubmit)
-                        } else if (inputhientai == inputvesau) {
-                            inputvesausubmit.val(valuesubmit)
-                        }
-                        inputhientai.val(value);
-                        inputhientai = null;
-                        $(this).prop('selectedIndex', 0);
-                    } else {
-                        alert('Hãy chọn ô bạn muốn nhập trước khi chọn giá trị');
-                        $(this).prop('selectedIndex', 0);
-                    }
-                }
-            });
-
-            $('.xoainputvetruoc').on('click', function() {
-                inputvetruoc.val('');
-                inputvetruocsubmit.val('');
-            });
-            $('.xoainputvesau').on('click', function() {
-                inputvesau.val('');
-                inputvesausubmit.val('');
-            });
-
-            $('#resetgiatri').on('click', function() {
-                inputvetruoc.val('');
-                inputvetruocsubmit.val('');
-                inputvesau.val('');
-                inputvesausubmit.val('');
-                $('select').val('');
-                inputhientai = null;
-            });
         });
     </script>
 @endsection
