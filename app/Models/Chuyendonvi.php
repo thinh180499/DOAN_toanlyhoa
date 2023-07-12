@@ -18,6 +18,12 @@ class Chuyendonvi extends Model
         $ketqua=$a*$hesonhan;
        return $ketqua;
     }
+    public function kiemtrachuyendonvi($i,$j){
+        $table=$this->table;
+        return DB::select('SELECT hesonhan FROM '.$table.' WHERE tudonvi='.$i.' AND dendonvi='.$j);
+        
+       
+    }
     public function danhsachchuyendonvi(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);

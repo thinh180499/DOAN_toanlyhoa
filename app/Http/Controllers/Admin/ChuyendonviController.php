@@ -69,8 +69,27 @@ class ChuyendonviController extends Controller
             $request->dendonvi,
         ];
         //dd($data);
-        $this->chuyendonvi->themchuyendonvi($data);
-        return redirect()->route('admin.chuyendonvi.index');
+        $kiemtra=$this->chuyendonvi->kiemtrachuyendonvi( $request->tudonvi, $request->dendonvi);
+        //dd(empty($kiemtra[0]));
+        if(empty($kiemtra)){
+            $this->chuyendonvi->themchuyendonvi($data);
+            $msgthanhcong="thêm chuyển đơn vị thành công";
+        }
+        $msgthanhcong="thêm chuyển đơn vị thành công";
+        $kiemtra=$this->chuyendonvi->kiemtrachuyendonvi( $request->dendonvi,  $request->tudonvi);
+        //dd($kiemtra);
+        if(empty($kiemtra)){
+            $data=[
+                1/$request->hesonhan,
+                $request->dendonvi,
+                $request->tudonvi,
+            ];
+            //dd($data);
+            $this->chuyendonvi->themchuyendonvi($data);
+            $msgthanhcong=$msgthanhcong."và nghịch chuyển đơn vị thành công";
+        }
+        
+        return redirect()->route('admin.chuyendonvi.index')->with('msgthanhcong');;
     }
 
     /**
