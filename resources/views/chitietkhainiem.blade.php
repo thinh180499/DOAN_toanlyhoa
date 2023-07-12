@@ -43,7 +43,7 @@
                                         @foreach ($list_bieuthuc as $bieuthuc)
                                             @if ($congthuc->bieuthuc_id == $bieuthuc->bieuthuc_id)
                                                 <a href="{{ route('chitietcongthuc', [$congthuc->id]) }}"
-                                                    >{{ $congthuc->tencongthuc."(".$bieuthuc->motabieuthuc.")" }}</a>
+                                                    >{{ $congthuc->tencongthuc."(".$bieuthuc->motabieuthuc.")" }}</a>{!!$bieuthuc->htmlbieuthuc!!}
                                             @endif
                                         @endforeach
                                     @endif

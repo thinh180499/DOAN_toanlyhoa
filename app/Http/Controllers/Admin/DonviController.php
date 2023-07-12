@@ -143,14 +143,14 @@ class DonviController extends Controller
         
         $kiemtra = $this->donvi->xettudonvi($iddonviupdata->id);
         if (!empty($kiemtra[0]->id)) {
-            return  redirect()->route('admin.donvi.index')->with('msgloi', 'sửa không thành công vì đơn vị này tồn tại trong chuyển đơn vi');
+            return  redirect()->route('admin.donvi.index')->with('msgloi', 'xóa không thành công vì đơn vị này tồn tại trong chuyển đơn vi');
         }
         $kiemtra = $this->donvi->xetdendonvi($iddonviupdata->id);
         if (!empty($kiemtra[0]->id)) {
-            return  redirect()->route('admin.donvi.index')->with('msgloi', 'sửa không thành công vì đơn vị này tồn tại trong chuyển đơn vi');
+            return  redirect()->route('admin.donvi.index')->with('msgloi', 'xóa không thành công vì đơn vị này tồn tại trong chuyển đơn vi');
         }
         $this->donvi->xoadonvi($id);
         $title="danh sách đơn vị";
-        return redirect()->route('admin.donvi.index',compact('title'))->with('msgthanhcong', 'sửa thành công');
+        return redirect()->route('admin.donvi.index',compact('title'))->with('msgthanhcong', 'xóa thành công');
     }
 }
