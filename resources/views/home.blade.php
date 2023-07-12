@@ -6,11 +6,11 @@
         <div class="row p-4">
             <h2 class="text-start">Vật Lý</h2>
         </div>
-        @if (Route::has('register'))
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-        </li>
-    @endif
+        {{-- @if (Route::has('register'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </li>
+        @endif --}}
         <div class="row">
             @if (!empty($list_congthuccuavatly))
                 @foreach ($list_congthuccuavatly as $congthuccuavatly)

@@ -145,6 +145,7 @@
 
     p, .lythuyet ul li {
         font-size: 18px;
+        line-height: 28px;
     }
 
     .icon-card .icon.primary {

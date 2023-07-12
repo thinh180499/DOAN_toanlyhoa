@@ -3,38 +3,42 @@
 {{-- @section('title', '{{ $chitietcongthuc->tencongthuc }}') --}}
 @section('content')
     <div class="row mt-4">
-        <h2 class="mb-4">{{ $chitietkhainiem->tenkhainiem."(".$chitietkhainiem->kyhieu.")" }}</h2>
+        <h2 class="mb-4">{{ $chitietkhainiem->tenkhainiem . ' (' . $chitietkhainiem->kyhieu . ')' }}</h2>
 
-        <div class="col-lg-5 congthuc">
+        <div class="col-lg-6 mb-4 mb-lg-0 khainiem">
             <div class="card-style cardform h-100">
 
-                <div class="mt-1 mb-80">
-                    {{-- <h3 class="mb-4">Trong đó</h3>
-                    <ul>
-                        <li>n: số mol (mol)</li>
-                        <li>m: khối lượng chất (gam)</li>
-                        <li>M: khối lượng Mol (gam/mol)</li>
-                    </ul> --}}
-
-                    @if (!empty($chitietkhainiem))
-                        {{ $chitietkhainiem->dinhnghia }}<br>
-                    @endif
-                    @if (!empty($mangkhainiem))
-                    @foreach ($mangkhainiem as $khainiem)
-                       
-                            <a href="{{ route('chitietkhainiem', [$khainiem->id]) }}"
-                                class="stretched-link">{{ $khainiem->tenkhainiem."(".$khainiem->kyhieu.")" }}</a><br>
-                       
-                    @endforeach
-                @endif
+                <div class="container kn">
+                    <div class="row ctkn">
+                        <h3 class="mb-4">Chi tiết khái niệm</h3>
+                        @if (!empty($chitietkhainiem))
+                            <p>{{ $chitietkhainiem->dinhnghia }}</p>
+                        @endif
+                    </div>
+                    <div class="row knlq">
+                        <h5 class="mb-3">Các khái niệm liên quan</h5>
+                        @if (!empty($mangkhainiem))
+                            @foreach ($mangkhainiem as $khainiem)
+                                <p class="mb-1">
+                                    <a href="{{ route('chitietkhainiem', [$khainiem->id]) }}">
+                                        {{ $khainiem->tenkhainiem . ' (' . $khainiem->kyhieu . ')' }}
+                                    </a>
+                                </p>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
+
             </div>
         </div>
-        <div class="col-lg-7 tinhtoan">
+        <div class="col-lg-6 mb-4 mb-lg-0 congthuc">
             <div class="card-style cardform h-100">
 
-                <div class="container mb-4">
-                    <div class="row d-flex flex-column">
+                <div class="container ct">
+                    <div class="row congthuc d-flex flex-column">
+                        <h3 class="mb-4">Các công thức tính
+                            {{ $chitietkhainiem->tenkhainiem . ' (' . $chitietkhainiem->kyhieu . ')' }}
+                        </h3>
 
                         @if (!empty($list_congthuc))
                             @foreach ($list_congthuc as $congthuc)
@@ -42,8 +46,21 @@
                                     @if (!empty($list_bieuthuc))
                                         @foreach ($list_bieuthuc as $bieuthuc)
                                             @if ($congthuc->bieuthuc_id == $bieuthuc->bieuthuc_id)
-                                                <a href="{{ route('chitietcongthuc', [$congthuc->id]) }}"
-                                                    >{{ $congthuc->tencongthuc."(".$bieuthuc->motabieuthuc.")" }}</a>{!!$bieuthuc->htmlbieuthuc!!}
+                                                <div class="mb-5">
+                                                    <p class="mb-3">
+                                                        {{ $congthuc->tencongthuc . ' (' . $bieuthuc->motabieuthuc . ')' }}
+                                                    </p>
+                                                    <div class="mx-auto d-flex align-items-center justify-content-center ">
+                                                        <div class="spanborder d-flex align-items-center justify-content-center position-relative">
+                                                            <a href="{{ route('chitietcongthuc', [$congthuc->id]) }}"
+                                                                class="stretched-link">
+                                                                <span>
+                                                                    {!! $bieuthuc->htmlbieuthuc !!}
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endif
                                         @endforeach
                                     @endif
@@ -51,71 +68,9 @@
                             @endforeach
                         @endif
 
-
-
                     </div>
                 </div>
 
-                {{-- <form action="moltheokhoiluong" method="post">
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
-                    <div class="container-fluid mb-5">
-                        <div class="row justify-content-center">
-                            <div class="col-auto border rounded-lg p-3 d-flex align-items-center">
-                                <div class="me-3">
-                                    <span>n = </span>
-                                </div>
-                                <div>
-                                    <span>m</span>
-                                    <hr>
-                                    <span>M</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-                    <div class="container mb-4">
-                        <div class="row d-flex flex-column">
-                            <div class="col">
-                                <div class="input-style-1">
-                                    <label for="somolchattan">m: Khối lượng chất (gam)</label>
-                                    <input type="number" id="somolchattan" name="a"
-                                        placeholder="Nhập khối lượng chất" class="input" step="any"
-                                        value="{{ isset($a) && is_numeric($a) ? $a : old('a') }}" />
-                                    @error('a')
-                                        <p class="text-danger fs-6 mt-2">* {{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col mb-4">
-                                <div class="input-style-1">
-                                    <label for="thetichdungdich">M: Khối lượng mol (gam/mol)</label>
-                                    <input type="number" id="thetichdungdich" name="b"
-                                        placeholder="Nhập khối lượng mol" class="input" step="any"
-                                        value="{{ isset($b) && is_numeric($b) ? $b : old('b') }}" />
-                                    @error('b')
-                                        <p class="text-danger fs-6 mt-2">* {{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col d-flex align-items-center">
-                                <button class="btn btn-primary me-5 py-0 px-4 calculate" type="submit">=</button>
-                                <span>
-                                    {!! isset($ketqua) ? $ketqua . ' (mol)' : false !!}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                </form> --}}
             </div>
         </div>
     </div>
@@ -123,8 +78,33 @@
 
 @section('css')
     <style>
-        .container {
-            max-width: 500px;
+        .container.kn,
+        .container.ct {
+            max-width: 620px;
+            /* max-height: 640px; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card-style {
+            padding: 40px;
+        }
+
+        .spanborder {
+            border: 2px solid #aeaeae;
+            padding: 10px;
+            min-width: 112px;
+            transition: all 0.2s ease;
+        }
+
+        .spanborder:hover {
+            box-shadow: rgba(0, 0, 0, 0.15) 7.4px 9.4px 3.2px;
+        }
+
+        .spanborder a {
+            color: #5d657b;
         }
 
         hr {
