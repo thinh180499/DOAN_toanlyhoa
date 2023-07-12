@@ -120,6 +120,11 @@
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             height: calc(1.5em + .9rem + 2px);
         }
+
+        /* span ket qua tim kiem select2 */
+        .select2-container--default .select2-results>.select2-results__options {
+            max-height: 500px;
+        }
     </style>
 @endsection
 

@@ -2,94 +2,102 @@
 
 {{-- @section('title', '{{ $chitietcongthuc->tencongthuc }}') --}}
 @section('content')
-    <div class="row mt-4">
-        <h2 class="mb-4">{{ $chitietcongthuc->tencongthuc }}</h2>
+    <form action="{{ route('chitietcongthuc', [$chitietcongthuc->id]) }}" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <div class="row mt-4">
+            <h2 class="mb-4">{{ $chitietcongthuc->tencongthuc }}</h2>
 
-        <div class="col-lg-5 congthuc">
-            <div class="card-style cardform h-100">
+            <div class="col-lg-6 congthuc">
+                <div class="card-style cardform">
 
-                <div class="mt-1 mb-80">
-                    {{-- <h3 class="mb-4">Trong đó</h3>
+                    <div class="container ct">
+                        {{-- <h3 class="mb-4">Trong đó</h3>
                     <ul>
                         <li>n: số mol (mol)</li>
                         <li>m: khối lượng chất (gam)</li>
                         <li>M: khối lượng Mol (gam/mol)</li>
                     </ul> --}}
-                    @if (!empty($list_hinh))
-                        @foreach ($list_hinh as $hinh)
-                            @if ($chitietcongthuc->id == $hinh->congthuc_id)
-                                <div class="row img">
-                                    <img src="{{ asset('images') . '/' . $hinh->img }}">
-                                </div>
-                            @endif
-                        @endforeach
-                    @endif
-
-                    <div class="row congthuc align-items-center justify-content-center">
-                        @if (!empty($list_khainiem))
-                            @foreach ($list_khainiem as $khainiem)
-                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
-                                    <div class="col khainiem text-end">
-                                        <span>{{ $khainiem->kyhieu . ' = ' }}</span>
+                        @if (!empty($list_hinh))
+                            @foreach ($list_hinh as $hinh)
+                                @if ($chitietcongthuc->id == $hinh->congthuc_id)
+                                    <div class="row img">
+                                        <img src="{{ asset('images') . '/' . $hinh->img }}">
                                     </div>
                                 @endif
                             @endforeach
                         @endif
-                        @if (!empty($list_bieuthuc))
-                            @foreach ($list_bieuthuc as $key)
-                                @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
-                                <div class="col bieuthuc">
-                                    <span>{!! $key->htmlbieuthuc !!}</span>
+
+                        <div class="row congthuc mb-3 mt-3">
+                            <div class="col d-flex align-items-center justify-content-center">
+                                <div class="spanborder d-flex align-items-center justify-content-center">
+                                    @if (!empty($list_khainiem))
+                                        @foreach ($list_khainiem as $khainiem)
+                                            @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                                <span>{{ $khainiem->kyhieu . ' = ' }}</span>&nbsp;&nbsp;
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    @if (!empty($list_bieuthuc))
+                                        @foreach ($list_bieuthuc as $key)
+                                            @if ($chitietcongthuc->bieuthuc_id == $key->bieuthuc_id)
+                                                <span>{!! $key->htmlbieuthuc !!}</span>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
-                                @endif
-                            @endforeach
-                        @endif
-                    </div>
+                            </div>
+                        </div>
 
-                    <div class="row">
-                        @if (!empty($list_khainiem))
-                            @foreach ($list_khainiem as $khainiem)
-                                @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
-                                    <div>
-                                        <strong>{{  $khainiem->kyhieu  }}</strong>{{': ' . $khainiem->dinhnghia }}
-                                    </div>
-                                @endif
-                            @endforeach
-                        @endif
-    
-                        @if (!empty($mangkhainiem))
-                            @foreach ($mangkhainiem as $key)
-                                <div>
-                                    <strong>{{  $key->kyhieu  }}</strong>{{': ' . $key->dinhnghia }}
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-7 tinhtoan">
-            <div class="card-style cardform h-100">
-                <form action="{{ route('chitietcongthuc', [$chitietcongthuc->id]) }}" method="post">
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                    <div class="container mb-4">
-                        <div class="row d-flex flex-column">
-
-                            @if (!empty($mangkhainiem))
-                                @foreach ($mangkhainiem as $key)
-                                    <div class="col">
-                                        <div class="input-style-1">
-                                            <label>{{ $key->tenkhainiem . ' (' . $key->kyhieu . ') ' }}</label>
-
-                                            <input type="number" name="{{ $key->khainiem_id }}"
-                                                placeholder="Nhập {{ $key->tenkhainiem }}" class="input" step="any"
-                                                value="{{ old($key->khainiem_id) }}" />
-
+                        <div class="row trongdo">
+                            @if (!empty($list_khainiem))
+                                @foreach ($list_khainiem as $khainiem)
+                                    @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                        <div class="">
+                                            <p>
+                                                <strong>{{ $khainiem->kyhieu }}</strong>{{ ': ' . $khainiem->dinhnghia }}
+                                            </p>
                                         </div>
-                                    </div>
+                                    @endif
                                 @endforeach
                             @endif
 
+                            @if (!empty($mangkhainiem))
+                                @foreach ($mangkhainiem as $key)
+                                    <div class="">
+                                        <p>
+                                            <strong>{{ $key->kyhieu }}</strong>{{ ': ' . $key->dinhnghia }}
+                                        </p>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 tinhtoan">
+
+                <div class="card-style cardform">
+                    <div class="container tt">
+                        {{-- <div class="row d-flex flex-column"> --}}
+
+
+
+                        {{-- <div class="row"> --}}
+                        @if (!empty($mangkhainiem))
+                            @foreach ($mangkhainiem as $key)
+                                <div class="row input-style-1">
+                                    <label>{{ $key->tenkhainiem . ' (' . $key->kyhieu . ') ' }}</label>
+
+                                    <input type="number" name="{{ $key->khainiem_id }}"
+                                        placeholder="Nhập {{ $key->tenkhainiem }}" class="input" step="any"
+                                        value="{{ old($key->khainiem_id) }}" />
+                                </div>
+                            @endforeach
+                        @endif
+                        {{-- </div> --}}
+
+
+                        <div class="row">
                             <div class="col d-flex align-items-center">
                                 <button class="btn btn-primary me-5 py-0 px-4 calculate" type="submit">=</button>
                                 <span>
@@ -101,10 +109,11 @@
                             </div>
 
                         </div>
+
                     </div>
 
-                </form>
-                {{-- <form action="moltheokhoiluong" method="post">
+
+                    {{-- <form action="moltheokhoiluong" method="post">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                     <div class="container-fluid mb-5">
@@ -122,12 +131,12 @@
                         </div>
                     </div>
 
-                    
-                    
-                    
-                        
-                       
-                    
+
+
+
+
+
+
                     <div class="container mb-4">
                         <div class="row d-flex flex-column">
                             <div class="col">
@@ -161,18 +170,51 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </div>--}
 
                 </form> --}}
+                </div>
             </div>
         </div>
-    </div>
+        </div>
+    </form>
 @endsection
 
 @section('css')
     <style>
-        .container {
-            max-width: 500px;
+        .container.ct,
+        .container.tt {
+            max-width: 620px;
+            height: 640px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .container.ct {
+            max-width: 680px;
+        }
+
+        .card-style {
+            padding: 40px;
+        }
+
+        .spanborder{
+            border: 2px solid #aeaeae;
+            padding: 25px;
+        }
+
+        .row.trongdo {
+            gap: 20px;
+        }
+
+        .row.img {
+            justify-content: center;
+        }
+
+        .row.img img {
+            max-width: 31rem;
         }
 
         hr {

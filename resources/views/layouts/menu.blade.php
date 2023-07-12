@@ -3,10 +3,7 @@
     <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_1" aria-controls="ddmenu_1"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="icon">
-            <svg width="22" height="22" viewBox="0 0 22 22">
-                <path
-                    d="M17.4167 4.58333V6.41667H13.75V4.58333H17.4167ZM8.25 4.58333V10.0833H4.58333V4.58333H8.25ZM17.4167 11.9167V17.4167H13.75V11.9167H17.4167ZM8.25 15.5833V17.4167H4.58333V15.5833H8.25ZM19.25 2.75H11.9167V8.25H19.25V2.75ZM10.0833 2.75H2.75V11.9167H10.0833V2.75ZM19.25 10.0833H11.9167V19.25H19.25V10.0833ZM10.0833 13.75H2.75V19.25H10.0833V13.75Z" />
-            </svg>
+            <iconify-icon icon="mdi:lightbulb-on-20"></iconify-icon>
         </span>
         <span class="text">Vật lý</span>
     </a>
@@ -28,10 +25,7 @@
     <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="icon">
-            <svg width="22" height="22" viewBox="0 0 22 22">
-                <path
-                    d="M17.4167 4.58333V6.41667H13.75V4.58333H17.4167ZM8.25 4.58333V10.0833H4.58333V4.58333H8.25ZM17.4167 11.9167V17.4167H13.75V11.9167H17.4167ZM8.25 15.5833V17.4167H4.58333V15.5833H8.25ZM19.25 2.75H11.9167V8.25H19.25V2.75ZM10.0833 2.75H2.75V11.9167H10.0833V2.75ZM19.25 10.0833H11.9167V19.25H19.25V10.0833ZM10.0833 13.75H2.75V19.25H10.0833V13.75Z" />
-            </svg>
+            <iconify-icon icon="mdi:format-superscript"></iconify-icon>
         </span>
         <span class="text">Toán học</span>
     </a>
@@ -53,10 +47,7 @@
     <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="icon">
-            <svg width="22" height="22" viewBox="0 0 22 22">
-                <path
-                    d="M17.4167 4.58333V6.41667H13.75V4.58333H17.4167ZM8.25 4.58333V10.0833H4.58333V4.58333H8.25ZM17.4167 11.9167V17.4167H13.75V11.9167H17.4167ZM8.25 15.5833V17.4167H4.58333V15.5833H8.25ZM19.25 2.75H11.9167V8.25H19.25V2.75ZM10.0833 2.75H2.75V11.9167H10.0833V2.75ZM19.25 10.0833H11.9167V19.25H19.25V10.0833ZM10.0833 13.75H2.75V19.25H10.0833V13.75Z" />
-            </svg>
+            <iconify-icon icon="mdi:flask-outline"></iconify-icon>
         </span>
         <span class="text">Hóa học</span>
     </a>
@@ -78,10 +69,7 @@
     <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_4" aria-controls="ddmenu_4"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="icon">
-            <svg width="22" height="22" viewBox="0 0 22 22">
-                <path
-                    d="M17.4167 4.58333V6.41667H13.75V4.58333H17.4167ZM8.25 4.58333V10.0833H4.58333V4.58333H8.25ZM17.4167 11.9167V17.4167H13.75V11.9167H17.4167ZM8.25 15.5833V17.4167H4.58333V15.5833H8.25ZM19.25 2.75H11.9167V8.25H19.25V2.75ZM10.0833 2.75H2.75V11.9167H10.0833V2.75ZM19.25 10.0833H11.9167V19.25H19.25V10.0833ZM10.0833 13.75H2.75V19.25H10.0833V13.75Z" />
-            </svg>
+            <iconify-icon icon="mdi:compare-horizontal"></iconify-icon>
         </span>
         <span class="text">Chuyển đổi đơn vị</span>
     </a>
@@ -99,7 +87,7 @@
     <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_5" aria-controls="ddmenu_5"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="icon">
-            <svg width="22" height="22" viewBox="0 0 22 22">
+            <svg width="28" height="28" viewBox="0 0 22 22">
                 <path
                     d="M17.4167 4.58333V6.41667H13.75V4.58333H17.4167ZM8.25 4.58333V10.0833H4.58333V4.58333H8.25ZM17.4167 11.9167V17.4167H13.75V11.9167H17.4167ZM8.25 15.5833V17.4167H4.58333V15.5833H8.25ZM19.25 2.75H11.9167V8.25H19.25V2.75ZM10.0833 2.75H2.75V11.9167H10.0833V2.75ZM19.25 10.0833H11.9167V19.25H19.25V10.0833ZM10.0833 13.75H2.75V19.25H10.0833V13.75Z" />
             </svg>

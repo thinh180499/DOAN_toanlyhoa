@@ -43,7 +43,7 @@
                                         @foreach ($list_bieuthuc as $bieuthuc)
                                             @if ($congthuc->bieuthuc_id == $bieuthuc->bieuthuc_id)
                                                 <a href="{{ route('chitietcongthuc', [$congthuc->id]) }}"
-                                                    class="stretched-link">{{ $congthuc->tencongthuc."(".$bieuthuc->motabieuthuc.")" }}</a>
+                                                    >{{ $congthuc->tencongthuc."(".$bieuthuc->motabieuthuc.")" }}</a>
                                             @endif
                                         @endforeach
                                     @endif
@@ -74,12 +74,12 @@
                         </div>
                     </div>
 
-                    
-                    
-                    
-                        
-                       
-                    
+
+
+
+
+
+
                     <div class="container mb-4">
                         <div class="row d-flex flex-column">
                             <div class="col">
