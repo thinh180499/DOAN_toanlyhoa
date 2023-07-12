@@ -17,9 +17,16 @@
                     </ul> --}}
 
                     @if (!empty($chitietkhainiem))
-                        {{ $chitietkhainiem->dinhnghia }}
+                        {{ $chitietkhainiem->dinhnghia }}<br>
                     @endif
-
+                    @if (!empty($mangkhainiem))
+                    @foreach ($mangkhainiem as $khainiem)
+                       
+                            <a href="{{ route('chitietkhainiem', [$khainiem->id]) }}"
+                                class="stretched-link">{{ $khainiem->tenkhainiem."(".$khainiem->kyhieu.")" }}</a><br>
+                       
+                    @endforeach
+                @endif
                 </div>
             </div>
         </div>

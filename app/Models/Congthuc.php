@@ -28,9 +28,13 @@ class Congthuc extends Model
         return DB::select('SELECT * FROM '.$table.' WHERE mon =3');
     }
 
-    public function danhsachcongthuccuakhainiem(){
+    public function danhsachcongthuccuakhainiem($id){
         $table=$this->table;
-        return DB::select('SELECT congthuc.id,tenkhainiem,kyhieu,bieuthuc_id,mon FROM '.$table.',khainiems WHERE khainiems.id='.$table.'.khainiem_id');
+         $danhsachid=DB::table($table)
+        ->where('khainiem_id',"=", $id)
+        ->get();
+        //dd($danhsachid);
+        return $danhsachid;
     }
 
     public function themcongthuc($data){
