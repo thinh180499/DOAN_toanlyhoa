@@ -3,11 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h4 class="mb-10">
+            <h2 class="mb-4">
                 @if (!empty($title))
                     {{ $title }}
                 @endif
-            </h4>
+            </h2>
 
             <div class="table-responsive">
                 <a href="{{ route('admin.donvicuakhainiem.create') }}" class="btn btn-success mb-4">Thêm đơn vị của khái niệm</a>
@@ -28,28 +28,28 @@
                                     <th scope="row">
                                         {{ $donvicuakhainiem->id }}
                                     </th>
-                                    
+
                                     <td>
                                         @if (!empty($list_khainiem))
                                             @foreach ($list_khainiem as $khainiem)
-                                                @if($donvicuakhainiem->khainiem_id == $khainiem->id) 
-                                                    {{$khainiem->tenkhainiem}}     
+                                                @if($donvicuakhainiem->khainiem_id == $khainiem->id)
+                                                    {{$khainiem->tenkhainiem}}
                                                 @endif
-                                                
+
                                             @endforeach
                                         @endif
-                                        
+
                                     </td>
                                     <td>
                                         @if (!empty($list_donvi))
                                         @foreach ($list_donvi as $donvi)
-                                            @if($donvicuakhainiem->donvi_id == $donvi->id) 
-                                                {{$donvi->tendonvi}}  
+                                            @if($donvicuakhainiem->donvi_id == $donvi->id)
+                                                {{$donvi->tendonvi}}
                                             @endif
-                                            
+
                                         @endforeach
                                     @endif
-                                       
+
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.donvicuakhainiem.edit',['donvicuakhainiem' => $donvicuakhainiem->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
@@ -78,7 +78,7 @@
 @section('css')
     <style>
         td:nth-child(4) {
-          width: 55%;
+          width: 45%;
         }
     </style>
 @endsection

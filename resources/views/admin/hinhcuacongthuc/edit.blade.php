@@ -8,17 +8,24 @@
         <!-- ========== tables-wrapper start ========== -->
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="mb-10">
+                <h2 class="mb-5">
                     @if (!empty($title))
                         {{ $title }}
                     @endif
                     @if (!empty($msr))
                         {{ $msr }}
                     @endif
-                </h4>
+                </h2>
+
+                <div class="form-group row mb-5">
+                    <label class="col-md-2 col-form-label">Hình hiện tại của công thức</label>
+                    <div class="col-md-10">
+                        <img src="{{ asset('images') . '/' . $hinhcuacongthuc->img }}">
+                    </div>
+                </div>
 
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="mon"></label>
+                    <label class="col-md-2 col-form-label">Chọn hình muốn sửa</label>
                     <div class="col-md-10">
                         <input type="file" name="img" placeholder="nhập tên hình"
                             value="{{ old('img') ?? $hinhcuacongthuc->img }}">
@@ -28,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group row mb-5">
                     <label class="col-md-2 col-form-label" for="congthuc">Công thức</label>
                     <div class="col-md-10">
                         <select name="congthuc" class="form-control">
@@ -45,8 +52,8 @@
                     </div>
                 </div>
 
-                <div class="form-group now d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success px-5">sửa</button>
+                <div class="form-group row d-flex justify-content-end pr-3">
+                    <button type="submit" class="btn btn-success px-5">Sửa</button>
                     <a href="{{ route('admin.hinhcuacongthuc.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>
@@ -70,5 +77,10 @@
         .select-style-1 .select-position::after {
             top: 65%
         }
+
+        img {
+            width: 24rem;
+        }
+
     </style>
 @endsection

@@ -7,14 +7,14 @@
         <!-- ========== tables-wrapper start ========== -->
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="mb-10">
+                <h2 class="mb-5">
                     @if (!empty($title))
                         {{ $title }}
                     @endif
                     @if (!empty($msr))
                         {{ $msr }}
                     @endif
-                </h4>
+                </h2>
 
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="hesonhan">Hệ số nhân</label>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group row mb-5">
                     <label class="col-md-2 col-form-label" for="dendonvi">Đên đơn vị</label>
                     <div class="col-md-10">
                         <select name="dendonvi" class="form-control">
@@ -59,8 +59,8 @@
                     </div>
                 </div>
 
-                <div class="form-group now d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success px-5">sửa</button>
+                <div class="form-group row d-flex justify-content-end pr-3">
+                    <button type="submit" class="btn btn-success px-5">Sửa</button>
                     <a href="{{ route('admin.chuyendonvi.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>
             </div>

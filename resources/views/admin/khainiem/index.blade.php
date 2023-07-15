@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="d-flex justify-content-between">
-                <h4 class="mb-10">
+                <h2 class="mb-4">
                     @if (!empty($title))
                         {{ $title }}
                     @endif
-                </h4>
+                </h2>
                 @if (session('msgthanhcong'))
                     <div class="alert alert-icon alert-info text-info alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -92,6 +92,9 @@
     <style>
         td:nth-child(5) {
           width: 60%;
+        }
+        td:nth-child(6) {
+          width: 12%;
         }
     </style>
 @endsection

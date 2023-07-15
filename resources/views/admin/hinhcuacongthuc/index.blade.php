@@ -3,11 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h4 class="mb-10">
+            <h2 class="mb-4">
                 @if (!empty($title))
                     {{ $title }}
                 @endif
-            </h4>
+            </h2>
 
             <div class="table-responsive">
                 <a href="{{ route('admin.hinhcuacongthuc.create') }}" class="btn btn-success mb-4">Thêm hình của công thức</a>
@@ -30,7 +30,7 @@
                                     </th>
 
                                     <td>
-                                        <form action="" method="post" enctype="multipart/form-data"> 
+                                        <form action="" method="post" enctype="multipart/form-data">
                                             <img src="{{ asset('images').'/'.$hinhcuacongthuc->img}}">
                                         </form>
 
@@ -72,8 +72,14 @@
 
 @section('css')
     <style>
-        td:nth-child(4) {
-          width: 55%;
+        td:nth-child(2) {
+          width: 30%;
+        }
+        td:nth-child(3) {
+          width: 25%;
+        }
+        img {
+            width: 24rem;
         }
     </style>
 @endsection

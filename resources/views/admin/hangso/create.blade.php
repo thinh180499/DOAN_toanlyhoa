@@ -7,14 +7,14 @@
         <!-- ========== tables-wrapper start ========== -->
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="mb-10">
+                <h2 class="mb-4">
                     @if (!empty($title))
                         {{ $title }}
                     @endif
                     @if (!empty($msr))
                         {{ $msr }}
                     @endif
-                </h4>
+                </h2>
 
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="hangso">Hằng số</label>

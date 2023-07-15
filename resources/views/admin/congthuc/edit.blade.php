@@ -7,14 +7,14 @@
         <!-- ========== tables-wrapper start ========== -->
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="mb-10">
+                <h2 class="mb-5">
                     @if (!empty($title))
                         {{ $title }}
                     @endif
                     @if (!empty($msr))
                         {{ $msr }}
                     @endif
-                </h4>
+                </h2>
 
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="tenkhainiem">Tên khái niệm - ký hiệu</label>
@@ -67,7 +67,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row mb-5">
                     <label class="col-md-2 col-form-label">Môn</label>
                     <div class="col-md-10">
                         <select name="mon" class="form-control">
@@ -81,10 +81,10 @@
                                 echo 'selected ';
                             } ?>value="3">Hóa học</option>
                         </select>
-                       
+
                     </div>
                 </div>
-                <div class="form-group now d-flex justify-content-end">
+                <div class="form-group row d-flex justify-content-end pr-3">
                     <button type="submit" class="btn btn-success px-5">Sửa</button>
                     <a href="{{ route('admin.congthuc.index') }}" class="btn btn-light px-5 ml-4">Hủy</a>
                 </div>

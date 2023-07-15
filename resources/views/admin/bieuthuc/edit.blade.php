@@ -5,7 +5,11 @@
     <form action="{{ route('admin.bieuthuc.update', ['bieuthuc' => $bieuthuc->id]) }}" method="post">
         @method('PUT')
         @csrf
-        <h4 class="mb-4">Sửa biểu thức</h4>
+        <h2 class="mb-4">
+            @if (!empty($title))
+                {{ $title }}
+            @endif
+        </h2>
         <div class="row mb-5">
             <div class="col">
                 <label class="control-label mt-3 mt-lg-0">Vế trước</label>
@@ -141,17 +145,17 @@
         }
 
         .select2-container .select2-selection--single {
-            height: calc(1.5em + .9rem + 2px);
+            height: calc(2em + .9rem + 2px);
         }
 
         .select2-container--default .select2-selection--single .select2-selection__rendered {
-            line-height: calc(1.5em + .9rem + 2px);
+            line-height: calc(2em + .9rem + 2px);
             padding-left: 18px;
             padding-right: 30px;
         }
 
         .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: calc(1.5em + .9rem + 2px);
+            height: calc(2em + .9rem + 2px);
         }
 
         /* span ket qua tim kiem select2 */

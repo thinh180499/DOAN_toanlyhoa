@@ -3,11 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h4 class="mb-10">
+            <h2 class="mb-4">
                 @if (!empty($title))
                     {{ $title }}
                 @endif
-            </h4>
+            </h2>
 
             <div class="table-responsive">
                 <a href="{{ route('admin.chuyendonvi.create') }}" class="btn btn-success mb-4">Thêm chuyển đơn vị</a>
