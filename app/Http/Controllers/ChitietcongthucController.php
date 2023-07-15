@@ -12,6 +12,8 @@ use App\Models\Bieuthuc;
 use App\Models\Hangso;
 use App\Models\Khainiem;
 
+use App\Models\Donvicuakhainiem;
+
 use App\Models\Hinhcuacongthuc;
 
 class ChitietcongthucController extends Controller
@@ -31,7 +33,7 @@ class ChitietcongthucController extends Controller
         $bieuthuc = new Bieuthuc();
         $hinhcuacongthuc = new Hinhcuacongthuc();
         $congthuc = new Congthuc();
-        
+
         $list_hinh = $hinhcuacongthuc->danhsachhinhcuacongthuc();
         $list_khainiem = $khainiem->danhsachkhainiem();
         $list_bieuthuc = $bieuthuc->danhsachbieuthuc();
@@ -122,7 +124,7 @@ class ChitietcongthucController extends Controller
         if (!empty($vetruoclakhainiem)) {
             if(!empty($mangkhainiem))
             {
-                
+
                 $khongtontai=1;
                 foreach($mangkhainiem as $key){
                     if($key->khainiem_id == $vetruoclakhainiem->khainiem_id){
@@ -136,7 +138,7 @@ class ChitietcongthucController extends Controller
             }else{
                 $mangkhainiem[] = $vetruoclakhainiem;
             }
-           
+
             //dd($vetruoc);
         }
         $vetruoclahangso = $hangso->xacdinhlahangsoid($chitietbieuthuc->vetruoc);
@@ -171,7 +173,7 @@ class ChitietcongthucController extends Controller
                 $mangkhainiem[] = $vesaulakhainiem;
                 //dd($mangkhainiem);
             }
-            
+
         }
         $vesaulahangso = $hangso->xacdinhlahangsoid($chitietbieuthuc->vesau);
         if (!empty($vesaulahangso)) {
@@ -188,15 +190,17 @@ class ChitietcongthucController extends Controller
 
     public function tinhcongthuc(Request $request, $id)
     {
+        $donvicuakhainiem = new Donvicuakhainiem();
         $khainiem = new Khainiem();
         $bieuthuc = new Bieuthuc();
         $hinhcuacongthuc = new Hinhcuacongthuc();
         $congthuc = new Congthuc();
+        $list_donvicuakhainiem = $donvicuakhainiem->danhsachdonvicuakhainiemcodonvi();
         $list_khainiem = $khainiem->danhsachkhainiem();
         $list_bieuthuc = $bieuthuc->danhsachbieuthuc();
         $chitietcongthuc = $congthuc->chitietcongthuc($id);
         $chitietcongthuc = $chitietcongthuc[0];
-        
+
         $list_hinh = $hinhcuacongthuc->danhsachhinhcuacongthuc();
         //dd($chitietcongthuc);
         //dd($chitietcongthuc);
@@ -205,7 +209,7 @@ class ChitietcongthucController extends Controller
         $ketqua = 0;
         $ketqua = $this->ketquacongthuc($chitietcongthuc->bieuthuc_id, $ketqua, $request);
         //dd($ketqua);
-        return view('chitietcongthuc', compact('list_hinh','list_khainiem', 'list_bieuthuc', 'chitietcongthuc', 'mangkhainiem','ketqua'));
+        return view('chitietcongthuc', compact('list_hinh','list_donvicuakhainiem','list_khainiem', 'list_bieuthuc', 'chitietcongthuc', 'mangkhainiem','ketqua'));
     }
     public function ketquacongthuc($bieuthuc_id, $ketqua, $request)
     {
@@ -228,7 +232,7 @@ class ChitietcongthucController extends Controller
                     $vetruoclakhainiem->khainiem_id => 'required|numeric|min:0',
                 ]);
             }
-            
+
             (float)$a = $request->input($vetruoclakhainiem->khainiem_id);
             //dd($a);
         }
@@ -257,7 +261,7 @@ class ChitietcongthucController extends Controller
                     $vesaulakhainiem->khainiem_id => 'required|numeric|min:0',
                 ]);
             }
-           
+
             (float) $b = $request->input($vesaulakhainiem->khainiem_id);
             // dd($b);
         }
@@ -270,7 +274,7 @@ class ChitietcongthucController extends Controller
             (float)$b = $this->ketquacongthuc($vesaulabieuthuc->bieuthuc_id, $ketqua, $request);
         }
 
-        
+
         if ($chitietbieuthuc->loaipheptoan_id == "LPT1") {
             (float)$ketqua = $a + $b;
         }
@@ -292,7 +296,7 @@ class ChitietcongthucController extends Controller
         }
         if ($chitietbieuthuc->loaipheptoan_id == "LPT7") {
             (float)$ketqua = pow($a, 1 / $b);
-            
+
         }
         return $ketqua;
     }

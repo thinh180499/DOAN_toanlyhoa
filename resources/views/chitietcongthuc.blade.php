@@ -93,6 +93,20 @@
                                         <p class="text-danger fs-6">* Kiểm tra dữ liệu nhập</p>
                                     @endif
                                 </span>
+                                @if (!empty($list_khainiem))
+                                    @foreach ($list_khainiem as $khainiem)
+                                        @if ($chitietcongthuc->khainiem_id == $khainiem->khainiem_id)
+                                            @if (!empty($list_donvicuakhainiem))
+                                                @foreach ($list_donvicuakhainiem as $donvicuakhainiem)
+                                                    @if ($donvicuakhainiem->khainiem_id == $khainiem->id)
+                                                        <span>&nbsp; {{ $donvicuakhainiem->kyhieu }} </span>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                @endif
+
                             </div>
                         </div>
 
@@ -106,7 +120,8 @@
 
 @section('css')
     <style>
-        .col.congthuc, .col.tinhtoan{
+        .col.congthuc,
+        .col.tinhtoan {
             flex: 1;
         }
 

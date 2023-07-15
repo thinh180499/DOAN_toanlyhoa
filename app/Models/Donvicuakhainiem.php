@@ -15,6 +15,14 @@ class Donvicuakhainiem extends Model
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
     }
+    public function danhsachdonvicuakhainiemcodonvi(){
+        $table=$this->table;
+        return DB::table($this->table)
+        ->join('donvis', 'donvicuakhainiems.donvi_id', '=', 'donvis.id')
+
+        ->select('donvicuakhainiems.*','donvis.kyhieu')
+        ->get();
+    }
     public function themdonvicuakhainiem($data){
         $data[]=date('Y-m-d H:i:s');
         $table=$this->table;

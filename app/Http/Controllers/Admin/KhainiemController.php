@@ -133,34 +133,34 @@ class KhainiemController extends Controller
             $request->kyhieu,
             $i,
         ];
-        // $bieuthuc=new Bieuthuc();
-        // $khainiemupdata = $this->khainiem->chitietkhainiem($id);
+        $bieuthuc=new Bieuthuc();
+        $khainiemupdata = $this->khainiem->chitietkhainiem($id);
 
-        // $idkhainiemupdata = $khainiemupdata[0];
+        $idkhainiemupdata = $khainiemupdata[0];
 
-        // $vetruoc = $bieuthuc->xetvetruoc($idkhainiemupdata->khainiem_id);
+        $vetruoc = $bieuthuc->xetvetruoc($idkhainiemupdata->khainiem_id);
         // $kiemtra = $this->khainiem->xetdonvicuakhainiem($idkhainiemupdata->id);
         // if (!empty($kiemtra[0]->id)) {
         //     return  redirect()->route('admin.khainiem.index')->with('msgloi', 'sửa không thành công vì khái niệm này tồn tại trong đơn vị của khái niệm');
         // }
         // //dd($kiemtra);
-        // $vesau = $bieuthuc->xetvesau($idkhainiemupdata->khainiem_id);
-        // if (!empty($vetruoc[0]->id)) {
-        //     return  redirect()->route('admin.khainiem.index')->with('msgloi', 'sửa không thành công vì khái niệm này tồn tại trong biểu thức khác');
-        // }
+        $vesau = $bieuthuc->xetvesau($idkhainiemupdata->khainiem_id);
+        if (!empty($vetruoc[0]->id)) {
+            return  redirect()->route('admin.khainiem.index')->with('msgloi', 'sửa không thành công vì khái niệm này tồn tại trong biểu thức khác');
+        }
 
-        // if (!empty($vesau[0]->id)) {
-        //     return  redirect()->route('admin.khainiem.index')->with('msgloi', 'sửa không thành công vì khái niệm này tồn tại trong biểu thức khác');
-        // }
+        if (!empty($vesau[0]->id)) {
+            return  redirect()->route('admin.khainiem.index')->with('msgloi', 'sửa không thành công vì khái niệm này tồn tại trong biểu thức khác');
+        }
         // $kiemtra = $this->khainiem->xetcongthuc($idkhainiemupdata->khainiem_id);
         // if (!empty($kiemtra[0]->id)) {
         //     return  redirect()->route('admin.khainiem.index')->with('msgloi', 'sửa không thành công vì khái niệm này tồn tại trong công thức');
         // }
-        
+
         //dd($khainiemupdata);
         $this->khainiem->suakhainiem($data, $id);
         return  redirect()->route('admin.khainiem.index')->with('msgthanhcong', 'sửa thành công');
-        
+
 
     }
 
@@ -195,7 +195,7 @@ class KhainiemController extends Controller
         if (!empty($kiemtra[0]->id)) {
             return  redirect()->route('admin.khainiem.index')->with('msgloi', 'xóa không thành công vì khái niệm này tồn tại trong công thức');
         }
-        
+
         //dd($khainiemupdata);
         $this->khainiem->xoakhainiem($id);
         return  redirect()->route('admin.khainiem.index')->with('msgthanhcong', 'xóa thành công');
