@@ -14,6 +14,20 @@ class Congthuc extends Model
     public function danhsachcongthuc(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
+
+    }
+    public function danhsachcongthucpag(){
+        $table=$this->table;
+        //return DB::select('SELECT * FROM '.$table);
+        return DB::table($table)
+        ->paginate(10);
+    }
+    public function timdanhsachcongthucpag($key){
+        $table=$this->table;
+        return DB::table($table)
+        ->where('tencongthuc','like','%'.$key.'%')
+        ->paginate(10);
+
     }
     public function danhsachcongthucvatly(){
         $table=$this->table;
@@ -48,7 +62,7 @@ class Congthuc extends Model
      public function chitietcongthuc($id){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
-    } 
+    }
     public function suacongthuc($data,$id){
         $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
@@ -56,7 +70,7 @@ class Congthuc extends Model
     }
     public function xoacongthuc($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
-    
+
     }
     public function xethinhcuacongthuc($id){
         $table=$this->table;
@@ -65,7 +79,7 @@ class Congthuc extends Model
         ->get();
         //dd($danhsachid);
         return $danhsachid;
-       
+
     }
     public function xetcongthuccuamon($id){
         $table=$this->table;
@@ -73,7 +87,7 @@ class Congthuc extends Model
         ->where('congthuc_id',"=", $id)
         ->get();
         return $danhsachid;
-       
+
     }
 
 }

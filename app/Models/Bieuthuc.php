@@ -21,10 +21,23 @@ class Bieuthuc extends Model
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
     }
-    public function layidcuoidanhsach(){
-       
+    public function danhsachbieuthucpag(){
         $table=$this->table;
-        
+        return DB::table($table)
+        ->paginate(10);
+
+    }
+    public function timdanhsachbieuthucpag($key){
+        $table=$this->table;
+        return DB::table($table)
+        ->where('motabieuthuc','like','%'.$key.'%')
+        ->paginate(10);
+
+    }
+    public function layidcuoidanhsach(){
+
+        $table=$this->table;
+
         $danhsachid=DB::table($table)
         ->orderBy('id', 'desc')
         ->get();
@@ -40,13 +53,13 @@ class Bieuthuc extends Model
         return $idbieuthuc;
     }
     public function xacdinhlabieuthuc($id){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->where('bieuthuc_id',"=", $id)
         ->get();
-        
+
         if(!empty($danhsachid[0]->id)){
             $khainiem="(".$danhsachid[0]->motabieuthuc.")";
         }else{
@@ -55,13 +68,13 @@ class Bieuthuc extends Model
         return $khainiem;
     }
     public function xacdinhlabieuthuchtml($id){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->where('bieuthuc_id',"=", $id)
         ->get();
-        
+
         if(!empty($danhsachid[0]->id)){
             $khainiem="(".$danhsachid[0]->htmlbieuthuc.")";
         }else{
@@ -70,13 +83,13 @@ class Bieuthuc extends Model
         return $khainiem;
     }
     public function xacdinhlabieuthucid($id){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->where('bieuthuc_id',"=", $id)
         ->get();
-        
+
         if(!empty($danhsachid[0]->id)){
             $khainiem=$danhsachid[0];
         }else{
@@ -104,14 +117,14 @@ class Bieuthuc extends Model
         return $mota;
     }
     public function motavemotbieuthuchtml($pheptoan_id,$vetruoc_id,$vesau_id){
-        
+
         $mota="";
         $motavetruoc="";
         $motavesau="";
         $bieuthuc=new Bieuthuc();
         $khainiem=new Khainiem();
         $hangso=new Hangso();
-       
+
         $motavetruoc=$motavetruoc.$khainiem->xacdinhlakhainiem($vetruoc_id);
         $motavetruoc=$motavetruoc.$hangso->xacdinhlahangso($vetruoc_id);
         $motavetruoc=$motavetruoc.$bieuthuc->xacdinhlabieuthuchtml($vetruoc_id);
@@ -130,17 +143,17 @@ class Bieuthuc extends Model
             $mota= $motavetruoc." * ".$motavesau;
         }
         if ($pheptoan_id == "LPT4") {
-            
+
             // $mota=$motavetruoc." <hr> ".$motavesau;
             $mota='<div class="phanso">' . '<span class="vetruoc">' . $motavetruoc . '</span>' . '<span class="vesau">' . $motavesau . '</span> </div>';
-            
+
         }
         if ($pheptoan_id == "LPT5") {
             $mota=$motavetruoc." <sup> ".$motavesau." </sup> ";
         }
         if ($pheptoan_id == "LPT7") {
             $mota=" <sup> ".$motavesau." </sup>  &radic; ".$motavetruoc;
-            
+
         }
          //dd($mota);
 
@@ -166,10 +179,10 @@ class Bieuthuc extends Model
         $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
         //dd($data);
-        
-        
+
+
         return DB::update('UPDATE '.$this->table.' SET loaipheptoan_id=?,vetruoc=?,vesau=?,motabieuthuc=?,htmlbieuthuc=?,updated_at=? WHERE id=?',$data);
-        
+
     }
     public function xoabieuthuc($id){
         return DB::delete('DELETE FROM '.$this->table.' WHERE id=?',[$id]);
@@ -217,7 +230,7 @@ class Bieuthuc extends Model
         ->where('vesau',"=", $id)
         ->get();
         return $danhsachid;
-       
+
     }
     public function xetcongthuc($id){
         $table=$this->table;
@@ -225,7 +238,7 @@ class Bieuthuc extends Model
         ->where('bieuthuc_id',"=", $id)
         ->get();
         return $danhsachid;
-       
+
     }
 
 }

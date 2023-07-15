@@ -33,10 +33,15 @@ class BieuthucController extends Controller
         $list_khainiem = $khainiem->danhsachkhainiem();
         $list_hangso = $hangso->danhsachhangso();
         $list_loaipheptoan = $loaipheptoan->danhsachloaipheptoan();
-        $list_bieuthuc = $this->bieuthuc->danhsachbieuthuc();
+        $list_bieuthucall = $this->bieuthuc->danhsachbieuthuc();
+
+        $list_bieuthuc = $this->bieuthuc->danhsachbieuthucpag();
+        if($key=request()->key){
+            $list_bieuthuc = $this->bieuthuc->timdanhsachbieuthucpag($key);
+        }
         //dd($list_bieuthuc);
         $title = "danh sách biểu thức";
-        return view('admin.bieuthuc.index', compact('list_khainiem', 'list_hangso', 'list_loaipheptoan', 'list_bieuthuc', 'title'));
+        return view('admin.bieuthuc.index', compact('list_khainiem', 'list_hangso', 'list_loaipheptoan', 'list_bieuthuc', 'list_bieuthucall', 'title'));
     }
 
     /**

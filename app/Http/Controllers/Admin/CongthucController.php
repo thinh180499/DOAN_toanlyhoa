@@ -14,12 +14,12 @@ use App\Models\Khainiem;
 class CongthucController extends Controller
 {
     private $congthuc;
-    
+
     public function __construct(){
         $this->congthuc=new Congthuc();
        $this->middleware('auth');
-       
-       
+
+
     }
     /**
      * Display a listing of the resource.
@@ -28,8 +28,11 @@ class CongthucController extends Controller
      */
     public function index()
     {
-        $list_congthuc=$this->congthuc->danhsachcongthuc();
-        
+        $list_congthuc=$this->congthuc->danhsachcongthucpag();
+        if($key=request()->key){
+            $list_congthuc=$this->congthuc->timdanhsachcongthucpag($key);
+        }
+
         $khainiem=new Khainiem();
         $bieuthuc=new Bieuthuc();
         $list_khainiem=$khainiem->danhsachkhainiem();
@@ -69,9 +72,9 @@ class CongthucController extends Controller
             'tenkhainiem.required'=>'khái niệm bắt buộc phải nhập',
             'tencongthuc.required'=>'tên công thức bắt buộc phải nhập',
             'bieuthuc.required'=>'biểu thức bắt buộc phải nhập',
-            
+
         ]);
-        
+
         $data=[
             $request->tenkhainiem,
             $request->bieuthuc,
@@ -130,7 +133,7 @@ class CongthucController extends Controller
             'tenkhainiem.required'=>'khái niệm bắt buộc phải nhập',
             'tencongthuc.required'=>'tên công thức bắt buộc phải nhập',
             'bieuthuc.required'=>'biểu thức bắt buộc phải nhập',
-           
+
         ]);
         $data=[
             $request->tenkhainiem,
@@ -153,17 +156,17 @@ class CongthucController extends Controller
     public function destroy($id)
     {
         $congthucupdata = $this->congthuc->chitietcongthuc($id);
-        
+
         $idcongthucupdata = $congthucupdata[0];
-        
-        
+
+
         $kiemtra = $this->congthuc->xethinhcuacongthuc($idcongthucupdata->id);
         if (!empty($kiemtra[0]->id)) {
             return  redirect()->route('admin.congthuc.index')->with('msgloi', 'xóa không thành công vì công thức này tồn tại trong hình của công thức');
         }
-        
+
         $this->congthuc->xoacongthuc($id);
         return  redirect()->route('admin.congthuc.index')->with('msgthanhcong', 'xóa thành công');
     }
-    
+
 }

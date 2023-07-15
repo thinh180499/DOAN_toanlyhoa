@@ -75,6 +75,7 @@
 
                     </tbody>
                 </table>
+                {{ $list_hangso->appends(Request::except('page'))->links() }}
             </div>
         </div>
     </div>

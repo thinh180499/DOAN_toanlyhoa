@@ -29,7 +29,7 @@ class DonvicuakhainiemController extends Controller
         $khainiem=new Khainiem();
         $list_khainiem=$khainiem->danhsachkhainiem();
         $list_donvi=$this->donvi->danhsachdonvitheoloai();
-        $list_donvicuakhainiem=$this->donvicuakhainiem->danhsachdonvicuakhainiem();
+        $list_donvicuakhainiem=$this->donvicuakhainiem->danhsachdonvicuakhainiempag();
         $title="Danh sách đơn vị của khái niệm";
         return view('admin.donvicuakhainiem.index',compact('list_donvicuakhainiem','list_donvi','list_khainiem','title'));
     }

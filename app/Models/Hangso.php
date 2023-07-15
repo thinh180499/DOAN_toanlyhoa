@@ -17,6 +17,12 @@ class Hangso extends Model
         return DB::select('SELECT * FROM '.$table);
 
     }
+    public function danhsachhangsopag(){
+        $table=$this->table;
+        //return DB::select('SELECT * FROM '.$table);
+        return DB::table($table)
+        ->paginate(10);
+    }
     public function trunghangso($hangso){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE hangso='.$hangso);

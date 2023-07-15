@@ -12,7 +12,7 @@ use App\Models\Chuyendonvi;
 class ChuyendonviController extends Controller
 {
     private $donvi;
-    
+
     private $chuyendonvi;
     public function __construct(){
         $this->donvi=new Donvi();
@@ -27,7 +27,10 @@ class ChuyendonviController extends Controller
     public function index()
     {
         $list_donvi=$this->donvi->danhsachdonvitheoloai();
-        $list_chuyendonvi=$this->chuyendonvi->danhsachchuyendonvi();
+        $list_chuyendonvi=$this->chuyendonvi->danhsachchuyendonvipag();
+        if($key=request()->key){
+            $list_chuyendonvi=$this->chuyendonvi->timdanhsachchuyendonvipag($key);
+        }
         $title="danh sách chuyển đơn vị";
         return view('admin.chuyendonvi.index',compact('list_chuyendonvi','list_donvi','title'));
     }
@@ -88,7 +91,7 @@ class ChuyendonviController extends Controller
             $this->chuyendonvi->themchuyendonvi($data);
             $msgthanhcong=$msgthanhcong."và nghịch chuyển đơn vị thành công";
         }
-        
+
         return redirect()->route('admin.chuyendonvi.index')->with('msgthanhcong');;
     }
 

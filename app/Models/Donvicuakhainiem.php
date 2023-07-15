@@ -14,6 +14,13 @@ class Donvicuakhainiem extends Model
     public function danhsachdonvicuakhainiem(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
+
+    }
+    public function danhsachdonvicuakhainiempag(){
+        $table=$this->table;
+        //return DB::select('SELECT * FROM '.$table);
+        return DB::table($table)
+        ->paginate(10);
     }
     public function danhsachdonvicuakhainiemcodonvi(){
         $table=$this->table;

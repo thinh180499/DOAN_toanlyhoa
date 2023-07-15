@@ -22,7 +22,7 @@ class HangsoController extends Controller
      */
     public function index()
     {
-        $list_hangso=$this->hangso->danhsachhangso();
+        $list_hangso=$this->hangso->danhsachhangsopag();
         $title="danh sách các hằng số";
         return view('admin.hangso.index',compact('list_hangso','title'));
     }

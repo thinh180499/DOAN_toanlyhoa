@@ -24,7 +24,7 @@ class HinhcuacongthucController extends Controller
     public function index()
     {
         $list_congthuc=$this->congthuc->danhsachcongthuc();
-        $list_hinhcuacongthuc=$this->hinhcuacongthuc->danhsachhinhcuacongthuc();
+        $list_hinhcuacongthuc=$this->hinhcuacongthuc->danhsachhinhcuacongthucpag();
         $title="Danh sách hình của công thức";
         return view('admin.hinhcuacongthuc.index',compact('list_hinhcuacongthuc','list_congthuc','title'));
     }
@@ -52,24 +52,24 @@ class HinhcuacongthucController extends Controller
         $request->validate([
             'img'=>'required|mimes:jpg,jpeg,png,gif',
             'congthuc'=>'required',
-            
+
         ],[
             'img.required'=>'img bắt buộc phải nhập',
             'congthuc.required'=>'công thức bắt buộc phải nhập',
         ]);
-        
+
         $get_img=$request->file('img');
-        
+
         $new_img=rand(0,99).'.'.$get_img->getClientOriginalExtension();
         $destinationPath = public_path('images');
         $get_img->move($destinationPath,$new_img);
-        
-       
+
+
         $data=[
             $new_img,
             $request->congthuc,
         ];
-       
+
         $this->hinhcuacongthuc->themhinhcuacongthuc($data);
         return redirect()->route('admin.hinhcuacongthuc.index');
     }
@@ -112,24 +112,24 @@ class HinhcuacongthucController extends Controller
         $request->validate([
             'img'=>'required|mimes:jpg,jpeg,png,gif',
             'congthuc'=>'required',
-            
+
         ],[
             'img.required'=>'img bắt buộc phải nhập',
             'congthuc.required'=>'công thức bắt buộc phải nhập',
         ]);
-        
+
         $get_img=$request->file('img');
-        
+
         $new_img=rand(0,99).'.'.$get_img->getClientOriginalExtension();
         $destinationPath = public_path('images');
         $get_img->move($destinationPath,$new_img);
-        
-       
+
+
         $data=[
             $new_img,
             $request->congthuc,
         ];
-        
+
         $img=$this->hinhcuacongthuc->chitiethinhcuacongthuc($id);
         $img=$img[0]->img;
         unlink('images/'.$img);

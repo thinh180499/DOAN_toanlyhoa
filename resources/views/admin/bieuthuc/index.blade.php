@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="d-flex justify-content-between">
-                <h2 class="mb-4">
+                <h4 class="mb-10">
                     @if (!empty($title))
                         {{ $title }}
                     @endif
-                </h2>
+                </h4>
                 @if (session('msgthanhcong'))
                     <div class="alert alert-icon alert-info text-info alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -33,6 +33,18 @@
 
 
             <div class="table-responsive">
+                <form action="" class="app-search">
+                    <div class="app-search-box">
+                        <div class="input-group">
+                            <input type="text" name="key" class="form-control" placeholder="Tìm kiếm...">
+                            <div class="input-group-append">
+                                <button class="btn" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <a href="{{ route('admin.bieuthuc.create') }}" class="btn btn-success mb-4">Thêm biểu thức</a>
                 <table class="table m-0">
                     <thead>
@@ -86,8 +98,8 @@
                                                 @endif
                                             @endforeach
                                         @endif
-                                        @if (!empty($list_bieuthuc))
-                                            @foreach ($list_bieuthuc as $key)
+                                        @if (!empty($list_bieuthucall))
+                                            @foreach ($list_bieuthucall as $key)
                                                 @if ($bieuthuc->vetruoc == $key->bieuthuc_id)
                                                     {!! $key->motabieuthuc !!}
                                                 @endif
@@ -110,8 +122,8 @@
                                                 @endif
                                             @endforeach
                                         @endif
-                                        @if (!empty($list_bieuthuc))
-                                            @foreach ($list_bieuthuc as $key)
+                                        @if (!empty($list_bieuthucall))
+                                            @foreach ($list_bieuthucall as $key)
                                                 @if ($bieuthuc->vesau == $key->bieuthuc_id)
                                                     {!! $key->motabieuthuc !!}
                                                 @endif
@@ -147,6 +159,7 @@
 
                     </tbody>
                 </table>
+                {{ $list_bieuthuc->appends(Request::except('page'))->links() }}
             </div>
         </div>
     </div>
@@ -172,10 +185,6 @@
         .phanso span.vesau {
             border-top: thin solid black;
             text-align: center;
-        }
-
-        td:nth-child(6) {
-            width: 12%;
         }
     </style>
 @endsection

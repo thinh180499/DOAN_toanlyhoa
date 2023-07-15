@@ -14,33 +14,59 @@ class Donvi extends Model
     public function danhsachdonvi(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
-        
+
+
+    }
+    public function danhsachdonvipag(){
+        $table=$this->table;
+        //return DB::select('SELECT * FROM '.$table);
+        return DB::table($table)
+        ->paginate(10);
+
     }
     public function danhsachdonvitheoloai(){
         $table=$this->table;
         return DB::select('SELECT '.$table.'.id,tendonvi,kyhieu,loaidonvis.tenloaidonvi FROM '.$table.',loaidonvis WHERE loaidonvi_id=loaidonvis.id');
-        
+
+    }
+    public function danhsachdonvitheoloaipag(){
+        $table=$this->table;
+        return DB::table($table)
+        ->join('loaidonvis', 'donvis.loaidonvi_id', '=', 'loaidonvis.id')
+        ->select('donvis.*', 'loaidonvis.tenloaidonvi')
+        ->paginate(10);
+
+    }
+    public function timdanhsachdonvitheoloaipag($key){
+        $table=$this->table;
+        return DB::table($table)
+        ->join('loaidonvis', 'donvis.loaidonvi_id', '=', 'loaidonvis.id')
+        ->where('tendonvi','like','%'.$key.'%')
+        ->orwhere('kyhieu','like','%'.$key.'%')
+        ->select('donvis.*', 'loaidonvis.tenloaidonvi')
+        ->paginate(10);
+
     }
     public function danhsachdonvicuadodai(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE loaidonvi_id=1');
-        
+
     }
     public function danhsachdonvicuathetich(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE loaidonvi_id=2');
-        
+
     }
     public function danhsachdonvicuakhoiluong(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE loaidonvi_id=3');
-        
+
     }
 
     public function themdonvi($data){
         $data[]=date('Y-m-d H:i:s');
         $table=$this->table;
-        
+
         DB::insert('INSERT INTO donvis(tendonvi,kyhieu,loaidonvi_id,created_at)value(?,?,?,?)',$data);
      }
      public function chitietdonvi($id){
@@ -54,7 +80,7 @@ class Donvi extends Model
     }
     public function xoadonvi($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
-    
+
     }
     public function xettudonvi($id){
         $table=$this->table;
@@ -62,7 +88,7 @@ class Donvi extends Model
         ->where('tudonvi',"=", $id)
         ->get();
         return $danhsachid;
-       
+
     }
     public function xetdendonvi($id){
         $table=$this->table;
@@ -70,6 +96,6 @@ class Donvi extends Model
         ->where('dendonvi',"=", $id)
         ->get();
         return $danhsachid;
-       
+
     }
 }

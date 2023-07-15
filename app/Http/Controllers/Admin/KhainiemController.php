@@ -23,7 +23,11 @@ class KhainiemController extends Controller
      */
     public function index()
     {
-        $list_khainiem = $this->khainiem->danhsachkhainiem();
+
+        $list_khainiem = $this->khainiem->danhsachkhainiempag();
+        if($key=request()->key){
+            $list_khainiem = $this->khainiem->timdanhsachkhainiem($key);
+        }
         //dd($list_khainiem);
         $title = "danh sách khái niệm";
         return view('admin.khainiem.index', compact('list_khainiem', 'title'));

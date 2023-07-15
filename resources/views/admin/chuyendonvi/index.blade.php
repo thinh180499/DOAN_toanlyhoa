@@ -10,6 +10,18 @@
             </h2>
 
             <div class="table-responsive">
+                <form action="" class="app-search">
+                    <div class="app-search-box">
+                        <div class="input-group">
+                            <input type="text" name="key" class="form-control" placeholder="Tìm kiếm...">
+                            <div class="input-group-append">
+                                <button class="btn" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <a href="{{ route('admin.chuyendonvi.create') }}" class="btn btn-success mb-4">Thêm chuyển đơn vị</a>
                 <table class="table m-0">
                     <thead>
@@ -73,6 +85,7 @@
 
                     </tbody>
                 </table>
+                {{ $list_chuyendonvi->appends(Request::except('page'))->links() }}
             </div>
         </div>
     </div>

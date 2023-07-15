@@ -11,14 +11,22 @@ class Khainiem extends Model
     use HasFactory;
     protected $table='khainiems';
     protected $fillable=['tenkhainiem','dinhnghia','kyhieu'];
-    // public function danhsachkhainiem(){
-    //     $table=$this->table;
-    //     return DB::select('SELECT * FROM '.$table);
-
-    // }
     public function danhsachkhainiem(){
         $table=$this->table;
+        return DB::select('SELECT * FROM '.$table);
+
+    }
+    public function danhsachkhainiempag(){
+        $table=$this->table;
         return DB::table($table)
+        ->paginate(10);
+
+    }
+    public function timdanhsachkhainiem($key){
+        $table=$this->table;
+        return DB::table($table)
+        ->where('tenkhainiem','like','%'.$key.'%')
+        ->orwhere('dinhnghia','like','%'.$key.'%')
         ->paginate(10);
 
     }

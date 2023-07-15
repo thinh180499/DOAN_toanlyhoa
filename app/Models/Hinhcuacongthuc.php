@@ -14,6 +14,13 @@ class Hinhcuacongthuc extends Model
     public function danhsachhinhcuacongthuc(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
+
+    }
+    public function danhsachhinhcuacongthucpag(){
+        $table=$this->table;
+        //return DB::select('SELECT * FROM '.$table);
+        return DB::table($table)
+        ->paginate(10);
     }
     public function themhinhcuacongthuc($data){
         $data[]=date('Y-m-d H:i:s');

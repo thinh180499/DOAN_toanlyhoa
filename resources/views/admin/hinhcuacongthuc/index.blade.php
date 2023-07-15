@@ -65,6 +65,7 @@
 
                     </tbody>
                 </table>
+                {{ $list_hinhcuacongthuc->appends(Request::except('page'))->links() }}
             </div>
         </div>
     </div>

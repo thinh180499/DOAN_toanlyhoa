@@ -70,6 +70,7 @@
 
                     </tbody>
                 </table>
+                {{ $list_donvicuakhainiem->appends(Request::except('page'))->links() }}
             </div>
         </div>
     </div>
