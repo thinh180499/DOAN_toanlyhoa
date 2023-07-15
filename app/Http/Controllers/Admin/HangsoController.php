@@ -57,6 +57,12 @@ class HangsoController extends Controller
             $request->hangso,
         ];
        //dd($data);
+       $kiemtra=$this->hangso->trunghangso( $request->hangso);
+       //dd(!empty($kiemtra));
+       if(!empty($kiemtra)){
+        return redirect()->route('admin.hangso.index')->with('msgloi', 'thêm không thành công vì hằng số đã tồn tại');;
+       }
+
         $this->hangso->themhangso($data);
         return redirect()->route('admin.hangso.index');
     }
@@ -82,8 +88,8 @@ class HangsoController extends Controller
     {
         $hangso=$this->hangso->chitiethangso($id);
         $title="sửa hằng số";
-        $hangso=$hangso[0];  
-        
+        $hangso=$hangso[0];
+
         return view('admin.hangso.edit',compact('hangso','title'));
     }
 
@@ -101,21 +107,21 @@ class HangsoController extends Controller
             'hangso'=>'required',
         ],[
             'hangso.required'=>'tên khái niệm bắt buộc phải nhập',
-            
+
         ]);
         $data=[
             $request->hangso,
         ];
         $hangsoupdata=$this->hangso->chitiethangso($id);
-       
+
         $idhangsoupdata=$hangsoupdata[0]->hangso_id;
         $vetruoc=$bieuthuc->xetvetruoc($idhangsoupdata);
-        
+
         $vesau=$bieuthuc->xetvesau($idhangsoupdata);
         if(!empty($vetruoc[0]->id)){
             return  redirect()->route('admin.hangso.index')->with('msgloi', 'sửa không thành công vì hằng số này tồn tại trong biểu thức khác');;
         }
-        
+
         if(!empty($vesau[0]->id)){
             return  redirect()->route('admin.hangso.index')->with('msgloi', 'sửa không thành công vì hằng số này tồn tại trong biểu thức khác');;
         }
@@ -135,15 +141,15 @@ class HangsoController extends Controller
     {
         $bieuthuc=new Bieuthuc();
         $hangsoupdata=$this->hangso->chitiethangso($id);
-       
+
         $idhangsoupdata=$hangsoupdata[0]->hangso_id;
         $vetruoc=$bieuthuc->xetvetruoc($idhangsoupdata);
-        
+
         $vesau=$bieuthuc->xetvesau($idhangsoupdata);
         if(!empty($vetruoc[0]->id)){
             return  redirect()->route('admin.hangso.index')->with('msgloi', 'xóa không thành công vì hằng số này tồn tại trong biểu thức khác');;
         }
-        
+
         if(!empty($vesau[0]->id)){
             return  redirect()->route('admin.hangso.index')->with('msgloi', 'xóa không thành công vì hằng số này tồn tại trong biểu thức khác');;
         }
@@ -151,7 +157,7 @@ class HangsoController extends Controller
         $this->hangso->xoahangso($id);
 
         return  redirect()->route('admin.hangso.index')->with('msgthanhcong', 'xóa thành công');;
-        
-       
+
+
     }
 }

@@ -15,13 +15,17 @@ class Hangso extends Model
     public function danhsachhangso(){
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table);
-        
+
     }
+    public function trunghangso($hangso){
+        $table=$this->table;
+        return DB::select('SELECT * FROM '.$table.' WHERE hangso='.$hangso);
+     }
 
     public function layidcuoidanhsach(){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->orderBy('id', 'desc')
         ->get();
@@ -32,14 +36,14 @@ class Hangso extends Model
         }else{
             $idhangso="HS1";
         }
-       
+
         //dd($idhangso);
         return $idhangso;
     }
     public function xacdinhlahangso($id){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->where('hangso_id',"=", $id)
         ->get();
@@ -51,9 +55,9 @@ class Hangso extends Model
         return $mota;
     }
     public function xacdinhlahangsoid($id){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->where('hangso_id',"=", $id)
         ->get();
@@ -74,15 +78,15 @@ class Hangso extends Model
         $table=$this->table;
         return DB::select('SELECT * FROM '.$table.' WHERE id='.$id);
      }
-     
+
      public function suahangso($data,$id){
         $data[]=date('Y-m-d H:i:s');
         $data[]=$id;
         return DB::update('UPDATE '.$this->table.' SET hangso=?,updated_at=? WHERE id=?',$data);
     }
-    
+
     public function xoahangso($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
-    
+
     }
 }
