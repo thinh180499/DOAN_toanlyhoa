@@ -83,6 +83,7 @@
 
                     </tbody>
                 </table>
+                {{ $list_khainiem->links() }}
             </div>
         </div>
     </div>

@@ -11,15 +11,21 @@ class Khainiem extends Model
     use HasFactory;
     protected $table='khainiems';
     protected $fillable=['tenkhainiem','dinhnghia','kyhieu'];
+    // public function danhsachkhainiem(){
+    //     $table=$this->table;
+    //     return DB::select('SELECT * FROM '.$table);
+
+    // }
     public function danhsachkhainiem(){
         $table=$this->table;
-        return DB::select('SELECT * FROM '.$table);
-        
+        return DB::table($table)
+        ->paginate(10);
+
     }
     public function layidcuoidanhsach(){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->orderBy('id', 'desc')
         ->get();
@@ -33,9 +39,9 @@ class Khainiem extends Model
         return $idkhainiem;
     }
     public function xacdinhlakhainiem($id){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->where('khainiem_id',"=", $id)
         ->get();
@@ -47,9 +53,9 @@ class Khainiem extends Model
         return $khainiem;
     }
     public function xacdinhlakhainiemid($id){
-       
+
         $table=$this->table;
-        
+
         $danhsachid=DB::table($table)
         ->where('khainiem_id',"=", $id)
         ->get();
@@ -79,7 +85,7 @@ class Khainiem extends Model
     }
     public function xoakhainiem($id){
         return DB::delete("DELETE FROM ".$this->table." WHERE id=?",[$id]);
-    
+
     }
     public function timkiem(){
         if(request('tukhoa')){
@@ -106,7 +112,7 @@ class Khainiem extends Model
         ->where('khainiem_id',"=", $id)
         ->get();
         return $danhsachid;
-       
+
     }
 
 }
