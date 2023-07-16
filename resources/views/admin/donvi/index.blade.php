@@ -31,20 +31,22 @@
                 @endif
             </div>
 
-            <div class="table-responsive">
-                <form action="" class="app-search">
-                    <div class="app-search-box">
-                        <div class="input-group">
-                            <input type="text" name="key" class="form-control" placeholder="Tìm kiếm...">
-                            <div class="input-group-append">
-                                <button class="btn" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
+            <div id="datatable-buttons_filter" class="dataTables_filter mb-4">
+                <form action="">
+                    <div class="input-group d-flex justify-content-between">
+                        <a href="{{ route('admin.donvi.create') }}" class="btn btn-success">Thêm loại đơn vị</a>
+
+                        <div class="search d-flex">
+                            <input type="text" name="key" class="form-control search-box" placeholder="Tìm kiếm theo tên hoặc ký hiệu của đơn vị ..." value="{{ old('key') }}">
+                            <button class="btn btn-info" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>
-                <a href="{{ route('admin.donvi.create') }}" class="btn btn-success mb-4">Thêm loại đơn vị</a>
+            </div>
+
+            <div class="table-responsive">
                 <table class="table m-0">
                     <thead>
                         <tr>
@@ -95,4 +97,20 @@
             </div>
         </div>
     </div>
+@endsection
+@section('css')
+    <style>
+        .search {
+            width: 33%;
+            margin-right: 1rem;
+        }
+
+        .search button {
+            width: 15%;
+        }
+
+        input.search-box {
+            display: inline-block;
+        }
+    </style>
 @endsection

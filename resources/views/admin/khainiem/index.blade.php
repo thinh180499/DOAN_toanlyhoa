@@ -32,12 +32,13 @@
             </div>
 
             <div id="datatable-buttons_filter" class="dataTables_filter mb-4">
-                <form action="" class="">
+                <form action="">
                     <div class="input-group d-flex justify-content-between">
                         <a href="{{ route('admin.khainiem.create') }}" class="btn btn-success ">Thêm khái niệm</a>
 
                         <div class="search d-flex">
-                            <input type="text" name="key" class="form-control search-box" placeholder="Tìm kiếm theo tên khái niệm và định nghĩa..." value="{{ old('key') }}">
+                            <input type="text" name="key" class="form-control search-box"
+                                placeholder="Tìm kiếm theo tên khái niệm và định nghĩa..." value="{{ old('key') }}">
                             <button class="btn btn-info" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -47,9 +48,6 @@
             </div>
 
             <div class="table-responsive">
-
-
-
                 <table class="table m-0">
                     <thead>
                         <tr>
@@ -118,12 +116,16 @@
         td:nth-child(6) {
             width: 12%;
         }
-        .input-group {
-            width: 100%
-        }
+
         .search {
-            width: 50%
+            width: 33%;
+            margin-right: 1rem;
         }
+
+        .search button {
+            width: 15%;
+        }
+
         input.search-box {
             display: inline-block;
         }

@@ -135,6 +135,10 @@
             gap: 25px;
         }
 
+        .container.ct {
+            max-width: 725px;
+        }
+
         .card-style {
             padding: 40px;
         }
@@ -153,7 +157,7 @@
         }
 
         .row.img img {
-            max-width: 31rem;
+            max-width: 19rem;
         }
 
         hr {

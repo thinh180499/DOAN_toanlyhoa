@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="d-flex justify-content-between">
-                <h4 class="mb-10">
+                <h2 class="mb-4">
                     @if (!empty($title))
                         {{ $title }}
                     @endif
-                </h4>
+                </h2>
                 @if (session('msgthanhcong'))
                     <div class="alert alert-icon alert-info text-info alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -31,21 +31,22 @@
                 @endif
             </div>
 
+            <div id="datatable-buttons_filter" class="dataTables_filter mb-4">
+                <form action="">
+                    <div class="input-group d-flex justify-content-between">
+                        <a href="{{ route('admin.bieuthuc.create') }}" class="btn btn-success">Thêm biểu thức</a>
 
-            <div class="table-responsive">
-                <form action="" class="app-search">
-                    <div class="app-search-box">
-                        <div class="input-group">
-                            <input type="text" name="key" class="form-control" placeholder="Tìm kiếm...">
-                            <div class="input-group-append">
-                                <button class="btn" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
+                        <div class="search d-flex">
+                            <input type="text" name="key" class="form-control search-box" placeholder="Tìm kiếm theo vế trước và vế sau..." value="{{ old('key') }}">
+                            <button class="btn btn-info" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>
-                <a href="{{ route('admin.bieuthuc.create') }}" class="btn btn-success mb-4">Thêm biểu thức</a>
+            </div>
+
+            <div class="table-responsive">
                 <table class="table m-0">
                     <thead>
                         <tr>
@@ -185,6 +186,19 @@
         .phanso span.vesau {
             border-top: thin solid black;
             text-align: center;
+        }
+
+        .search {
+            width: 33%;
+            margin-right: 1rem;
+        }
+
+        .search button {
+            width: 15%;
+        }
+
+        input.search-box {
+            display: inline-block;
         }
     </style>
 @endsection

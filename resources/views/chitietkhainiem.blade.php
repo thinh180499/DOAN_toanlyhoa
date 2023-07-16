@@ -88,6 +88,10 @@
             gap: 25px;
         }
 
+        .container.ct {
+            max-width: 725px;
+        }
+
         .card-style {
             padding: 40px;
         }

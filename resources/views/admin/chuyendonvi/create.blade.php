@@ -19,7 +19,7 @@
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label" for="hesonhan">Hệ số nhân</label>
                     <div class="col-md-10">
-                        <input name="hesonhan" type="text" class="form-control" id="hesonhan"
+                        <input name="hesonhan" type="number" step="any" class="form-control" id="hesonhan"
                             placeholder="Nhập hệ số nhân" value="{{ old('hesonhan') }}">
                         @error('hesonhan')
                             <p class="text-danger">{{ $message }}</p>
