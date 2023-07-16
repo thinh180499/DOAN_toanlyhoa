@@ -27,7 +27,7 @@
                                         @if (!empty($list_donvi))
                                             @foreach ($list_donvi as $donvi)
                                                 <option value="{{ $donvi->id }}">
-                                                    {{ $donvi->tendonvi . ' ' . $donvi->kyhieu }}</option>
+                                                    {{ $donvi->tendonvi . ' (' . $donvi->kyhieu . ')' }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -56,7 +56,7 @@
                                         @if (!empty($list_donvi))
                                             @foreach ($list_donvi as $donvi)
                                                 <option value="{{ $donvi->id }}">
-                                                    {{ $donvi->tendonvi . ' ' . $donvi->kyhieu }}</option>
+                                                    {{ $donvi->tendonvi . ' (' . $donvi->kyhieu . ')'}}</option>
                                             @endforeach
                                         @endif
                                     </select>
