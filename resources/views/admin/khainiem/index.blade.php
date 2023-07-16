@@ -31,25 +31,23 @@
                 @endif
             </div>
 
-            <div class="table-responsive">
+            <div id="datatable-buttons_filter" class="dataTables_filter mb-4">
+                <form action="" class="">
+                    <div class="input-group d-flex justify-content-between">
+                        <a href="{{ route('admin.khainiem.create') }}" class="btn btn-success ">Thêm khái niệm</a>
 
-
-                <form action="" class="app-search">
-                    <div class="app-search-box">
-                        <div class="input-group">
-                            <input type="text" name="key" class="form-control" placeholder="Tìm kiếm...">
-                            <div class="input-group-append">
-                                <button class="btn" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
+                        <div class="search d-flex">
+                            <input type="text" name="key" class="form-control search-box" placeholder="Tìm kiếm theo tên khái niệm và định nghĩa..." value="{{ old('key') }}">
+                            <button class="btn btn-info" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>
+            </div>
 
+            <div class="table-responsive">
 
-
-                <a href="{{ route('admin.khainiem.create') }}" class="btn btn-success mb-4">Thêm khái niệm</a>
 
 
                 <table class="table m-0">
@@ -84,11 +82,14 @@
                                         {{ $khainiem->dinhnghia }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.khainiem.edit',['khainiem' => $khainiem->id]) }}" class="btn btn-info px-3 mr-2">Sửa</a>
-                                        <form class="d-inline-block" action="{{ route('admin.khainiem.destroy', ['khainiem' => $khainiem->id]) }}" method="post">
+                                        <a href="{{ route('admin.khainiem.edit', ['khainiem' => $khainiem->id]) }}"
+                                            class="btn btn-info px-3 mr-2">Sửa</a>
+                                        <form class="d-inline-block"
+                                            action="{{ route('admin.khainiem.destroy', ['khainiem' => $khainiem->id]) }}"
+                                            method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger px-3" >Xóa</button>
+                                            <button type="submit" class="btn btn-danger px-3">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -111,10 +112,20 @@
 @section('css')
     <style>
         td:nth-child(5) {
-          width: 60%;
+            width: 60%;
         }
+
         td:nth-child(6) {
-          width: 12%;
+            width: 12%;
+        }
+        .input-group {
+            width: 100%
+        }
+        .search {
+            width: 50%
+        }
+        input.search-box {
+            display: inline-block;
         }
     </style>
 @endsection

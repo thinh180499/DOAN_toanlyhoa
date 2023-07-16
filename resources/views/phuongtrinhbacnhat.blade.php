@@ -5,11 +5,11 @@
         <div class="col">
             <div class="card-style cardform">
                 <h2>Phương trình bậc nhất</h2>
-                @if ($errors->any())
-                <h2 style="color: red;">
-                    vui lòng kiểm tra lại dữ liệu
-                </h2>
-                 @endif
+                {{-- @if ($errors->any())
+                    <h2 style="color: red;">
+                        vui lòng kiểm tra lại dữ liệu
+                    </h2>
+                @endif --}}
 
                 <form action="phuongtrinhbacnhat" method="post">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -30,27 +30,27 @@
                         <div class="row d-flex flex-column">
                             <div class="col mb-4">
                                 <label class="lb" for="somolchattan">a</label>
-                                <input type="number" id="somolchattan" name="a" placeholder="Nhập a"
-                                    class="input" step="any" value="{{ isset($a)&&is_numeric($a) ? $a:old('a')}}" />
-                                    @error('a')
-                                        <span style="color: red;">{{$message}}</span>
-                                    @enderror
+                                <input type="number" id="somolchattan" name="a" placeholder="Nhập a" class="input"
+                                    step="any" value="{{ isset($a) && is_numeric($a) ? $a : old('a') }}" />
+                                @error('a')
+                                    <p class="text-danger fs-6 mt-2">* {{ $message }}</p>
+                                @enderror
                                 </span>
                             </div>
 
                             <div class="col mb-4">
                                 <label class="lb" for="thetichdungdich">b</label>
                                 <input type="number" id="thetichdungdich" name="b" placeholder="Nhập b"
-                                    class="input" step="any" value="{{ isset($b)&&is_numeric($b) ? $b:old('b') }}" />
+                                    class="input" step="any" value="{{ isset($b) && is_numeric($b) ? $b : old('b') }}" />
                                 @error('b')
-                                    <span style="color: red;">{{$message}}</span>
+                                    <p class="text-danger fs-6 mt-2">* {{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div class="col d-flex align-items-center mb-4">
                                 <button class="btn btn-primary me-5 py-0 px-4 calculate" type="submit">=</button>
                                 <span>
-                                {!! isset($ketqua)?$ketqua:false !!}
+                                    {!! isset($ketqua) ? $ketqua : false !!}
                                 </span>
                             </div>
                         </div>
